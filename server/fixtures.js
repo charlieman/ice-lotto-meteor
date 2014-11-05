@@ -1,6 +1,6 @@
 if (Lottos.find().count() === 0) {
   Lottos.insert({
-    date: new Date(2014,11,1),
+    date: new Date(2014, 11, 1),
     tiers: [
       {tier: 1, prices: {1: 'foo', 2: 'bar', 3: 'baz', 5: 'yoo'}},
       {tier: 2, prices: {1: 'foo', 2: 'bar', 4: 'baz', 5: 'yoo'}},
