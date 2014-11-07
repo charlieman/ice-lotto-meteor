@@ -9,11 +9,11 @@ if (Lottos.find().count() === 0) {
     userId: nerium._id,
     date: new Date(2014, 11, 1),
     tiers: [
-      {tier: 1, prices: {1: 'foo', 2: 'bar', 3: 'baz', 5: 'yoo'}},
-      {tier: 2, prices: {1: 'foo', 2: 'bar', 4: 'baz', 5: 'yoo'}},
-      {tier: 3, prices: {1: 'foo', 2: 'bar', 3: 'baz', 4: 'yoo'}},
-      {tier: 4, prices: {1: 'foo', 2: 'bar', 3: 'baz', 4: 'yoo', 5: 'dawg'}},
-      {tier: 5, prices: {1: 'foo', 2: 'bar', 3: 'baz', 4: 'yoo', 5: 'dawg', 6: 'foo', 7: 'bar', 8: 'baz', 9: 'yoo', 10: 'dawg'}}
+      {tier: 1, prizes: {1: 'foo', 2: 'bar', 3: 'baz', 5: 'yoo'}},
+      {tier: 2, prizes: {1: 'foo', 2: 'bar', 4: 'baz', 5: 'yoo'}},
+      {tier: 3, prizes: {1: 'foo', 2: 'bar', 3: 'baz', 4: 'yoo'}},
+      {tier: 4, prizes: {1: 'foo', 2: 'bar', 3: 'baz', 4: 'yoo', 5: 'dawg'}},
+      {tier: 5, prizes: {1: 'foo', 2: 'bar', 3: 'baz', 4: 'yoo', 5: 'dawg', 6: 'foo', 7: 'bar', 8: 'baz', 9: 'yoo', 10: 'dawg'}}
     ],
     smallpot: 20,
     bigpot: 180,

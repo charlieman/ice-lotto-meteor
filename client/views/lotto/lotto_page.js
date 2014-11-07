@@ -17,12 +17,12 @@ Template.lottoPage.helpers({
 });
 
 Template.tier.helpers({
-  priceLoop: function (prices) {
-    var priceList = [];
+  prizeLoop: function (prizes) {
+    var prizeList = [];
     for (var i = 0; i < 10; i++) {
-      priceList.push({price: prices[i + 1]});
+      prizeList.push({prize: prizes[i + 1]});
     }
-    return priceList;
+    return prizeList;
   }
 });
 
