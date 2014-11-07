@@ -1,11 +1,69 @@
 <template name="lottoPage">
   {{> lottoItem}}
-  <div>
+
+  <div class="content">
     <div class="form-group">
       <label>Small pot:</label> <span>{{ smallpot }}</span>
     </div>
     <div class="form-group">
       <label>Big pot:</label> <span>{{ bigpot }}</span>
     </div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          {{#each range 10 }}
+            <th>{{ value }}</th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+      {{#each tiers}}
+          {{> tier }}
+          {{#if currentTier}}
+            {{#with showEntries ../entries }}
+              {{> entries }}
+            {{/with}}
+          {{/if}}
+      {{/each}}
+
+      </tbody>
+    </table>
   </div>
+</template>
+
+<template name="tier">
+  <tr>
+    <td class="tier">{{tier}}</td>
+    {{#each priceLoop prices }}
+      <td class="price-cell">{{price}}</td>
+    {{/each}}
+  </tr>
+</template>
+
+<template name="entries">
+  <tr>
+    <td colspan="2">Entries</td>
+    <td colspan="8">
+      {{#if hasItems}}
+        <table class="table table-striped table-bordered">
+          <tbody>
+            {{#each entries}}
+              {{> entry }}
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p>No entries for this tier</p>
+      {{/if}}
+    </td>
+    <td></td>
+  </tr>
+</template>
+
+<template name="entry">
+  <tr>
+    <td>{{userid}}</td>
+    <td>{{amount}}</td>
+  </tr>
 </template>

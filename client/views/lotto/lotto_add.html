@@ -1,0 +1,10 @@
+<template name="lottoAdd">
+  <form class="form-inline" role="form">
+    <div class="form-group {{errorClass 'date'}}">
+      <label class="sr-only" for="date">Date</label>
+      <input name="date" id="date" type="date" value="" required class="form-control"/>
+      <!--<p class="help-block">{{errorMessage 'date'}}</p>-->
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</template>

@@ -1,7 +1,9 @@
 <template name="lottoList">
+  {{> lottoAdd }}
+
   <div class="lotto-list">
     {{#each lottos}}
-      {{> lottoItem}}
+      {{> lottoItem }}
     {{/each}}
   </div>
 </template>
