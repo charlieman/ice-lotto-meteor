@@ -40,6 +40,10 @@ Template.tier.events({
 Template.entries.helpers({
   hasItems: function() {
     return this.entries.length > 0;
+  },
+  isAdmin: function() {
+    var user = Meteor.user();
+    return user !== null && user.profile.admin === true;
   }
 });
 //Template.tier.rendered = function () {
@@ -55,3 +59,9 @@ Template.entries.helpers({
 //};
 
 Template.entry.helpers({});
+
+Template.addEntry.helpers({
+  usernames: function(){
+    return Meteor.users.find({}, {fields: {username: 1}});
+  }
+});

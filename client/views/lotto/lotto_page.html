@@ -51,6 +51,9 @@
             {{#each entries}}
               {{> entry }}
             {{/each}}
+            {{#if isAdmin}}
+              {{> addEntry }}
+            {{/if}}
           </tbody>
         </table>
       {{else}}
@@ -65,5 +68,22 @@
   <tr>
     <td>{{userid}}</td>
     <td>{{amount}}</td>
+  </tr>
+</template>
+
+<template name="addEntry">
+  <tr>
+    <td><form class="form-inline" role="form">
+      <div class="form-group">
+        <input type="text" name="name" id="name" value="" placeholder="Username" class="form-control" list="usernames"/>
+        <datalist id="usernames">
+          {{#each usernames }}
+            <option label={{username}} value={{userId}}></option>
+          {{/each}}
+        </datalist>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </form></td>
+    <td></td>
   </tr>
 </template>

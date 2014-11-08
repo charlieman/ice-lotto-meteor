@@ -1,9 +1,10 @@
 if (Lottos.find().count() === 0) {
-
-  var neriumId = Meteor.users.insert({
-    profile: { name: 'Nerium', verified: true, admin: true }
+  Accounts.createUser({
+    username: 'nerium',
+    password: 'nerium',
+    profile: {verified: true, admin: true, alts: ['erchamion', 'char mingus']}
   });
-  var nerium = Meteor.users.findOne(neriumId);
+  var nerium = Meteor.users.findOne({username: 'nerium'});
 
   Lottos.insert({
     userId: nerium._id,
