@@ -1,11 +1,4 @@
 Template.lottoPage.helpers({
-  range: function (to) {
-    var range = [];
-    for (var i = 0; i < to; i++) {
-      range.push({value: i + 1});
-    }
-    return range;
-  },
   currentTier: function() {
     var tier = Session.get('SelectedTier');
     return tier === this.tier;
@@ -13,10 +6,13 @@ Template.lottoPage.helpers({
   showEntries: function (entries) {
     var tier = Session.get('SelectedTier');
     return {entries: _.filter(entries, function(x) {return x.amount === tier})};
+  },
+  midTier: function() {
+    return this.tier === 10;
   }
 });
 
-Template.tier.helpers({
+Template.tierRow.helpers({
   prizeLoop: function (prizes) {
     var prizeList = [];
     for (var i = 0; i < 10; i++) {
@@ -26,7 +22,7 @@ Template.tier.helpers({
   }
 });
 
-Template.tier.events({
+Template.tierRow.events({
   'click tr': function (e) {
     e.preventDefault();
     var tier = Session.get('SelectedTier');
@@ -37,31 +33,4 @@ Template.tier.events({
   }
 });
 
-Template.entries.helpers({
-  hasItems: function() {
-    return this.entries.length > 0;
-  },
-  isAdmin: function() {
-    var user = Meteor.user();
-    return user !== null && user.profile.admin === true;
-  }
-});
-//Template.tier.rendered = function () {
-//  console.log(this);
-//  $(this.find('td')).popover({
-//    title: 'Entries',
-//    container: 'body',
-//    content:'<p>test</p>',
-//    html: true,
-//    placement: 'bottom',
-//    trigger: 'click'
-//  });
-//};
 
-Template.entry.helpers({});
-
-Template.addEntry.helpers({
-  usernames: function(){
-    return Meteor.users.find({}, {fields: {username: 1}});
-  }
-});

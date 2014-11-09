@@ -1,5 +1,5 @@
 <template name="lottoPage">
-  {{> lottoItem}}
+    {{> lottoItem}}
 
   <div class="content">
     <div class="form-group">
@@ -10,20 +10,18 @@
     </div>
     <table class="table table-striped table-bordered">
       <thead>
-        <tr>
-          <th></th>
-          {{#each range 10 }}
-            <th>{{ value }}</th>
-          {{/each}}
-        </tr>
+      {{> tableHeaders }}
       </thead>
       <tbody>
       {{#each tiers}}
-          {{> tier }}
+          {{> tierRow }}
           {{#if currentTier}}
-            {{#with showEntries ../entries }}
-              {{> entries }}
-            {{/with}}
+              {{#with showEntries ../entries }}
+                  {{> entriesTable }}
+              {{/with}}
+          {{/if}}
+          {{#if midTier}}
+              {{> tableHeaders }}
           {{/if}}
       {{/each}}
 
@@ -32,58 +30,20 @@
   </div>
 </template>
 
-<template name="tier">
+<template name="tableHeaders">
   <tr>
-    <td class="tier">{{tier}}</td>
-    {{#each prizeLoop prizes }}
-      <td class="prize-cell">{{prize}}</td>
-    {{/each}}
+    <th></th>
+      {{#each range 1 11 1 }}
+        <th>{{ value }}</th>
+      {{/each}}
   </tr>
 </template>
 
-<template name="entries">
+<template name="tierRow">
   <tr>
-    <td colspan="2">Entries</td>
-    <td colspan="8">
-      {{#if hasItems}}
-        <table class="table table-striped table-bordered">
-          <tbody>
-            {{#each entries}}
-              {{> entry }}
-            {{/each}}
-            {{#if isAdmin}}
-              {{> addEntry }}
-            {{/if}}
-          </tbody>
-        </table>
-      {{else}}
-        <p>No entries for this tier</p>
-      {{/if}}
-    </td>
-    <td></td>
-  </tr>
-</template>
-
-<template name="entry">
-  <tr>
-    <td>{{userid}}</td>
-    <td>{{amount}}</td>
-  </tr>
-</template>
-
-<template name="addEntry">
-  <tr>
-    <td><form class="form-inline" role="form">
-      <div class="form-group">
-        <input type="text" name="name" id="name" value="" placeholder="Username" class="form-control" list="usernames"/>
-        <datalist id="usernames">
-          {{#each usernames }}
-            <option label={{username}} value={{userId}}></option>
-          {{/each}}
-        </datalist>
-        <button type="submit" class="btn btn-primary">Add</button>
-      </div>
-    </form></td>
-    <td></td>
+    <th class="tierNumber">{{tier}}</th>
+      {{#each prizeLoop prizes }}
+        <td class="prize-cell">{{prize}}</td>
+      {{/each}}
   </tr>
 </template>

@@ -2,6 +2,6 @@ Meteor.publish('lottos', function() {
     return Lottos.find();
 });
 
-Meteor.publish('users', function(){
+Meteor.publish('usernames', function(){
    return Meteor.users.find({}, {fields: {username: 1}});
 });
