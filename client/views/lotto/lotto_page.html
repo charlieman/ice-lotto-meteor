@@ -1,5 +1,5 @@
 <template name="lottoPage">
-    {{> lottoItem}}
+    {{> lottoItem }}
 
   <div class="content">
     <div class="form-group">
@@ -24,7 +24,7 @@
               {{> tableHeaders }}
           {{/if}}
       {{/each}}
-
+      {{> tableHeaders }}
       </tbody>
     </table>
   </div>
@@ -41,8 +41,11 @@
 
 <template name="tierRow">
   <tr>
-    <th class="tierNumber">{{tier}}</th>
-      {{#each prizeLoop prizes }}
+    <th class="tier-number">
+        {{tier}}
+        {{#if currentTier}}&#9660;{{else}}&#9654;{{/if}}
+    </th>
+      {{#each prizeLoop prizes}}
         <td class="prize-cell">{{prize}}</td>
       {{/each}}
   </tr>
