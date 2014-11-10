@@ -1,20 +1,25 @@
 <template name="entriesTable">
-  <tr>
+  <tr class="entries">
     <td colspan="2">Entries</td>
     <td colspan="8">
         {{#if hasItems}}
-          <table class="table table-striped table-bordered">
+          <table class="table table-striped table-bordered table-condensed">
             <tbody>
             {{#each entries}}
                 {{> entryRow }}
             {{/each}}
             {{#if isAdmin}}
-                {{> entryAdd }}
+              <tr>
+                <td colspan="3">{{> entryAdd }}</td>
+              </tr>
             {{/if}}
             </tbody>
           </table>
         {{else}}
           <p>No entries for this tier</p>
+            {{#if isAdmin}}
+                {{> entryAdd }}
+            {{/if}}
         {{/if}}
     </td>
     <td></td>
@@ -23,24 +28,23 @@
 
 <template name="entryRow">
   <tr>
-    <td>{{userId}}</td>
+    <td>{{username}}</td>
     <td>{{amount}}</td>
+    <td><button class="remove btn btn-danger btn-xs">x</button></td>
   </tr>
 </template>
 
 <template name="entryAdd">
-  <tr>
-    <td><form class="form-inline" role="form">
-      <div class="form-group">
-        <select name="name" id="name" class="form-control">
-          <option>Select</option>
-            {{#each usernames }}
-              <option value={{userId}}>{{username}}</option>
-            {{/each}}
-        </select>
-        <button type="submit" class="btn btn-primary">Add</button>
-      </div>
-    </form></td>
-    <td></td>
-  </tr>
+  <form class="entry-add form-inline" role="form">
+    <div class="form-group">
+      <label class="sr-only" for="userId">User</label>
+      <select name="userId" id="userId" class="form-control">
+        <option value="">Select user</option>
+          {{#each usernames }}
+            <option value="{{_id}}">{{username}}</option>
+          {{/each}}
+      </select>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+  </form>
 </template>

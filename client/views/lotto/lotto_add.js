@@ -24,7 +24,7 @@ Template.lottoAdd.events({
 
     if (!lotto.date) {
       var errors = {};
-      error.date = "Please select a date";
+      errors.date = "Please select a date";
       return Session.set('lottoAddErrors', errors)
     }
 
