@@ -1,13 +1,5 @@
-UI.registerHelper('range', function (from, to, step) {
-  if (to === undefined) {
-    to = from;
-    from = 0;
-  }
-  step = step || 1;
-  var range = [];
-  while (from < to) {
-    range.push({value: from});
-    from = from + step;
-  }
-  return range;
+UI.registerHelper('range', function (start, stop, step) {
+  return _.map(_.range(start, stop, step), function (x) {
+    return {value: x};
+  })
 });
