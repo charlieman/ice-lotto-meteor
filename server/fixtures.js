@@ -26,13 +26,13 @@ if (Lottos.find().count() === 0) {
 
   var tiers = [];
   for (var i = 0; i < 20; i++) {
-    var prizes = {};
+    var prizes = [];
     for (var j = 0; j < 10; j++) {
       if (Math.random() > 0.3) {
-        prizes[j + 1] = 'prize ' + i + '-' + j;
+        prizes.push({_id: Random.id(), pos: j + 1, prize: 'prize ' + i + '-' + j});
       }
     }
-    tiers.push({tier: i + 1, prizes: prizes});
+    tiers.push({_id: Random.id(), tier: i + 1, prizes: prizes});
   }
   var entries = [];
 
@@ -43,7 +43,7 @@ if (Lottos.find().count() === 0) {
     }
   }
   for (i = 0; i < 20; i++) {
-    _.each([nerium, foobar, baz], function(user){
+    _.each([nerium, foobar, baz], function (user) {
       if (Math.random() > 0.5) {
         entries.push({_id: Random.id(), userId: user._id, username: user.username, amount: i});
       }

@@ -38,15 +38,3 @@
       {{/each}}
   </tr>
 </template>
-
-<template name="tierRow">
-  <tr>
-    <th class="tier-number">
-        {{tier}}
-        {{#if currentTier}}&#9660;{{else}}&#9654;{{/if}}
-    </th>
-      {{#each prizeLoop prizes}}
-        <td class="prize-cell">{{prize}}</td>
-      {{/each}}
-  </tr>
-</template>

@@ -1,0 +1,16 @@
+<template name="tierRow">
+  <tr>
+    <th class="tier-number">
+        {{tier}}
+        {{#if inSession 'SelectedTier' tier}}&#9660;{{else}}&#9654;{{/if}}
+    </th>
+      {{#each prizeLoop prizes}}
+        <td class="prize-cell">
+            {{prize}}
+            {{#if inSession 'SelectedPrize' _id}}
+                {{> prizeSelector }}
+            {{/if}}
+        </td>
+      {{/each}}
+  </tr>
+</template>

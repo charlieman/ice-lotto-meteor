@@ -1,3 +1,27 @@
 .tier-number {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.prize-cell {
+  position: relative;
+}
+
+.prize-cell .popover-wrapper {
+  position: absolute;
+  top: 100%;
+  display: block;
+  left: 50%;
+}
+
+.popover-wrapper .popover.bottom {
+  display: block;
+  position: relative;
+  width: 250px;
+  left: 0;
+  margin-left: -50%;
+  margin-top: 0;
+}
+
+.popover .close {
+  padding: 5px;
 }
