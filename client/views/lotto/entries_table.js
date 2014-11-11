@@ -28,7 +28,7 @@ Template.entryAdd.helpers({
 });
 
 Template.entryAdd.events({
-  'submit .entry-add': function (e, template) {
+  'submit .entry-add': function (e) {
     e.preventDefault();
     var tier = Session.get('SelectedTier');
     var lottoId = Session.get('lottoId');
