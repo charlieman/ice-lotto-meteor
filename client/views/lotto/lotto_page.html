@@ -15,7 +15,7 @@
       <tbody>
       {{#each tiers}}
           {{> tierRow }}
-          {{#if currentTier}}
+          {{#if inSession 'SelectedTier' tier}}
               {{#with showEntries ../entries }}
                   {{> entriesTable }}
               {{/with}}
