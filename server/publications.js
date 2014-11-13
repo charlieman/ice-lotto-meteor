@@ -8,7 +8,10 @@ Meteor.publish('singleLotto', function (id) {
   check(id, String);
   if(!this.userId)
     return this.ready();
-  return Lottos.find(id);
+  return [
+    Lottos.find(id),
+    Tiers.find({lottoId: id})
+  ];
 });
 
 Meteor.publish('usernames', function(){

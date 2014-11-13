@@ -4,19 +4,13 @@ Template.prizeSelector.events({
     console.log('close');
     Session.set('SelectedPrize', null);
   },
-  'submit .prize-change': function (e, template) {
-    console.log('submit');
-    console.log('template', template);
-    console.log('context', this);
+  'submit .prize-change': function (e) {
     e.preventDefault();
-    var tierId = Session.get('SelectedTier');
+    var tierId = this.tierId;
     var lottoId = Session.get('lottoId');
-    var prizeId = this._id;
     var prize = e.target.prizeName.value;
     var pos = this.pos;
-    console.log(prize, lottoId, tierId);
-    console.log(prize);
-    Meteor.call('prizeChange', prize, lottoId, tierId, prizeId, pos, function(error, result){
+    Meteor.call('prizeChange', prize, tierId, pos, function(error, result){
       if (error) {
         console.log(error);
         return;
@@ -25,6 +19,5 @@ Template.prizeSelector.events({
       e.target.prizeName.value = '';
       Session.set('SelectedPrize', null);
     });
-
   }
 });

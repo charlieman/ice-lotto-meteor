@@ -1,4 +1,5 @@
 if (Lottos.find().count() === 0) {
+  //accounts
   Accounts.createUser({
     username: 'nerium',
     password: 'nerium',
@@ -24,18 +25,9 @@ if (Lottos.find().count() === 0) {
   var baz = Meteor.users.findOne({username: 'baz'});
   var borg = Meteor.users.findOne({username: 'borg'});
 
-  var tiers = [];
-  for (var i = 0; i < 20; i++) {
-    var prizes = [];
-    for (var j = 0; j < 10; j++) {
-      if (Math.random() > 0.3) {
-        prizes.push({_id: Random.id(), pos: j + 1, prize: 'prize ' + i + '-' + j});
-      }
-    }
-    tiers.push({_id: Random.id(), tier: i + 1, prizes: prizes});
-  }
-  var entries = [];
+  //lotto
 
+  var entries = [];
   // for the small pot
   for (i = 0; i < 5; i++) {
     if (Math.random() > 0.6) {
@@ -52,10 +44,9 @@ if (Lottos.find().count() === 0) {
 
   var pots = updatePots(entries);
 
-  Lottos.insert({
+  var lottoId = Lottos.insert({
     userId: nerium._id,
     date: new Date(2014, 10, 1), // month is zero based
-    tiers: tiers,
     smallpot: pots.smallpot_total,
     bigpot: pots.bigpot_total,
     smallpot_entries: pots.smallpot,
@@ -66,4 +57,15 @@ if (Lottos.find().count() === 0) {
     bigpot_winner: undefined,
     created: new Date()
   });
+
+  // lotto tiers
+  for (var i = 0; i < 20; i++) {
+    var prizes = [];
+    for (var j = 0; j < 10; j++) {
+      if (Math.random() > 0.3) {
+        prizes.push({_id: Random.id(), pos: j + 1, prize: 'prize ' + i + '-' + j});
+      }
+    }
+    Tiers.insert({tier: i + 1, lottoId: lottoId, prizes: prizes});
+  }
 }
