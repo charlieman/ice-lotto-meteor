@@ -1,3 +1,6 @@
+table {
+  table-layout: fixed;
+}
 .tier-number {
   cursor: pointer;
 }

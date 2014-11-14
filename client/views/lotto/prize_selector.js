@@ -21,3 +21,7 @@ Template.prizeSelector.events({
     });
   }
 });
+
+Template.prizeSelector.rendered = function(){
+  this.find('#prizeName').focus();
+};
