@@ -1,0 +1,23 @@
+<template name="userItem">
+  <div>
+    <strong>{{username}}</strong>
+
+    <form class="verify">
+        {{#if profile.verified}}
+          <span>Verified</span>
+          <button type="button" class="unverify btn btn-danger btn-xs">Unverify</button>
+        {{else}}
+          <button type="submit" class="btn btn-primary">Verify</button>
+        {{/if}}
+    </form>
+    <form class="add-alt">
+      <input type="text" name="altName" />
+      <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    <ul class="alts">
+        {{#each altLoop}}
+          <li>{{alt}} <button class="remove-alt btn btn-danger btn-xs">&times;</button> </li>
+        {{/each}}
+    </ul>
+  </div>
+</template>

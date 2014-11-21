@@ -15,8 +15,13 @@ Meteor.publish('singleLotto', function (id) {
 });
 
 Meteor.publish('usernames', function () {
-  //check(this.userId, String);
   if (!this.userId)
-    return this.ready();
-  return Meteor.users.find({}, {fields: {username: 1}});
+    return [];
+  return Meteor.users.find({}, {fields: {username: 1, 'profile.alts': 1}});
+});
+
+Meteor.publish('userManagement', function() {
+  if (!isAdminById(this.userId))
+    return [];
+  return Meteor.users.find({}, {fields: {username: 1, profile: 1}});
 });
