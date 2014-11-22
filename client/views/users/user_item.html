@@ -14,9 +14,9 @@
       <input type="text" name="altName" />
       <button type="submit" class="btn btn-success">Add</button>
     </form>
-    <ul class="alts">
+    <ul class="alts list-inline">
         {{#each altLoop}}
-          <li>{{alt}} <button class="remove-alt btn btn-danger btn-xs">&times;</button> </li>
+          <li class="label label-default">{{alt}} <button class="remove-alt btn btn-danger btn-xs">&times;</button> </li>
         {{/each}}
     </ul>
   </div>
