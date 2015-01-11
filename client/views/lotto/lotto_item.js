@@ -1,5 +1,5 @@
 Template.lottoItem.helpers({
   prettyDate: function(){
-    return this.date.toUTCString();
+    return moment(this.date).format('MMM Do, YYYY');
   }
 });
