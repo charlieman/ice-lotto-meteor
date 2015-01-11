@@ -15,7 +15,7 @@ Template.entryRow.events({
     var entryId = this._id;
     Meteor.call('entryRemove', entryId, lottoId, function (error, result) {
       if (error)
-        console.log(error);
+        return throwError(error.reason);
       console.log(result);
     });
   }
@@ -44,8 +44,7 @@ Template.entryAdd.events({
 
     Meteor.call('entryAdd', entry, lottoId, function (error, result) {
       if (error)
-        console.log(error);
-        //return throwError(error.reason);
+        return throwError(error.reason);
       console.log(result);
       e.target.userId.value = '';
     });

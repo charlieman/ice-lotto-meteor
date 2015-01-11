@@ -38,19 +38,16 @@ Template.userItem.events({
       if(error) {
         return throwError(error.reason);
       }
-      console.log(result);
       e.target.altName.value = '';
     });
   },
   'click .remove-alt': function(e) {
     e.preventDefault();
     var altName = this.alt;
-    console.log(this);
     Meteor.call('removeAlt', this.userId, altName, function(error, result){
       if(error) {
         return throwError(error.reason);
       }
-      console.log(result);
     });
   }
 });
