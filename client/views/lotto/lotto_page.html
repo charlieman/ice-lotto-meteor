@@ -2,6 +2,14 @@
     {{> lottoItem lotto }}
 
   <div class="content">
+    {{#if isAdmin}}
+    <div class="form-group pull-right">
+      <label>
+        {{#if lotto.public}}Public{{else}}Private{{/if}}
+        <input type="checkbox" autocomplete="off" class="togglePublic" checked={{lotto.public}}>
+      </label>
+    </div>
+    {{/if}}
     <div class="form-group">
       <label>Small pot:</label> <span>{{ lotto.smallpot }}</span>
     </div>
@@ -33,8 +41,8 @@
 <template name="tableHeaders">
   <tr>
     <th></th>
-      {{#each range 1 11 1 }}
-        <th>{{ value }}</th>
-      {{/each}}
+    {{#each range 1 11 1 }}
+      <th>{{ value }}</th>
+    {{/each}}
   </tr>
 </template>

@@ -11,3 +11,14 @@ Template.lottoPage.helpers({
     return this.tier === 10;
   }
 });
+
+Template.lottoPage.events({
+  'change .togglePublic': function(e){
+    e.preventDefault();
+    Meteor.call('lottoPublicToggle', this.lotto._id, function(error, result){
+      if(error) {
+        return throwError(error.reason);
+      }
+    });
+  },
+});
