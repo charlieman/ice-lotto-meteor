@@ -1,10 +1,6 @@
 Template.entriesTable.helpers({
   hasItems: function () {
     return this.entries.length > 0;
-  },
-  isAdmin: function () {
-    var user = Meteor.user();
-    return user !== null && user.profile.admin === true;
   }
 });
 
