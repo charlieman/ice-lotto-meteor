@@ -5,6 +5,8 @@ Template.registerHelper('range', function (start, stop, step) {
 });
 
 Template.registerHelper('inSession', function(name, value){
-  var sessionValue = Session.get(name);
-  return sessionValue === value;
+  return Session.equals(name, value);
 });
+
+Template.registerHelper('isVerified', isVerified);
+Template.registerHelper('isAdmin', isAdmin);
