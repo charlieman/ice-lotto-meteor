@@ -1,7 +1,21 @@
+var searchItems = function(e, t) {
+  var text = e.target.value;
+  if (text.length < 3) return;
+  // Ajax search
+  var option = document.createElement('option');
+  option.value = 'Dawn ' + e.target.value.length;
+  var items = t.find("#items");
+  items.appendChild(option);
+};
+
+var debounceSearch = lodash.debounce(searchItems, 500);
 Template.prizeSelector.events({
+  'keypress': function(e) {
+    if (e.keyCode === 27) Session.set('SelectedPrize', null);
+  },
+  'input #prizeName': debounceSearch,
   'click .close': function (e) {
     e.preventDefault();
-    console.log('close');
     Session.set('SelectedPrize', null);
   },
   'submit .prize-change': function (e) {
@@ -9,19 +23,22 @@ Template.prizeSelector.events({
     var tierId = this.tierId;
     var lottoId = Session.get('lottoId');
     var prize = e.target.prizeName.value;
+    var amount = ~~e.target.prizeAmount.value;
     var pos = this.pos;
-    Meteor.call('prizeChange', prize, tierId, pos, function(error, result){
+    Meteor.call('prizeChange', prize, amount, tierId, pos, function(error, result){
       if (error) {
         console.log(error);
         return;
       }
-      console.log(result);
       e.target.prizeName.value = '';
+      e.target.prizeAmount.value = '1';
       Session.set('SelectedPrize', null);
     });
   }
 });
 
 Template.prizeSelector.rendered = function(){
-  this.find('#prizeName').focus();
+  var prize = this.find('#prizeName');
+  prize.focus();
+  prize.select();
 };

@@ -6,9 +6,12 @@
     </th>
       {{#each prizeLoop prizes}}
         <td class="prize-cell">
-            {{prize}}
-            {{#if inSession 'SelectedPrize' _id}}
-                {{> prizeSelector }}
+            <span class="prize">{{prize}}</span>
+            <span class="amount">{{amount}}</span>
+            {{#if isAdmin}}
+              {{#if inSession 'SelectedPrize' _id}}
+                  {{> prizeSelector }}
+              {{/if}}
             {{/if}}
         </td>
       {{/each}}

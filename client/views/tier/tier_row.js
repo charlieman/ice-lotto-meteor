@@ -33,7 +33,7 @@ Template.tierRow.events({
       Session.set('SelectedTier', null);
   },
   'click .prize-cell': function (e) {
-    if (e.target.tagName !== 'TD') return;
+    if (!_.contains(['prize', 'amount', 'prize-cell'], e.target.className)) return;
     e.preventDefault();
     var prize = Session.get('SelectedPrize');
     if (prize !== this._id)

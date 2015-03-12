@@ -9,8 +9,16 @@
       <div class="popover-content">
         <form class="prize-change form" role="form">
           <div class="form-group">
-            <label class="sr-only" form="prizeName">Prize</label>
-            <input type="text" class="form-control" name="prizeName" id="prizeName" placeholder="Enter Item" required/>
+            <label class="sr-only" for="prizeName">Prize</label>
+            <input type="text" class="form-control" name="prizeName" id="prizeName" autocomplete="off"
+                   placeholder="Enter Item" list="items" value="{{prize}}" required/>
+            <datalist id="items">
+              <!--<option value="The Juggernaut"></option>-->
+            </datalist>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="prizeAmount">Prize</label>
+            <input type="number" class="form-control" name="prizeAmount" id="prizeAmount" value="1" min="1" max="255" required/>
           </div>
           <button type="submit" class="btn btn-primary">Change</button>
         </form>

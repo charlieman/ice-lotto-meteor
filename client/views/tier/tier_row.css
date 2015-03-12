@@ -1,0 +1,7 @@
+.prize-cell .amount {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 0.8em;
+  padding: 1px;
+}
