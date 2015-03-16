@@ -3,20 +3,20 @@
     <strong>{{username}}</strong>
 
     <form class="verify">
-        {{#if profile.verified}}
-          <span>Verified</span>
-          <button type="button" class="unverify btn btn-danger btn-xs">Unverify</button>
-        {{else}}
-          <button type="submit" class="btn btn-primary">Verify</button>
-        {{/if}}
+      <label>
+        <input type="checkbox" autocomplete="off" class="toggleVerify" checked={{isVerified}}>
+        {{#if isVerified}}Verified{{else}}Not verified{{/if}}
+      </label>
     </form>
-    <form class="add-alt">
-      <input type="text" name="altName" />
-      <button type="submit" class="btn btn-success">Add</button>
+    <form class="add-alt form-inline">
+      <div class="form-group">
+        <input type="text" name="altName" class="form-control" placeholder="Alt Name" />
+        <button type="submit" class="btn btn-success">Add</button>
+      </div>
     </form>
     <ul class="alts list-inline">
         {{#each altLoop}}
-          <li class="label label-default">{{alt}} <button class="remove-alt btn btn-danger btn-xs">&times;</button> </li>
+          <li class="label label-primary">{{alt}} <span class="remove-alt btn btn-danger btn-xs">&times;</span> </li>
         {{/each}}
     </ul>
   </div>

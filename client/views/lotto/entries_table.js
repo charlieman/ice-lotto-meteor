@@ -12,7 +12,6 @@ Template.entryRow.events({
     Meteor.call('entryRemove', entryId, lottoId, function (error, result) {
       if (error)
         return throwError(error.reason);
-      console.log(result);
     });
   }
 });
@@ -41,7 +40,6 @@ Template.entryAdd.events({
     Meteor.call('entryAdd', entry, lottoId, function (error, result) {
       if (error)
         return throwError(error.reason);
-      console.log(result);
       e.target.userId.value = '';
     });
   }

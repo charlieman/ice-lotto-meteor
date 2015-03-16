@@ -1,4 +1,7 @@
 Template.userItem.helpers({
+  isVerified: function(){
+    return isVerified(this);
+  },
   altLoop: function(){
     var userId = this._id;
     return _.map(this.profile.alts, function(i){ return {alt: i, userId: userId}})
@@ -6,22 +9,12 @@ Template.userItem.helpers({
 });
 
 Template.userItem.events({
-  'submit .verify': function(e){
+  'change .toggleVerify': function(e){
     e.preventDefault();
-    Meteor.call('userVerify', this._id, true, function(error, result){
+    Meteor.call('userVerify', this._id, !isVerified(this), function(error, result){
       if(error) {
         return throwError(error.reason);
       }
-      console.log(result);
-    });
-  },
-  'click .unverify': function(e) {
-    e.preventDefault();
-    Meteor.call('userVerify', this._id, false, function(error, result){
-      if(error) {
-        return throwError(error.reason);
-      }
-      console.log(result);
     });
   },
   'submit .add-alt': function(e) {
