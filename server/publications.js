@@ -1,6 +1,8 @@
 Meteor.publish('lottos', function () {
-  if (!this.userId)
-    return [];
+  if (!this.userId) {
+    this.ready();
+    return;
+  }
   return Lottos.find({}, {fields: {date: 1}, limit: 10, sort: {date: -1}});
 });
 
@@ -9,22 +11,23 @@ Meteor.publish('singleLotto', function (id) {
   
   if (!this.userId) {
     var lotto = Lottos.findOne({_id: id, public: true});
-    if (!lotto)
-      return [];
+    if (!lotto) {
+      this.ready();
+      return;
+    }
   }
 
   return [
     Lottos.find(id),
-    Tiers.find({lottoId: id}, {sort: {tier: 1}})
+    Tiers.find({lottoId: id}, {sort: {tier: 1}}),
+    Meteor.users.find({'profile.verified': true}, {fields: {username: 1, 'profile.alts': 1}})
   ];
 });
 
-Meteor.publish('usernames', function () {
-  //if (!this.userId) return [];
-  return Meteor.users.find({'profile.verified': true}, {fields: {username: 1, 'profile.alts': 1}});
-});
-
 Meteor.publish('userManagement', function() {
-  if (!isAdminById(this.userId)) return [];
+  if (!isAdminById(this.userId)) {
+    this.ready();
+    return;
+  }
   return Meteor.users.find({}, {fields: {username: 1, profile: 1}});
 });
