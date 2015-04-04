@@ -2,6 +2,15 @@
 Template.entriesTable.helpers({
   hasItems: function () {
     return this.entries.length > 0;
+  },
+  isLottoOpen: function() {
+    return !this.closed;
+  }
+});
+
+Template.entryRow.helpers({
+  isLottoOpen: function() {
+    return !Template.parentData().closed;
   }
 });
 

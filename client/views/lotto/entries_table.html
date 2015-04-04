@@ -6,20 +6,17 @@
           <table class="table table-striped table-bordered table-condensed">
             <tbody>
             {{#each entries}}
-                {{> entryRow }}
+              {{> entryRow }}
             {{/each}}
-            {{#if isAdmin}}
-              <tr>
-                <td colspan="3">{{> entryAdd }}</td>
-              </tr>
-            {{/if}}
             </tbody>
           </table>
         {{else}}
           <p>No entries for this tier</p>
-            {{#if isAdmin}}
-                {{> entryAdd }}
-            {{/if}}
+        {{/if}}
+        {{#if isAdmin}}
+          {{#if isLottoOpen}}
+            {{> entryAdd }}
+          {{/if}}
         {{/if}}
     </td>
     <td></td>
@@ -30,7 +27,7 @@
   <tr>
     <td>{{username}}</td>
     <td>{{amount}}</td>
-    <td><button class="remove btn btn-danger btn-xs">x</button></td>
+    <td>{{#if isLottoOpen}}<button class="remove btn btn-danger btn-xs">x</button>{{/if}}</td>
   </tr>
 </template>
 

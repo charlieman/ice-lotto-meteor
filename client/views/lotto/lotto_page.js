@@ -1,10 +1,11 @@
 Template.lottoPage.helpers({
-  showEntries: function (entries) {
+  showEntries: function (entries, closed) {
     var tier = Session.get('SelectedTier');
     return {
       entries: _.filter(entries, function (x) {
         return x.amount === tier;
-      })
+      }),
+      closed: closed
     };
   },
   midTier: function () {
@@ -13,7 +14,7 @@ Template.lottoPage.helpers({
 });
 
 Template.lottoPage.events({
-  'change .togglePublic': function(e){
+  'click .togglePublic': function(e){
     e.preventDefault();
     Meteor.call('lottoPublicToggle', this.lotto._id, function(error, result){
       if(error) {
