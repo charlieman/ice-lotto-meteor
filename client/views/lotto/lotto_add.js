@@ -25,7 +25,7 @@ Template.lottoAdd.events({
     if (!lotto.date) {
       var errors = {};
       errors.date = "Please select a date";
-      return Session.set('lottoAddErrors', errors)
+      return Session.set('lottoAddErrors', errors);
     }
 
     Meteor.call('lottoInsert', lotto, function(error, result) {

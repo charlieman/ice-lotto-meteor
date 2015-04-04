@@ -3,7 +3,7 @@ Template.lottoPage.helpers({
     var tier = Session.get('SelectedTier');
     return {
       entries: _.filter(entries, function (x) {
-        return x.amount === tier
+        return x.amount === tier;
       })
     };
   },

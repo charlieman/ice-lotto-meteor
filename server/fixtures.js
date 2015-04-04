@@ -1,4 +1,4 @@
-if (Lottos.find().count() === 0) {
+if (Meteor.users.find().count() === 0) {
   //accounts
   Accounts.createUser({
     username: 'nerium',
@@ -34,14 +34,17 @@ if (Lottos.find().count() === 0) {
       entries.push({_id: Random.id(), userId: borg._id, username: borg.username, amount: i});
     }
   }
-  for (i = 0; i < 20; i++) {
-    _.each([nerium, foobar, baz], function (user) {
-      if (Math.random() > 0.5) {
-        entries.push({_id: Random.id(), userId: user._id, username: user.username, amount: i});
-      }
-    });
-  }
 
+  var addUserEntryMaybe = function (user) {
+    if (Math.random() > 0.5) {
+      entries.push({_id: Random.id(), userId: user._id, username: user.username, amount: i});
+    }
+  };
+
+  for (i = 0; i < 20; i++) {
+    _.each([nerium, foobar, baz], addUserEntryMaybe);
+  }
+  
   var pots = updatePots(entries);
 
   var lottoId = Lottos.insert({

@@ -3,7 +3,7 @@ Template.tierRow.helpers({
     var tierId = this._id;
     var prizeList = [];
     var i = 1;
-    var sortedPrizes = _.sortBy(prizes, function(p) {return p.pos});
+    var sortedPrizes = _.sortBy(prizes, function(p) {return p.pos;});
 
     // fill unused spaces with empty prizes
     // TODO make better

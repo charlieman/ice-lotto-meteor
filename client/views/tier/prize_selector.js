@@ -1,6 +1,8 @@
 var searchItems = function(e, t) {
   var text = e.target.value;
-  if (text.length < 3) return;
+  if (text.length < 3) {
+    return;
+  }
   // Ajax search
   var option = document.createElement('option');
   option.value = 'Dawn ' + e.target.value.length;
@@ -11,7 +13,9 @@ var searchItems = function(e, t) {
 var debounceSearch = lodash.debounce(searchItems, 500);
 Template.prizeSelector.events({
   'keypress': function(e) {
-    if (e.keyCode === 27) Session.set('SelectedPrize', null);
+    if (e.keyCode === 27) {
+      Session.set('SelectedPrize', null);
+    }
   },
   'input #prizeName': debounceSearch,
   'click .close': function (e) {
@@ -23,7 +27,7 @@ Template.prizeSelector.events({
     var tierId = this.tierId;
     var lottoId = Session.get('lottoId');
     var prize = e.target.prizeName.value;
-    var amount = ~~e.target.prizeAmount.value;
+    var amount = Math.floor(e.target.prizeAmount.value);
     var pos = this.pos;
     Meteor.call('prizeChange', prize, amount, tierId, pos, function(error, result){
       if (error) {

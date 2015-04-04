@@ -1,3 +1,4 @@
+"use strict";
 Template.entriesTable.helpers({
   hasItems: function () {
     return this.entries.length > 0;
@@ -10,8 +11,9 @@ Template.entryRow.events({
     var lottoId = Session.get('lottoId');
     var entryId = this._id;
     Meteor.call('entryRemove', entryId, lottoId, function (error, result) {
-      if (error)
+      if (error) {
         return throwError(error.reason);
+      }
     });
   }
 });
@@ -34,12 +36,13 @@ Template.entryAdd.events({
     };
     var errors = validateEntry(entry);
     if (errors.userId || errors.amount) {
-      return Session.set('entryAddErrors', errors)
+      return Session.set('entryAddErrors', errors);
     }
 
     Meteor.call('entryAdd', entry, lottoId, function (error, result) {
-      if (error)
+      if (error) {
         return throwError(error.reason);
+      }
       e.target.userId.value = '';
     });
   }
