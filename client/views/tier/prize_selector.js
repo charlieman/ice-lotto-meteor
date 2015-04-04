@@ -12,6 +12,10 @@ var searchItems = function(e, t) {
 
 var debounceSearch = lodash.debounce(searchItems, 500);
 Template.prizeSelector.events({
+  'click .popover-wrapper': function(e) {
+    // prevent propagation of click event to the prize cell
+    e.stopPropagation();
+  },
   'keypress': function(e) {
     if (e.keyCode === 27) {
       Session.set('SelectedPrize', null);
