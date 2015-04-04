@@ -1,0 +1,18 @@
+.alts {
+  font-size: 1.5em;
+}
+.alts .label {
+  padding-top: 0.3em;
+}
+.remove-alt {
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+}
+.remove-alt:hover {
+  background-color: red;
+}
