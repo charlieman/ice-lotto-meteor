@@ -21,4 +21,14 @@ Template.lottoPage.events({
       }
     });
   },
+  'click .closeLotto': function(e) {
+    e.preventDefault();
+    if (confirm("Are you sure you want to close the lotto?\n(No more entries will be allowed after closing it)")) {
+      Meteor.call('lottoClose', this.lotto._id, function(error, result){
+        if(error) {
+          return throwError(error.reason);
+        }
+      });
+    }
+  }
 });

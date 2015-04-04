@@ -1,36 +1,43 @@
 <template name="lottoPage">
-    {{> lottoItem lotto }}
+  {{> lottoItem lotto }}
 
   <div class="content">
     {{#if isAdmin}}
     <div class="form-group pull-right">
+      {{#if lotto.closed}}
+        <span>Lotto is closed</span>
+      {{else}}
+        <button type="button" class="closeLotto btn btn-danger">Close lotto</button>
+      {{/if}}
       <label>
         {{#if lotto.public}}Public{{else}}Private{{/if}}
         <input type="checkbox" autocomplete="off" class="togglePublic" checked={{lotto.public}}>
       </label>
     </div>
     {{/if}}
+
     <div class="form-group">
       <label>Small pot:</label> <span>{{ lotto.smallpot }}</span>
     </div>
     <div class="form-group">
       <label>Big pot:</label> <span>{{ lotto.bigpot }}</span>
     </div>
+    
     <table class="table table-striped table-bordered">
       <thead>
       {{> tableHeaders }}
       </thead>
       <tbody>
       {{#each tiers}}
-          {{> tierRow }}
-          {{#if inSession 'SelectedTier' tier}}
-              {{#with showEntries ../lotto.entries }}
-                  {{> entriesTable }}
-              {{/with}}
-          {{/if}}
-          {{#if midTier}}
-              {{> tableHeaders }}
-          {{/if}}
+        {{> tierRow }}
+        {{#if inSession 'SelectedTier' tier}}
+          {{#with showEntries ../lotto.entries }}
+            {{> entriesTable }}
+          {{/with}}
+        {{/if}}
+        {{#if midTier}}
+          {{> tableHeaders }}
+        {{/if}}
       {{/each}}
       {{> tableHeaders }}
       </tbody>
