@@ -26,19 +26,20 @@ Template.tierRow.helpers({
 Template.tierRow.events({
   'click .tier-number': function (e) {
     e.preventDefault();
-    var tier = Session.get('SelectedTier');
-    if (tier !== this.tier)
-      Session.set('SelectedTier', this.tier);
-    else
+    if (Session.equals('SelectedTier', this.tier)) {
       Session.set('SelectedTier', null);
+    }
+    else {
+      Session.set('SelectedTier', this.tier);
+    }
   },
   'click .prize-cell': function (e) {
-    if (!_.contains(['prize', 'amount', 'prize-cell'], e.target.className)) return;
     e.preventDefault();
-    var prize = Session.get('SelectedPrize');
-    if (prize !== this._id)
-      Session.set('SelectedPrize', this._id);
-    else
+    if (Session.equals('SelectedPrize', this._id)) {
       Session.set('SelectedPrize', null);
+    }
+    else {
+      Session.set('SelectedPrize', this._id);
+    }
   }
 });

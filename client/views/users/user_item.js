@@ -1,15 +1,15 @@
 Template.userItem.helpers({
-  isVerified: function(){
+  isVerified: function() {
     return isVerified(this);
   },
-  altLoop: function(){
+  altLoop: function() {
     var userId = this._id;
-    return _.map(this.profile.alts, function(i){ return {alt: i, userId: userId}})
+    return _.map(this.profile.alts, function(i) { return {alt: i, userId: userId};});
   }
 });
 
 Template.userItem.events({
-  'change .toggleVerify': function(e){
+  'change .toggleVerify': function(e) {
     e.preventDefault();
     Meteor.call('userVerify', this._id, !isVerified(this), function(error, result){
       if(error) {
