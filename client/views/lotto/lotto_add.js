@@ -19,7 +19,7 @@ Template.lottoAdd.events({
     e.preventDefault();
 
     var lotto = {
-      date: e.target.date.valueAsDate
+      date: moment(e.target.date.value).toDate()
     };
 
     if (!lotto.date) {
