@@ -11,6 +11,9 @@ Template.entriesTable.helpers({
 Template.entryRow.helpers({
   isLottoOpen: function() {
     return !Template.parentData().closed;
+  },
+  mainUsername: function() {
+    return GWUsers.findOne(this.gwuserId).alts[0];
   }
 });
 
@@ -28,8 +31,8 @@ Template.entryRow.events({
 });
 
 Template.entryAdd.helpers({
-  usernames: function () {
-    return Meteor.users.find({}, {fields: {username: 1}});
+  gwusers: function () {
+    return GWUsers.find({}, {fields: {alts: 1}});
   }
 });
 
@@ -38,13 +41,13 @@ Template.entryAdd.events({
     e.preventDefault();
     var tier = Session.get('SelectedTier');
     var lottoId = Session.get('lottoId');
-    var userId = e.target.userId.value;
+    var gwuserId = e.target.gwuserId.value;
     var entry = {
-      userId: userId,
+      gwuserId: gwuserId,
       amount: tier
     };
     var errors = validateEntry(entry);
-    if (errors.userId || errors.amount) {
+    if (errors.gwuserId || errors.amount) {
       return Session.set('entryAddErrors', errors);
     }
 
@@ -52,7 +55,7 @@ Template.entryAdd.events({
       if (error) {
         return throwError(error.reason);
       }
-      e.target.userId.value = '';
+      e.target.gwuserId.value = '';
     });
   }
 });

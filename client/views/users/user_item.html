@@ -8,16 +8,5 @@
         {{#if isVerified}}Verified{{else}}Not verified{{/if}}
       </label>
     </form>
-    <form class="add-alt form-inline">
-      <div class="form-group">
-        <input type="text" name="altName" class="form-control" placeholder="Alt Name" />
-        <button type="submit" class="btn btn-success">Add</button>
-      </div>
-    </form>
-    <ul class="alts list-inline">
-        {{#each altLoop}}
-          <li class="label label-primary">{{alt}} <span class="remove-alt">&times;</span> </li>
-        {{/each}}
-    </ul>
   </div>
 </template>

@@ -20,7 +20,8 @@ Meteor.publish('singleLotto', function (id) {
   return [
     Lottos.find(id),
     Tiers.find({lottoId: id}, {sort: {tier: 1}}),
-    Meteor.users.find({'profile.verified': true}, {fields: {username: 1, 'profile.alts': 1}})
+    Meteor.users.find({'profile.verified': true}, {fields: {username: 1, 'profile.alts': 1}}),
+    GWUsers.find({}, {fields: {alts: 1}})
   ];
 });
 
@@ -30,4 +31,12 @@ Meteor.publish('userManagement', function() {
     return;
   }
   return Meteor.users.find({}, {fields: {username: 1, profile: 1}});
+});
+
+Meteor.publish('gwuserManagement', function() {
+  if (!isAdminById(this.userId)) {
+    this.ready();
+    return;
+  }
+  return GWUsers.find({}, {fields: {alts: 1}});
 });

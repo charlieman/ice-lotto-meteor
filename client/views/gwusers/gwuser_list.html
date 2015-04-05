@@ -1,0 +1,15 @@
+<template name="gwuserList">
+  <div class="user-list">
+  	{{#each gwusers }}
+      {{> gwuserItem }}
+    {{/each}}
+    <div>
+      <form class="add-gwuser form-inline">
+        <div class="form-group">
+          <input type="text" name="altName" class="form-control" placeholder="Alt Name" />
+          <button type="submit" class="btn btn-success">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
