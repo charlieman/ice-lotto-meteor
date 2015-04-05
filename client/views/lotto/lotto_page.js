@@ -10,10 +10,27 @@ Template.lottoPage.helpers({
   },
   midTier: function () {
     return this.tier === 10;
+  },
+  potEntries: function(entries) {
+    return _.map(entries, function (v, k) {
+      return {
+        gwuserId: k,
+        amount: v
+      };
+    });
+  },
+  mainUsername: function (gwuserId) {
+    return GWUsers.findOne(gwuserId).alts[0];
   }
 });
 
 Template.lottoPage.events({
+  'click .toggleSmall': function(e) {
+    Session.set('showSmall', !Session.get('showSmall'));
+  },
+  'click .toggleBig': function(e) {
+    Session.set('showBig', !Session.get('showBig'));
+  },
   'click .togglePublic': function(e){
     e.preventDefault();
     Meteor.call('lottoPublicToggle', this.lotto._id, function(error, result){
