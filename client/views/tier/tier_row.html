@@ -1,6 +1,6 @@
 <template name="tierRow">
   <tr>
-    <th class="tier-number">
+    <th class="tier-number" role="button">
         {{tier}}
         {{#if inSession 'SelectedTier' tier}}&#9660;{{else}}&#9654;{{/if}}
     </th>

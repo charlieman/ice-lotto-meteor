@@ -1,8 +1,10 @@
+
 table {
   table-layout: fixed;
 }
-.tier-number {
-  cursor: pointer;
+
+[role=button] {
+  cursor:pointer;
 }
 
 .prize-cell {

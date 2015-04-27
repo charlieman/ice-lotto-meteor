@@ -26,7 +26,10 @@
   <div class="content">
   <div class="row">
     <div class="form-group col-xs-12 col-sm-6">
-      <label class="toggleSmall">Small pot:</label> <span>{{ lotto.smallpot }}</span>
+      <label class="toggleSmall" role="button">
+        {{#if inSession 'showSmall' true}}&#9660;{{else}}&#9654;{{/if}}
+        Small pot:
+      </label> <span>{{ lotto.smallpot }}</span>
       {{#if inSession 'showSmall' true}}
         <table class="table table-striped table-bordered table-condensed">
           <tbody>
@@ -43,7 +46,10 @@
   </div>
   <div class="row">
     <div class="form-group col-xs-12 col-sm-6">
-      <label class="toggleBig">Big pot:</label> <span>{{ lotto.bigpot }}</span>
+      <label class="toggleBig" role="button">
+        {{#if inSession 'showBig' true}}&#9660;{{else}}&#9654;{{/if}}
+        Big pot:
+      </label> <span>{{ lotto.bigpot }}</span>
       {{#if inSession 'showBig' true}}
         <table class="table table-striped table-bordered table-condensed">
           <tbody>

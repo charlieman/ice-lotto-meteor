@@ -1,10 +1,13 @@
 "use strict";
 Template.entriesTable.helpers({
-  hasItems: function () {
+  hasEntries: function () {
     return this.entries.length > 0;
   },
   isLottoOpen: function() {
     return !this.closed;
+  },
+  hasOne: function() {
+    return this.entries.length === 1;
   }
 });
 
