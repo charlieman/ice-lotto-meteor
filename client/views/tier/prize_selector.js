@@ -49,4 +49,8 @@ Template.prizeSelector.rendered = function(){
   var prize = this.find('#prizeName');
   prize.focus();
   prize.select();
+  var prizeAmount = this.find('#prizeAmount');
+  if (prizeAmount.value === "") {
+    prizeAmount.value = 1;
+  }
 };
