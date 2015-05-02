@@ -2,7 +2,7 @@ Template.lottoAdd.created = function() {
   Session.set('lottoAddErrors', {});
 };
 Template.lottoAdd.rendered = function() {
-  this.find('input[name=date]').valueAsDate = new Date();
+  this.find('#date').valueAsDate = moment().day(5).toDate();
 };
 
 Template.lottoAdd.helpers({
