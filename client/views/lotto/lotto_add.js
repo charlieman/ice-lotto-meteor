@@ -28,7 +28,9 @@ Template.lottoAdd.events({
       return Session.set('lottoAddErrors', errors);
     }
 
-    Meteor.call('lottoInsert', lotto, function(error, result) {
+    var autofill = e.target.autofill.checked;
+
+    Meteor.call('lottoInsert', lotto, autofill, function(error, result) {
       if(error) {
         return throwError(error.reason);
       }
