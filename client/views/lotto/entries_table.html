@@ -3,7 +3,7 @@
     <td colspan="2">{{entries.length}} {{#if hasOne}}entry{{else}}entries{{/if}}</td>
     <td colspan="8">
       {{#if hasEntries}}
-        <table class="table table-striped table-bordered table-condensed">
+        <table class="table table-striped table-bordered table-condensed table-entries">
           <tbody>
           {{#each entries}}
             {{> entryRow }}
@@ -25,6 +25,7 @@
 
 <template name="entryRow">
   <tr>
+    <td class="index"><i></i></td>
     <td>{{mainUsername}}</td>
     <td>{{amount}}</td>
     <td>{{#if isAdmin}}{{#if isLottoOpen}}<button class="remove btn btn-danger btn-xs">x</button>{{/if}}{{/if}}</td>

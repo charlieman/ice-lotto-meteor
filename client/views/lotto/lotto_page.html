@@ -31,10 +31,11 @@
         Small pot:
       </label> <span>{{ lotto.smallpot }}</span>
       {{#if inSession 'showSmall' true}}
-        <table class="table table-striped table-bordered table-condensed">
+        <table class="table table-striped table-bordered table-condensed table-entries">
           <tbody>
           {{#each potEntries lotto.smallpot_entries}}
             <tr>
+              <td class="index"><i></i></td>
               <td>{{mainUsername gwuserId}}</td>
               <td>{{amount}}</td>
             </tr>
@@ -51,10 +52,11 @@
         Big pot:
       </label> <span>{{ lotto.bigpot }}</span>
       {{#if inSession 'showBig' true}}
-        <table class="table table-striped table-bordered table-condensed">
+        <table class="table table-striped table-bordered table-condensed table-entries">
           <tbody>
           {{#each potEntries lotto.bigpot_entries}}
             <tr>
+              <td class="index"><i></i></td>
               <td>{{mainUsername gwuserId}}</td>
               <td>{{amount}}</td>
             </tr>

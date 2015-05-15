@@ -30,3 +30,18 @@ table {
 .popover .close {
   padding: 5px;
 }
+
+.table-entries {
+  counter-reset: section;
+}
+
+.table-entries i {
+  counter-increment: section;  
+}
+
+.table-entries i:before {
+  content: counter(section);
+}
+.table-entries .index {
+  width: 20px;
+}
