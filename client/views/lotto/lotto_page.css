@@ -45,3 +45,9 @@ table {
 .table-entries .index {
   width: 20px;
 }
+
+.bubble {
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  padding: 7px;
+}

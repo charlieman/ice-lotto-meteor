@@ -18,6 +18,9 @@ Template.lottoPage.helpers({
       entries: entries,
       label: label
     }
+  },
+  isLottoOpen: function() {
+    return !this.closed;
   }
 });
 
@@ -43,12 +46,6 @@ Template.pot.helpers({
 });
 
 Template.lottoPage.events({
-  'click .toggleSmall': function(e) {
-    Session.set('showSmall', !Session.get('showSmall'));
-  },
-  'click .toggleBig': function(e) {
-    Session.set('showBig', !Session.get('showBig'));
-  },
   'click .togglePot': function(e) {
     Session.set(this.toggle, !Session.get(this.toggle));
   },
@@ -69,5 +66,45 @@ Template.lottoPage.events({
         }
       });
     }
+  },
+  'submit .entry-add-direct' : function(e) {
+    e.preventDefault();
+    var button = e.target.querySelector('button[type=submit]');
+    window.b = button;
+    button.disabled = 'disabled';
+    button.innerHTML = 'Adding...';
+    var tier = Math.floor(e.target.entryAmount.value);
+    var lottoId = Session.get('lottoId');
+    var gwuserId = e.target.entryUserId.value;
+    var entry = {
+      gwuserId: gwuserId,
+      amount: tier
+    };
+    var errors = validateEntry(entry);
+    if (errors.gwuserId || errors.amount) {
+      button.innerHTML = 'Error';
+      Meteor.setTimeout(function(){
+        button.innerHTML = 'Add';
+        button.disabled = '';
+        if (errors.gwuserId) {
+          e.target.entryUserId.focus();
+        } else {
+          e.target.entryAmount.focus();
+        }
+      }, 500);
+      return Session.set('entryAddErrors', errors);
+    }
+
+    Meteor.call('entryAdd', entry, lottoId, function (error, result) {
+      Meteor.setTimeout(function(){
+        button.innerHTML = 'Add';
+        button.disabled = '';
+        e.target.entryAmount.focus();
+      }, 500);
+      if (error) {
+        return throwError(error.reason);
+      }
+      //e.target.entryUserId.value = '';
+    });
   }
 });
