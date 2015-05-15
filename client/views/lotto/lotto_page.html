@@ -24,48 +24,20 @@
   {{/if}}
 
   <div class="content">
-  <div class="row">
-    <div class="form-group col-xs-12 col-sm-6">
-      <label class="toggleSmall" role="button">
-        {{#if inSession 'showSmall' true}}&#9660;{{else}}&#9654;{{/if}}
-        Small pot:
-      </label> <span>{{ lotto.smallpot }}</span>
-      {{#if inSession 'showSmall' true}}
-        <table class="table table-striped table-bordered table-condensed table-entries">
-          <tbody>
-          {{#each potEntries lotto.smallpot_entries}}
-            <tr>
-              <td class="index"><i></i></td>
-              <td>{{mainUsername gwuserId}}</td>
-              <td>{{amount}}</td>
-            </tr>
-          {{/each}}
-          </tbody>
-        </table>
-      {{/if}}
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6">
+        {{#with makePot '_smallPot' lotto.smallpot lotto.smallpot_entries 'Small Pot' }}
+          {{> pot }}
+        {{/with}}
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-xs-12 col-sm-6">
-      <label class="toggleBig" role="button">
-        {{#if inSession 'showBig' true}}&#9660;{{else}}&#9654;{{/if}}
-        Big pot:
-      </label> <span>{{ lotto.bigpot }}</span>
-      {{#if inSession 'showBig' true}}
-        <table class="table table-striped table-bordered table-condensed table-entries">
-          <tbody>
-          {{#each potEntries lotto.bigpot_entries}}
-            <tr>
-              <td class="index"><i></i></td>
-              <td>{{mainUsername gwuserId}}</td>
-              <td>{{amount}}</td>
-            </tr>
-          {{/each}}
-          </tbody>
-        </table>
-      {{/if}}
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6">
+        {{#with makePot '_bigPot' lotto.bigpot lotto.bigpot_entries 'Big Pot' }}
+          {{> pot }}
+        {{/with}}
+      </div>
     </div>
-  </div>
     
     <table class="table table-striped table-bordered">
       <thead>
@@ -96,4 +68,31 @@
       <th>{{ value }}</th>
     {{/each}}
   </tr>
+</template>
+
+<template name="pot">
+  <label class="togglePot" role="button">
+  {{#if inSession toggle true}}&#9660;{{else}}&#9654;{{/if}}
+    {{label}}:
+  </label> <span>{{ total }}</span>
+  {{#if inSession toggle true}}
+    <table class="table table-striped table-bordered table-condensed table-entries">
+      <tbody>
+      <tr>
+        <th class="index"></th>
+        <th>User</th>
+        <th>Total</th>
+        <th>Range</th>
+      </tr>
+      {{#each potEntries entries}}
+        <tr>
+          <td class="index"><i></i></td>
+          <td>{{mainUsername gwuserId}}</td>
+          <td>{{amount}}</td>
+          <td>{{rangeStart}} - {{rangeEnd}}</td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
 </template>

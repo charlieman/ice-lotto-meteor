@@ -11,11 +11,29 @@ Template.lottoPage.helpers({
   midTier: function () {
     return this.tier === 10;
   },
+  makePot: function(toggle, total, entries, label) {
+    return {
+      toggle: toggle,
+      total: total,
+      entries: entries,
+      label: label
+    }
+  }
+});
+
+Template.pot.helpers({
   potEntries: function(entries) {
+    var rangeStart = 1;
+    var rangeEnd = 0;
     return _.map(entries, function (v, k) {
+      var _rangeStart = rangeStart;
+      rangeEnd = _rangeStart + v - 1;
+      rangeStart = rangeEnd + 1;
       return {
         gwuserId: k,
-        amount: v
+        amount: v,
+        rangeStart: _rangeStart,
+        rangeEnd: rangeEnd
       };
     });
   },
@@ -30,6 +48,9 @@ Template.lottoPage.events({
   },
   'click .toggleBig': function(e) {
     Session.set('showBig', !Session.get('showBig'));
+  },
+  'click .togglePot': function(e) {
+    Session.set(this.toggle, !Session.get(this.toggle));
   },
   'click .togglePublic': function(e){
     e.preventDefault();
