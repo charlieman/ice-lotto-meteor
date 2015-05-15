@@ -35,7 +35,7 @@ Template.entryRow.events({
 
 Template.entryAdd.helpers({
   gwusers: function () {
-    return GWUsers.find({}, {fields: {alts: 1}});
+    return GWUsers.find({}, {fields: {alts: 1}, sort: {'alts.0': 1}});
   }
 });
 
