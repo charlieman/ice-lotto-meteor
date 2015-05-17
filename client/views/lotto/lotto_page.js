@@ -20,7 +20,7 @@ Template.lottoPage.helpers({
     }
   },
   isLottoOpen: function() {
-    return !this.closed;
+    return !this.lotto.closed;
   }
 });
 
