@@ -8,11 +8,11 @@
         <td class="prize-cell">
             <span class="prize">{{prize}}</span>
             <span class="amount">{{amount}}</span>
-            {{#if isAdmin}}
+            {{#if isAdmin}}{{#if isLottoOpen}}
               {{#if inSession 'SelectedPrize' _id}}
                   {{> prizeSelector }}
               {{/if}}
-            {{/if}}
+            {{/if}}{{/if}}
         </td>
       {{/each}}
   </tr>

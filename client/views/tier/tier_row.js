@@ -20,6 +20,9 @@ Template.tierRow.helpers({
       i++;
     }
     return prizeList;
+  },
+  isLottoOpen: function() {
+    return !Lottos.findOne().closed;
   }
 });
 
