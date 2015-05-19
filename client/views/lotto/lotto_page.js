@@ -42,6 +42,9 @@ Template.pot.helpers({
   },
   mainUsername: function (gwuserId) {
     return GWUsers.findOne(gwuserId).alts[0];
+  },
+  half: function(total) {
+    return total / 2;
   }
 });
 

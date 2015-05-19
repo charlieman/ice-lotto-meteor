@@ -2,9 +2,12 @@
   {{> lottoItem lotto }}
 
   {{#if isAdmin}}
-  <div class="form-group pull-right">
+  <div class="btn-toolbar">
+    <div class="btn-group" role="group">
     {{#if lotto.closed}}
-      <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> <span>Lotto is closed</span>
+      <button type="button" class="btn btn-danger disabled" disabled="disabled">
+        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Closed
+      </button>
     {{else}}
       <button type="button" class="closeLotto btn btn-danger">
         <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Close lotto
@@ -20,19 +23,18 @@
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Make public
       </button>
     {{/if}}
+    </div>
   </div>
   {{/if}}
 
   <div class="content">
     <div class="row">
-      <div class="col-xs-12 col-sm-6">
+      <div class="col-xs-6 col-sm-6">
         {{#with makePot '_smallPot' lotto.smallpot lotto.smallpot_entries 'Small Pot' }}
           {{> pot }}
         {{/with}}
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6">
+      <div class="col-xs-6 col-sm-6">
         {{#with makePot '_bigPot' lotto.bigpot lotto.bigpot_entries 'Big Pot' }}
           {{> pot }}
         {{/with}}
@@ -42,7 +44,7 @@
     {{#if isAdmin}}{{#if isLottoOpen}}
     <div class="row">
       <div class="form-group col-xs-12 col-sm-6">
-      <div class="bubble">
+      <div class="panel panel-default"><div class="panel-body">
         <h4>Add entries directly</h4>
         <form class="entry-add-direct form-inline" role="form">
           <div class="form-group">
@@ -61,7 +63,7 @@
           </div>
           <button type="submit" class="btn btn-primary">Add</button>
         </form>
-      </div>
+      </div></div>
       </div>
     </div>
     {{/if}}{{/if}}
@@ -98,28 +100,39 @@
 </template>
 
 <template name="pot">
-  <label class="togglePot" role="button">
-  {{#if inSession toggle true}}&#9660;{{else}}&#9654;{{/if}}
-    {{label}}:
-  </label> <span>{{ total }}</span>
-  {{#if inSession toggle true}}
-    <table class="table table-striped table-bordered table-condensed table-entries">
-      <tbody>
-      <tr>
-        <th class="index"></th>
-        <th>User</th>
-        <th>Total</th>
-        <th>Range</th>
-      </tr>
-      {{#each potEntries entries}}
-        <tr>
-          <td class="index"><i></i></td>
-          <td>{{mainUsername gwuserId}}</td>
-          <td>{{amount}}</td>
-          <td>{{rangeStart}} - {{rangeEnd}}</td>
-        </tr>
-      {{/each}}
-      </tbody>
-    </table>
-  {{/if}}
+  <div class="panel panel-default">
+    <div class="panel-heading">{{label}}</div>
+    <div class="panel-body">
+      <p>
+        Total: <span class="gold">{{ total }}</span><br />
+        Winnings: <span class="gold">{{ half total }}</span>
+      </p>
+      <span class="togglePot" role="button">{{#if inSession toggle true}}&#9660; hide{{else}}&#9654; show{{/if}} entries</span>
+      {{#if inSession toggle true}}
+        <table class="table table-striped table-bordered table-condensed table-entries">
+          <tbody>
+          <tr>
+            <th class="index"></th>
+            <th>User</th>
+            <th>Total</th>
+            <th>Range</th>
+          </tr>
+          {{#each potEntries entries}}
+            <tr>
+              <td class="index"><i></i></td>
+              <td>{{mainUsername gwuserId}}</td>
+              <td>{{amount}}</td>
+              <td>{{rangeStart}} - {{rangeEnd}}</td>
+            </tr>
+          {{else}}
+            <tr>
+              <td></td>
+              <td colspan="3">No entries</td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      {{/if}}
+    </div>
+  </div>
 </template>
