@@ -46,8 +46,11 @@ table {
   width: 20px;
 }
 
-.bubble {
-  border: 1px solid #DDD;
-  border-radius: 4px;
-  padding: 7px;
+.gold {
+  padding-left: 17px;
+  background: url("/gold_coin.png") no-repeat 0% 100% transparent;
+}
+
+.btn-toolbar {
+  margin-bottom: 5px;
 }
