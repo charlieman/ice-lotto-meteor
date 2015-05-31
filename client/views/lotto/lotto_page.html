@@ -43,27 +43,41 @@
     
     {{#if isAdmin}}{{#if isLottoOpen}}
     <div class="row">
-      <div class="form-group col-xs-12 col-sm-6">
-      <div class="panel panel-default"><div class="panel-body">
-        <h4>Add entries directly</h4>
-        <form class="entry-add-direct form-inline" role="form">
-          <div class="form-group">
-            <label class="sr-only" for="entryUserId">User</label>
-            <select name="entryUserId" id="entryUserId" class="form-control">
-              <option value="">Select user</option>
-                {{#each gwusers }}
-                  <option value="{{_id}}">{{alts.[0]}}</option>
-                {{/each}}
-            </select>
-          </div>
+      <div class="form-group col-xs-6 col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Add entries directly</div>
+          <div class="panel-body">
+            <form class="entry-add-direct form-inline" role="form">
+              <div class="form-group">
+                <label class="sr-only" for="entryUserId">User</label>
+                <select name="entryUserId" id="entryUserId" class="form-control">
+                  <option value="">Select user</option>
+                    {{#each gwusers }}
+                      <option value="{{_id}}">{{alts.[0]}}</option>
+                    {{/each}}
+                </select>
+              </div>
 
-          <div class="form-group">
-            <label class="sr-only" for="entryAmount">Tier</label>
-            <input type="number" class="form-control" name="entryAmount" id="entryAmount" value="1" min="1" max="20" required/>
+              <div class="form-group">
+                <label class="sr-only" for="entryAmount">Tier</label>
+                <input type="number" class="form-control" name="entryAmount" id="entryAmount" value="1" min="1" max="20" required/>
+              </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-      </div></div>
+        </div>
+      </div>
+      <div class="form-group col-xs-6 col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Log</div>
+          <div class="panel-body">
+            <ul>
+            {{#each lotto.entries}}
+              <li>{{mainUsername gwuserId}} - {{amount}}</li>
+            {{/each}}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     {{/if}}{{/if}}

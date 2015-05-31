@@ -19,6 +19,9 @@ Template.lottoPage.helpers({
       label: label
     }
   },
+  mainUsername: function (gwuserId) {
+    return GWUsers.findOne(gwuserId).alts[0];
+  },
   isLottoOpen: function() {
     return !this.lotto.closed;
   }
