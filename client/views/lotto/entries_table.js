@@ -10,6 +10,16 @@ Template.entriesTable.helpers({
     return this.entries.length === 1;
   }
 });
+Template.entriesTable.events({
+  'click .roll': function(e) {
+    var lottoId = Session.get('lottoId');
+    Meteor.call('entryRoll', lottoId, this.tier, function(error, result){
+      if (error) {
+        return throwError(error.reason);
+      }
+    });
+  }
+});
 
 Template.entryRow.helpers({
   isLottoOpen: function() {

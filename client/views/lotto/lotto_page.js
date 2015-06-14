@@ -5,7 +5,8 @@ Template.lottoPage.helpers({
       entries: _.filter(entries, function (x) {
         return x.amount === tier;
       }),
-      closed: closed
+      closed: closed,
+      tier: tier
     };
   },
   midTier: function () {
@@ -106,6 +107,7 @@ Template.lottoPage.events({
         button.innerHTML = 'Add';
         button.disabled = '';
         e.target.entryAmount.focus();
+        e.target.entryAmount.select();
       }, 500);
       if (error) {
         return throwError(error.reason);

@@ -1,6 +1,13 @@
 <template name="entriesTable">
   <tr class="entries">
-    <td colspan="2">{{entries.length}} {{#if hasOne}}entry{{else}}entries{{/if}}</td>
+    <td colspan="2">
+      <p>
+        {{entries.length}} {{#if hasOne}}entry{{else}}entries{{/if}}
+      </p>
+      {{#if isAdmin}} {{#unless isLottoOpen}}
+        <button class="roll btn btn-active">Roll</button>
+      {{/unless}}{{/if}}
+    </td>
     <td colspan="8">
       {{#if hasEntries}}
         <table class="table table-striped table-bordered table-condensed table-entries">
