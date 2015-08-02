@@ -1,12 +1,15 @@
 Template.lottoPage.helpers({
-  showEntries: function (entries, closed) {
+  showEntries: function (entries, closed, winners) {
     var tier = Session.get('SelectedTier');
+    var lottoId = Session.get('lottoId');
+    var winner = _.result(_.find(winners, function(w) {return w.tier === tier}), 'entryId');
     return {
       entries: _.filter(entries, function (x) {
         return x.amount === tier;
       }),
       closed: closed,
-      tier: tier
+      tier: tier,
+      winner: winner
     };
   },
   midTier: function () {

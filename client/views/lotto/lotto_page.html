@@ -90,7 +90,7 @@
       {{#each tiers}}
         {{> tierRow }}
         {{#if inSession 'SelectedTier' tier}}
-          {{#with showEntries ../lotto.entries ../lotto.closed }}
+          {{#with showEntries ../lotto.entries ../lotto.closed ../lotto.winners }}
             {{> entriesTable }}
           {{/with}}
         {{/if}}
