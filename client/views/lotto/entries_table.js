@@ -17,6 +17,7 @@ Template.entriesTable.events({
       if (error) {
         return throwError(error.reason);
       }
+      console.log(result);
     });
   }
 });
@@ -27,6 +28,14 @@ Template.entryRow.helpers({
   },
   mainUsername: function() {
     return GWUsers.findOne(this.gwuserId).alts[0];
+  },
+  attributes: function() {
+    console.log(Template.parentData());
+    var winner = Template.parentData().winner;
+    if (winner === this._id) {
+      return { class: "winner" };
+    }
+    return {};
   }
 });
 
