@@ -54,3 +54,7 @@ table {
 .btn-toolbar {
   margin-bottom: 5px;
 }
+
+.winner td, td.winner {
+  background: gold;
+}

@@ -23,6 +23,12 @@ Template.tierRow.helpers({
   },
   isLottoOpen: function() {
     return !Lottos.findOne().closed;
+  },
+  attributes: function() {
+    if (!!this.winner) {
+      return { class: "winner" };
+    }
+    return {};
   }
 });
 

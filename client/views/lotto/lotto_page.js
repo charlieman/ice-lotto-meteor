@@ -9,7 +9,7 @@ Template.lottoPage.helpers({
       }),
       closed: closed,
       tier: tier,
-      winner: winner
+      winners: winners
     };
   },
   midTier: function () {

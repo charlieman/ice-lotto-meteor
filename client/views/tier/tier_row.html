@@ -5,7 +5,7 @@
         {{#if inSession 'SelectedTier' tier}}&#9660;{{else}}&#9654;{{/if}}
     </th>
       {{#each prizeLoop prizes}}
-        <td class="prize-cell">
+        <td class="prize-cell" {{attributes}}>{{#if this.winner}}*{{/if}}
             <span class="prize">{{prize}}</span>
             <span class="amount">{{amount}}</span>
             {{#if isAdmin}}{{#if isLottoOpen}}

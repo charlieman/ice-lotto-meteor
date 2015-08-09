@@ -5,11 +5,15 @@ Meteor.methods({
     }
   },
   duplicateTiers: function(lottoId, lastLottoId) {
-    tiersToDuplicate = Tiers.find({lottoId: lastLottoId});
-
+    var omitPrize = function omitPrize(x) { return _.omit(x, 'winner');};
+    var tiersToDuplicate = Tiers.find({lottoId: lastLottoId});
     tiersToDuplicate.forEach(function(tier) {
-      var newTier = _.omit(tier, '_id');
-      newTier.lottoId = lottoId;
+      var prizes = _.map(tier.prizes, omitPrize);
+      var newTier = {
+        lottoId: lottoId,
+        tier: tier.tier,
+        prizes: prizes
+      }
       Tiers.insert(newTier);
     });
   }

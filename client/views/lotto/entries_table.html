@@ -4,9 +4,9 @@
       <p>
         {{entries.length}} {{#if hasOne}}entry{{else}}entries{{/if}}
       </p>
-      {{#if isAdmin}} {{#unless isLottoOpen}}
+      {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasNoWinner}} {{#if hasEntries}}
         <button class="roll btn btn-active">Roll</button>
-      {{/unless}}{{/if}}
+      {{/if}} {{/if}} {{/unless}} {{/if}}
     </td>
     <td colspan="8">
       {{#if hasEntries}}
@@ -35,7 +35,12 @@
     <td class="index"><i></i></td>
     <td>{{mainUsername}}</td>
     <td>{{amount}}</td>
-    <td>{{#if isAdmin}}{{#if isLottoOpen}}<button class="remove btn btn-danger btn-xs">x</button>{{/if}}{{/if}}</td>
+    <td>
+      {{#if isAdmin}}{{#if isLottoOpen}}
+        <button class="remove btn btn-danger btn-xs">x</button>
+      {{/if}}{{/if}}
+      {{#if winner}}Winner{{/if}}
+    </td>
   </tr>
 </template>
 

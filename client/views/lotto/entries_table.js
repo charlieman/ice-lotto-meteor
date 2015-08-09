@@ -1,23 +1,26 @@
 "use strict";
 Template.entriesTable.helpers({
   hasEntries: function () {
-    return this.entries.length > 0;
+    return this.entries && this.entries.length > 0;
   },
   isLottoOpen: function() {
     return !this.closed;
   },
   hasOne: function() {
-    return this.entries.length === 1;
+    return this.entries && this.entries.length === 1;
+  },
+  hasNoWinner: function() {
+    return !_.any(this.entries, function(e) {return !!e.winner});
   }
 });
 Template.entriesTable.events({
   'click .roll': function(e) {
     var lottoId = Session.get('lottoId');
-    Meteor.call('entryRoll', lottoId, this.tier, function(error, result){
+    Meteor.call('rollForTier', lottoId, this.tier, function(error, result){
       if (error) {
         return throwError(error.reason);
       }
-      console.log(result);
+      //console.log(result);
     });
   }
 });
@@ -30,9 +33,7 @@ Template.entryRow.helpers({
     return GWUsers.findOne(this.gwuserId).alts[0];
   },
   attributes: function() {
-    console.log(Template.parentData());
-    var winner = Template.parentData().winner;
-    if (winner === this._id) {
+    if (!!this.winner) {
       return { class: "winner" };
     }
     return {};
