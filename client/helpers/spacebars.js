@@ -10,5 +10,7 @@ Template.registerHelper('inSession', function(name, value) {
   return Session.equals(name, value);
 });
 
-Template.registerHelper('isVerified', isVerified);
+Template.registerHelper('isVerified', function() {
+	return isVerified(Meteor.user());
+});
 Template.registerHelper('isAdmin', isAdmin);

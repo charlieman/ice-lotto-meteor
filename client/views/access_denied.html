@@ -1,8 +1,13 @@
 <template name="accessDenied">
   <div class="jumbotron">
     {{#if isUser}}
-      <h2>Verification required</h2>
-      <p>Please ask in guild chat for account verification.</p>
+      {{#if isVerified}}
+        <h2>Access denied</h2>
+        <p>You don't have permissions to access this.</p>
+      {{else}}
+        <h2>Verification required</h2>
+        <p>Please ask in guild chat for account verification.</p>
+      {{/if}}
     {{else}}
       <h2>Login required</h2>
       <p>This is a private form so we'll make sure you're a member of ICE before you're approved. Please excuse any delay.</p>
