@@ -15,12 +15,13 @@ Template.lottoPage.helpers({
   midTier: function () {
     return this.tier === 10;
   },
-  makePot: function(toggle, total, entries, label) {
+  makePot: function(toggle, total, entries, label, winner) {
     return {
       toggle: toggle,
       total: total,
       entries: entries,
-      label: label
+      label: label,
+      winner: winner
     }
   },
   mainUsername: function (gwuserId) {
@@ -32,7 +33,7 @@ Template.lottoPage.helpers({
 });
 
 Template.pot.helpers({
-  potEntries: function(entries) {
+  potEntries: function(entries, winner) {
     var rangeStart = 1;
     var rangeEnd = 0;
     return _.map(entries, function (v, k) {
@@ -43,7 +44,8 @@ Template.pot.helpers({
         gwuserId: k,
         amount: v,
         rangeStart: _rangeStart,
-        rangeEnd: rangeEnd
+        rangeEnd: rangeEnd,
+        winner: k === winner
       };
     });
   },
@@ -52,6 +54,18 @@ Template.pot.helpers({
   },
   half: function(total) {
     return total / 2;
+  },
+  hasWinner: function(pot) {
+    return !!this.winner;
+  },
+  isLottoOpen: function() {
+    return !Template.parentData().lotto.closed;
+  },
+  attributes: function() {
+    if (!!this.winner) {
+      return { class: "winner" };
+    }
+    return {};
   }
 });
 
@@ -69,7 +83,7 @@ Template.lottoPage.events({
   },
   'click .closeLotto': function(e) {
     e.preventDefault();
-    if (this.lotto.closed || confirm("Are you sure you want to close the lotto?\n(No more entries will be allowed after closing it)")) {
+    if (confirm("Are you sure you want to close/reopen the lotto?")) {
       Meteor.call('lottoToggleClose', this.lotto._id, function(error, result){
         if(error) {
           return throwError(error.reason);
@@ -80,7 +94,6 @@ Template.lottoPage.events({
   'submit .entry-add-direct' : function(e) {
     e.preventDefault();
     var button = e.target.querySelector('button[type=submit]');
-    window.b = button;
     button.disabled = 'disabled';
     button.innerHTML = 'Adding...';
     var tier = Math.floor(e.target.entryAmount.value);
@@ -116,6 +129,20 @@ Template.lottoPage.events({
         return throwError(error.reason);
       }
       //e.target.entryUserId.value = '';
+    });
+  }
+});
+
+Template.pot.events({
+  'click .roll': function(e) {
+    e.preventDefault();
+    var lottoId = Session.get('lottoId');
+    var pot = this.toggle;
+    Meteor.call('rollForPot', lottoId, pot, function(error, result){
+      if (error) {
+        return throwError(error.reason);
+      }
+      //console.log('result', result);
     });
   }
 });

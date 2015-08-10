@@ -30,12 +30,12 @@
   <div class="content">
     <div class="row">
       <div class="col-xs-6 col-sm-6">
-        {{#with makePot '_smallPot' lotto.smallpot lotto.smallpot_entries 'Small Pot' }}
+        {{#with makePot '_smallPot' lotto.smallpot lotto.smallpot_entries 'Small Pot' lotto.smallpot_winner }}
           {{> pot }}
         {{/with}}
       </div>
       <div class="col-xs-6 col-sm-6">
-        {{#with makePot '_bigPot' lotto.bigpot lotto.bigpot_entries 'Big Pot' }}
+        {{#with makePot '_bigPot' lotto.bigpot lotto.bigpot_entries 'Big Pot' lotto.bigpot_winner }}
           {{> pot }}
         {{/with}}
       </div>
@@ -123,6 +123,9 @@
       </p>
       <span class="togglePot" role="button">{{#if inSession toggle true}}&#9660; hide{{else}}&#9654; show{{/if}} entries</span>
       {{#if inSession toggle true}}
+        {{#if isAdmin}} {{#unless isLottoOpen}} {{#unless hasWinner}}
+        <button type="button" class="roll btn btn-active pull-right">Roll</button>
+        {{/unless}} {{/unless}} {{/if}}
         <table class="table table-striped table-bordered table-condensed table-entries">
           <tbody>
           <tr>
@@ -131,8 +134,8 @@
             <th>Total</th>
             <th>Range</th>
           </tr>
-          {{#each potEntries entries}}
-            <tr>
+          {{#each potEntries entries winner}}
+            <tr {{attributes}}>
               <td class="index"><i></i></td>
               <td>{{mainUsername gwuserId}}</td>
               <td>{{amount}}</td>
