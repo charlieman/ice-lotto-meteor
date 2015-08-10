@@ -1,5 +1,7 @@
 <template name="lottoList">
-  {{> lottoAdd }}
+  {{#if isAdmin}}
+  	{{> lottoAdd }}
+  {{/if}}
 
   <div class="lotto-list">
     {{#each lottos}}
