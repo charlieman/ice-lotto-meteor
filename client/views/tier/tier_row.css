@@ -1,4 +1,7 @@
-.prize-cell .amount {
+.prize-row > td {
+	position: relative;
+}
+.prize-row .amount {
   position: absolute;
   right: 0;
   bottom: 0;

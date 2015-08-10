@@ -42,7 +42,7 @@ Template.tierRow.events({
       Session.set('SelectedTier', this.tier);
     }
   },
-  'click .prize-cell': function (e) {
+  'click .prize-row > td': function (e) {
     e.preventDefault();
     if (Session.equals('SelectedPrize', this._id)) {
       Session.set('SelectedPrize', null);

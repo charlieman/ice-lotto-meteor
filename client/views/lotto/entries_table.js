@@ -15,6 +15,7 @@ Template.entriesTable.helpers({
 });
 Template.entriesTable.events({
   'click .roll': function(e) {
+    e.preventDefault();
     var lottoId = Session.get('lottoId');
     Meteor.call('rollForTier', lottoId, this.tier, function(error, result){
       if (error) {

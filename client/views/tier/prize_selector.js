@@ -35,8 +35,7 @@ Template.prizeSelector.events({
     var pos = this.pos;
     Meteor.call('prizeChange', prize, amount, tierId, pos, function(error, result){
       if (error) {
-        console.log(error);
-        return;
+        return throwError(error);
       }
       e.target.prizeName.value = '';
       e.target.prizeAmount.value = '1';

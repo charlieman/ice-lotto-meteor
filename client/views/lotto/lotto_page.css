@@ -7,11 +7,7 @@ table {
   cursor:pointer;
 }
 
-.prize-cell {
-  position: relative;
-}
-
-.prize-cell .popover-wrapper {
+.prize-row > td .popover-wrapper {
   position: absolute;
   top: 100%;
   display: block;
