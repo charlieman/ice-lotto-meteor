@@ -21,6 +21,9 @@
             <input type="number" class="form-control" name="prizeAmount" id="prizeAmount" value="{{amount}}" min="1" max="255" required/>
           </div>
           <button type="submit" class="btn btn-primary">Change</button>
+          {{#if hasPrize }}
+            <button type="button" class="remove btn btn-danger pull-right">Remove</button>
+          {{/if}}
         </form>
       </div>
     </div>

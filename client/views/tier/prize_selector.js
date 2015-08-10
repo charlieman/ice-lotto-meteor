@@ -1,3 +1,9 @@
+Template.prizeSelector.helpers({
+  hasPrize: function() {
+    return !!this.prize;
+  }
+});
+
 var searchItems = function(e, t) {
   var text = e.target.value;
   if (text.length < 3) {
@@ -13,7 +19,7 @@ var searchItems = function(e, t) {
 var debounceSearch = lodash.debounce(searchItems, 500);
 Template.prizeSelector.events({
   'click .popover-wrapper': function(e) {
-    // prevent propagation of click event to the prize cell
+    // prevent propagation of click events to the prize cell
     e.stopPropagation();
   },
   'keypress': function(e) {
@@ -25,6 +31,17 @@ Template.prizeSelector.events({
   'click .close': function (e) {
     e.preventDefault();
     Session.set('SelectedPrize', null);
+  },
+  'click .remove': function(e) {
+    e.preventDefault();
+    var tierId = this.tierId;
+    var pos = this.pos;
+    Meteor.call('prizeRemove', tierId, pos, function(error, result){
+      if (error) {
+        return throwError(error);
+      }
+      Session.set('SelectedPrize', null);
+    });
   },
   'submit .prize-change': function (e) {
     e.preventDefault();
