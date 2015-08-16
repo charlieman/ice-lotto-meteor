@@ -61,7 +61,6 @@ if (Meteor.users.find().count() === 0) {
     smallpot_entries: pots.smallpot,
     bigpot_entries: pots.bigpot,
     entries: entries,
-    winners: [],
     smallpot_winner: undefined,
     bigpot_winner: undefined,
     created: new Date()
