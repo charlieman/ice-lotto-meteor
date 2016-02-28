@@ -1,15 +1,17 @@
 <template name="lottoAdd">
-  <form class="form-inline" role="form">
-    <div class="form-group {{errorClass 'date'}}">
-      <label class="sr-only" for="date">Date</label>
-      <input name="date" id="date" type="date" value="" required class="form-control"/>
-      <!--<p class="help-block">{{errorMessage 'date'}}</p>-->
-    </div>
-    <div class="checkbox">
-    	<label title="Copy items from previous lotto">
-    		<input type="checkbox" name="autofill" id="autofill" checked="checked"> Fill items
-    	</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-  </form>
+	<form class="form-inline" role="form">
+		<div class="form-group {{errorClass 'date'}}">
+			<div class="input-group">
+				<!-- <label class="sr-only" for="date">Date</label> -->
+				<input type="date" class="form-control" name="date" id="date" required pattern="/^(\d{4})-(\d{1,2})-(\d{1,2})/" placeholder="YYYY-MM-DD" />
+				<p class="help-block">{{errorMessage 'date'}}</p>
+				<span class="input-group-btn">
+					<button type="submit" class="btn btn-primary">Create</button>
+				</span>
+			</div>
+			<label title="Copy items from previous lotto">
+				<input type="checkbox" name="autofill" id="autofill" checked="checked" /> Autofill
+			</label>
+		</div>
+	</form>
 </template>
