@@ -126,6 +126,9 @@
         {{#if isAdmin}} {{#unless isLottoOpen}} {{#unless hasWinner}}
         <button type="button" class="roll btn btn-active pull-right">Roll</button>
         {{/unless}} {{/unless}} {{/if}}
+        {{#if isSuperAdmin}} {{#if hasWinner}}
+        <button type="button" class="unroll btn btn-danger pull-right">Unroll</button>
+        {{/if}} {{/if}}
         <table class="table table-striped table-bordered table-condensed table-entries">
           <tbody>
           <tr>

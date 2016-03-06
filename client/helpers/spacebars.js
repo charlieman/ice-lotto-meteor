@@ -14,3 +14,5 @@ Template.registerHelper('isVerified', function() {
 	return isVerified(Meteor.user());
 });
 Template.registerHelper('isAdmin', isAdmin);
+
+Template.registerHelper('isSuperAdmin', isSuperAdmin);

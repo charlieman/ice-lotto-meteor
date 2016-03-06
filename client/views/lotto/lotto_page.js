@@ -144,5 +144,17 @@ Template.pot.events({
       }
       //console.log('result', result);
     });
+  },
+  'click .unroll': function(e) {
+    e.preventDefault();
+    if (confirm("Are you sure you want to undo the roll?")) {
+      var lottoId = Session.get('lottoId');
+      var pot = this.toggle;
+      Meteor.call('unrollForPot', lottoId, pot, function(error, result){
+        if (error) {
+          return throwError(error.reason);
+        }
+      });
+    }
   }
 });

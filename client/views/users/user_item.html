@@ -7,6 +7,12 @@
         <input type="checkbox" autocomplete="off" class="toggleVerify" checked={{isVerified}}>
         {{#if isVerified}}Verified{{else}}Not verified{{/if}}
       </label>
+      {{#if isSuperAdmin}}
+      <label>
+        <input type="checkbox" autocomplete="off" class="toggleAdmin" checked={{isAdmin}}>
+        {{#if isAdmin}}Admin{{else}}Not admin{{/if}}
+      </label>
+      {{/if}}
     </form>
   </div>
 </template>
