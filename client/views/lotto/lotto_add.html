@@ -3,7 +3,7 @@
     <div class="form-group {{errorClass 'date'}}">
       <div class="input-group">
         <!-- <label class="sr-only" for="date">Date</label> -->
-        <input type="date" class="form-control" name="date" id="date" required pattern="/^(\d{4})-(\d{1,2})-(\d{1,2})/" placeholder="YYYY-MM-DD" />
+        <input type="date" class="form-control" name="date" id="date" required pattern="\d{4}-\d{1,2}-\d{1,2}" placeholder="YYYY-MM-DD" />
         <p class="help-block">{{errorMessage 'date'}}</p>
         <span class="input-group-btn">
           <button type="submit" class="btn btn-primary">Create</button>
