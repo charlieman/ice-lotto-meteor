@@ -1,0 +1,7 @@
+{
+  "name": "ice-lotto",
+  "dependencies": {
+    "gambler": "^0.1.0",
+    "meteor-node-stubs": "^0.2.1"
+  }
+}

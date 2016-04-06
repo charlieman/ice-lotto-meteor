@@ -4,7 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 iron:router
 stevezhu:lodash
 momentjs:moment
@@ -12,7 +11,21 @@ accounts-password
 ian:accounts-ui-bootstrap-3
 sacha:spin
 mizzao:bootstrap-3
-meteorhacks:npm
 
-
-npm-container
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+standard-minifier-css
+standard-minifier-js
+es5-shim
+ecmascript
