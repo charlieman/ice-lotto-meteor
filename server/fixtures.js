@@ -17,23 +17,23 @@ if (Meteor.users.find().count() === 0) {
   gwusers = GWUsers.find().fetch();
 
   //lotto
+  smallpot_users = gwusers.slice(0, 2);
+  bigpot_users = gwusers.slice(2);
 
   var entries = [];
   // for the small pot
-  for (i = 1; i < 5; i++) {
+  for (i = 1; i <= 5; i++) {
     if (Math.random() > 0.6) {
-      entries.push({_id: Random.id(), gwuserId: Random.choice(gwusers)._id, amount: i});
+      entries.push({_id: Random.id(), gwuserId: Random.choice(smallpot_users)._id, amount: i});
     }
   }
 
-  var addUserEntryMaybe = function (gwuser) {
-    if (Math.random() > 0.5) {
-      entries.push({_id: Random.id(), gwuserId: gwuser._id, amount: i});
-    }
-  };
-
-  for (i = 0; i < 20; i++) {
-    _.each(gwusers, addUserEntryMaybe);
+  for (i = 1; i <= 20; i++) {
+    _.each(bigpot_users, function(gwuser) {
+      if (Math.random() > 0.5) {
+        entries.push({_id: Random.id(), gwuserId: gwuser._id, amount: i});
+      }
+    });
   }
   
   var pots = updatePots(entries);
@@ -43,8 +43,8 @@ if (Meteor.users.find().count() === 0) {
     date: new Date(2015, 3, 4), // month is zero based
     smallpot: pots.smallpot_total,
     bigpot: pots.bigpot_total,
-    smallpot_entries: pots.smallpot,
-    bigpot_entries: pots.bigpot,
+    smallpot_entries: pots.smallpot_entries,
+    bigpot_entries: pots.bigpot_entries,
     entries: entries,
     smallpot_winner: undefined,
     bigpot_winner: undefined,
