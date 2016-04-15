@@ -23,6 +23,17 @@ Template.entriesTable.events({
       }
       //console.log(result);
     });
+  },
+  'click .unroll': function(e) {
+    e.preventDefault();
+    var lottoId = Session.get('lottoId');
+    if (confirm("Are you sure you want to undo the roll?")) {
+      Meteor.call('unrollForTier', lottoId, this.tier, function(error, result) {
+        if (error) {
+          return throwError(error.reason);
+        }
+      });
+    }
   }
 });
 

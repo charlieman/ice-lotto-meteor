@@ -55,7 +55,7 @@ Template.pot.helpers({
   half: function(total) {
     return total / 2;
   },
-  hasWinner: function(pot) {
+  hasWinner: function() {
     return !!this.winner;
   },
   isLottoOpen: function() {
@@ -119,12 +119,12 @@ Template.lottoPage.events({
     }
 
     Meteor.call('entryAdd', entry, lottoId, function (error, result) {
-      Meteor.setTimeout(function(){
+      //Meteor.setTimeout(function(){
         button.innerHTML = 'Add';
         button.disabled = '';
         e.target.entryAmount.focus();
         e.target.entryAmount.select();
-      }, 500);
+      //}, 500);
       if (error) {
         return throwError(error.reason);
       }
