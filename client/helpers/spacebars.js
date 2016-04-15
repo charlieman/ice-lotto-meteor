@@ -16,3 +16,5 @@ Template.registerHelper('isVerified', function() {
 Template.registerHelper('isAdmin', isAdmin);
 
 Template.registerHelper('isSuperAdmin', isSuperAdmin);
+
+Template.registerHelper('showSAPowers', showSAPowers);

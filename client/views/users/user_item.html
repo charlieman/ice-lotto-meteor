@@ -2,16 +2,20 @@
   <div>
     <strong>{{username}}</strong>
 
-    <form class="verify">
-      <label>
-        <input type="checkbox" autocomplete="off" class="toggleVerify" checked={{isVerified}}>
-        {{#if isVerified}}Verified{{else}}Not verified{{/if}}
-      </label>
-      {{#if isSuperAdmin}}
-      <label>
-        <input type="checkbox" autocomplete="off" class="toggleAdmin" checked={{isAdmin}}>
-        {{#if isAdmin}}Admin{{else}}Not admin{{/if}}
-      </label>
+    <form class="form-inline verify">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" autocomplete="off" class="toggleVerify" checked={{isVerified}}>
+          {{#if isVerified}}Verified{{else}}Not verified{{/if}}
+        </label>
+      </div>
+      {{#if showSAPowers}}
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" autocomplete="off" class="toggleAdmin" checked={{isAdmin}}>
+          {{#if isAdmin}}Admin{{else}}Not admin{{/if}}
+        </label>
+      </div>
       {{/if}}
     </form>
   </div>

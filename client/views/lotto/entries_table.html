@@ -7,7 +7,7 @@
       {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasNoWinner}} {{#if hasEntries}}
         <button type="button" class="roll btn btn-active">Roll</button>
       {{/if}} {{/if}} {{/unless}} {{/if}}
-      {{#if isSuperAdmin}} {{#unless hasNoWinner}}
+      {{#if showSAPowers}} {{#unless hasNoWinner}}
         <button type="button" class="unroll btn btn-danger">Unroll</button>
       {{/unless}} {{/if}}
     </td>
