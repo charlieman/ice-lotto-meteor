@@ -3,23 +3,9 @@ if (Meteor.users.find().count() === 0) {
   Accounts.createUser({
     username: 'nerium',
     password: 'nerium',
-    profile: {verified: true, admin: true}
+    profile: {verified: true, admin: true, superadmin: true, sapowers: false}
   });
-  Accounts.createUser({
-    username: 'foobar',
-    password: 'foobar',
-    profile: {verified: true}
-  });
-  Accounts.createUser({
-    username: 'baz',
-    password: 'baz',
-    profile: {verified: false}
-  });
-  Accounts.createUser({
-    username: 'borg',
-    password: 'borg',
-    profile: {verified: false}
-  });
+
   var nerium = Meteor.users.findOne({username: 'nerium'});
 
   // gwusers
@@ -27,7 +13,6 @@ if (Meteor.users.find().count() === 0) {
   GWUsers.insert({alts: ['Semaj']});
   GWUsers.insert({alts: ['Mia Wynd']});
   GWUsers.insert({alts: ['stonedragon', 'Robyn Wynd', 'Asunder Wynd']});
-  GWUsers.insert({alts: ['Robyn Wynd', 'Asunder Wynd']});
 
   gwusers = GWUsers.find().fetch();
 
@@ -35,7 +20,7 @@ if (Meteor.users.find().count() === 0) {
 
   var entries = [];
   // for the small pot
-  for (i = 0; i < 5; i++) {
+  for (i = 1; i < 5; i++) {
     if (Math.random() > 0.6) {
       entries.push({_id: Random.id(), gwuserId: Random.choice(gwusers)._id, amount: i});
     }
