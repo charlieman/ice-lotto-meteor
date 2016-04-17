@@ -15,6 +15,10 @@ Template.lottoPage.helpers({
   midTier: function () {
     return this.tier === 10;
   },
+  showTier: function(type) {
+    if (type !== 'double') return true;
+    return (this.tier % 2 === 0);
+  },
   makePot: function(toggle, total, entries, label, winner) {
     return {
       toggle: toggle,

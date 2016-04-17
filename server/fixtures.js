@@ -36,7 +36,7 @@ if (Meteor.users.find().count() === 0) {
     });
   }
   
-  var pots = updatePots(entries);
+  var pots = updatePots(entries, 'double');
 
   var lottoId = Lottos.insert({
     userId: nerium._id,
@@ -48,7 +48,8 @@ if (Meteor.users.find().count() === 0) {
     entries: entries,
     smallpot_winner: undefined,
     bigpot_winner: undefined,
-    created: new Date()
+    created: new Date(),
+    type: 'double'
   });
 
   // lotto tiers
