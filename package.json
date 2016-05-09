@@ -2,6 +2,7 @@
   "name": "ice-lotto",
   "dependencies": {
     "gambler": "^0.1.0",
-    "meteor-node-stubs": "^0.2.3"
+    "meteor-node-stubs": "^0.2.3",
+    "rest-promise": "^1.2.4"
   }
 }
