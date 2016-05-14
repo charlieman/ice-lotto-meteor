@@ -8,3 +8,12 @@
   font-size: 0.8em;
   padding: 1px;
 }
+
+.prize-row > th {
+  font-weight: normal;
+}
+
+.prize-row > th i {
+  font-weight: bold;
+  font-style: normal;
+}

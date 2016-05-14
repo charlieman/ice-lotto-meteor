@@ -86,7 +86,7 @@
       <thead>
       {{> tableHeaders }}
       </thead>
-      <tbody>
+      <tbody class="table-prizes">
       {{#each tiers}}
         {{#if showTier ../lotto.type}}
           {{> tierRow }}
@@ -96,9 +96,6 @@
                 {{> entriesTable }}
 
             {{/with}}
-          {{/if}}
-          {{#if midTier}}
-            {{> tableHeaders }}
           {{/if}}
         {{/if}}
       {{/each}}

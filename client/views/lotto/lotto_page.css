@@ -38,8 +38,21 @@ table {
 .table-entries i:before {
   content: counter(section);
 }
+
 .table-entries .index {
   width: 20px;
+}
+
+.table-prizes {
+  counter-reset: row;
+}
+
+.table-prizes .tier-number i {
+  counter-increment: row;
+}
+
+.table-prizes .tier-number i:before {
+  content: counter(row);
 }
 
 .gold {
