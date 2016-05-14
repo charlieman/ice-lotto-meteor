@@ -41,9 +41,10 @@
       </div>
     </div>
     
-    {{#if isAdmin}}{{#if isLottoOpen}}
+    
     <div class="row">
       <div class="form-group col-xs-6 col-sm-6">
+        {{#if isAdmin}}{{#if isLottoOpen}}
         <div class="panel panel-default">
           <div class="panel-heading">Add entries directly</div>
           <div class="panel-body">
@@ -66,21 +67,37 @@
             </form>
           </div>
         </div>
+        {{/if}}{{/if}}
       </div>
-      <div class="form-group col-xs-6 col-sm-6">
+      
+      <div class="log-panel form-group col-xs-6 col-sm-6">
         <div class="panel panel-default">
           <div class="panel-heading">Log</div>
           <div class="panel-body">
-            <ul>
-            {{#each lotto.entries}}
-              <li>{{mainUsername gwuserId}} - {{amount}}</li>
-            {{/each}}
-            </ul>
+            <span class="toggleLog" role="button">{{#if inSession toggleLog true}}&#9660; hide{{else}}&#9654; show{{/if}} entries</span>
+            {{#if inSession toggleLog true}}
+              <table class="table table-striped table-bordered table-condensed">
+                <tbody>
+                  {{#each entry in reversedEntries}}
+                    <tr>
+                      <td>{{mainUsername entry.gwuserId}}</td>
+                      <td>{{entry.amount}}</td>
+                      <td>
+                      {{#if isAdmin}}{{#if isLottoOpen}}
+                        {{#with lottoId=lotto._id entryId=entry._id }}
+                          <button class="entry-remove btn btn-danger btn-xs">x</button>
+                        {{/with}}
+                      {{/if}}{{/if}}
+                      </td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            {{/if}}
           </div>
         </div>
       </div>
     </div>
-    {{/if}}{{/if}}
     
     <table class="table table-striped table-bordered">
       <thead>

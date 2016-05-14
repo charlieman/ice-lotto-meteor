@@ -33,6 +33,9 @@ Template.lottoPage.helpers({
   },
   isLottoOpen: function() {
     return !this.lotto.closed;
+  },
+  reversedEntries: function() {
+    return _.chain(this.lotto.entries).reverse().value();
   }
 });
 
@@ -74,6 +77,18 @@ Template.pot.helpers({
 });
 
 Template.lottoPage.events({
+  'click .entry-remove': function(e) {
+    e.preventDefault();
+    Meteor.call('entryRemove', this.entryId, this.lottoId, function (error, result) {
+      if (error) {
+        return throwError(error.reason);
+      }
+    });
+  },
+  'click .toggleLog': function(e) {
+    e.preventDefault();
+    Session.set(this.toggleLog, !Session.get(this.toggleLog));
+  },
   'click .togglePot': function(e) {
     Session.set(this.toggle, !Session.get(this.toggle));
   },
