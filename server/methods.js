@@ -1,7 +1,7 @@
 Meteor.methods({
   createTiers: function (lottoId) {
-    for (var i = 0; i < 20; i++) {
-      Tiers.insert({tier: i + 1, lottoId: lottoId, prizes: []});
+    for (var i = 2; i <= 20; i+=2) {
+      Tiers.insert({tier: i, lottoId: lottoId, prizes: []});
     }
   },
   duplicateTiers: function(lottoId, lastLottoId) {
