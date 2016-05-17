@@ -1,4 +1,4 @@
-Template.registerHelper('_', function() { return lodash; });
+Template.registerHelper('_', function() { return _; });
 
 Template.registerHelper('range', function (start, stop, step) {
   return _.map(_.range(start, stop, step), function (x) {

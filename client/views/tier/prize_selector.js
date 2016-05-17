@@ -16,7 +16,7 @@ var searchItems = function(e, t) {
   items.appendChild(option);
 };
 
-var debounceSearch = lodash.debounce(searchItems, 500);
+var debounceSearch = _.debounce(searchItems, 500);
 Template.prizeSelector.events({
   'click .popover-wrapper': function(e) {
     // prevent propagation of click events to the prize cell
