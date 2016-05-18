@@ -99,7 +99,11 @@
       </div>
     </div>
     
-    <table class="table table-striped table-bordered">
+    {{#if isAdmin}}{{#if isLottoOpen}}
+      <button class="populate btn btn-large">Populate</button>
+    {{/if}}{{/if}}
+
+    <table class="inventory table table-striped table-bordered">
       <thead>
       {{> tableHeaders }}
       </thead>
@@ -124,9 +128,9 @@
 
 <template name="tableHeaders">
   <tr>
-    <th></th>
+    <th class="index"></th>
     {{#each range 1 11 1 }}
-      <th>{{ value }}</th>
+      <th class="item">{{ value }}</th>
     {{/each}}
   </tr>
 </template>

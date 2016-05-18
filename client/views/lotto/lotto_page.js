@@ -77,6 +77,15 @@ Template.pot.helpers({
 });
 
 Template.lottoPage.events({
+  'click .populate': function(e) {
+    e.preventDefault();
+    var lottoId = Session.get('lottoId');
+    Meteor.call('populateItems', lottoId, function(error, result) {
+      if (error) {
+        return throwError(error.reason);
+      }
+    });
+  },
   'click .entry-remove': function(e) {
     e.preventDefault();
     Meteor.call('entryRemove', this.entryId, this.lottoId, function (error, result) {

@@ -29,6 +29,10 @@ Template.tierRow.helpers({
       return { class: "winner" };
     }
     return {};
+  },
+  whichever: function(name1, name2) {
+    if (!!name1) return name1;
+    return name2;
   }
 });
 

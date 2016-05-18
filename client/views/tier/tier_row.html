@@ -7,8 +7,12 @@
     </th>
     {{#each prizeLoop prizes}}
       <td {{attributes}}>
-        <span class="prize">{{prize}}</span>
-        <span class="amount">{{amount}}</span>
+        {{#if icon}}
+          <img class="prize" alt="{{whichever name prize}}" title="{{whichever name prize}}"  src="{{icon}}" width="64" height="64" />
+        {{else}}
+          <span class="prize">{{whichever name prize}}</span>
+        {{/if}}
+        <span class="amount">{{whichever count amount}}</span>
         {{#if isAdmin}}{{#if isLottoOpen}}
           {{#if inSession 'SelectedPrize' _id}}
             {{> prizeSelector }}

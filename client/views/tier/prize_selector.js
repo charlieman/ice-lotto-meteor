@@ -1,6 +1,6 @@
 Template.prizeSelector.helpers({
   hasPrize: function() {
-    return !!this.prize;
+    return !!this.name || !!this.prize;
   }
 });
 

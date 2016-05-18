@@ -67,3 +67,11 @@ table {
 .winner td, td.winner {
   background: gold;
 }
+
+.inventory th.item {
+  width: 80px;
+}
+
+.inventory th.index {
+  width: 100px;
+}

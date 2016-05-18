@@ -3,10 +3,12 @@
 }
 .prize-row .amount {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  font-size: 0.8em;
-  padding: 1px;
+  right: 8px;
+  top: 8px;
+  font-size: 1em;
+  padding: 0;
+  color: #FFFF58;
+  text-shadow: 1px 1px 2px black, -1px -1px 2px black;
 }
 
 .prize-row > th {
