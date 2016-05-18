@@ -1,3 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+import { HTTP } from 'meteor/http';
+import { Bank } from '../imports/lib/bank';
+
 Meteor.methods({
   createTiers: function (lottoId) {
     for (var i = 2; i <= 20; i+=2) {
@@ -16,5 +20,13 @@ Meteor.methods({
       }
       Tiers.insert(newTier);
     });
+  },
+  getItemsFromAPI: function() {
+    const apiKey = Meteor.settings.apiKey;
+    const guildId = Meteor.settings.guildId;
+    const baseUrl = 'https://api.guildwars2.com/v2';
+
+    const bank = new Bank(apiKey, guildId);
+    return bank.getItems(Meteor.settings.inventory);
   }
 });
