@@ -33,6 +33,20 @@ Template.tierRow.helpers({
   whichever: function(name1, name2) {
     if (!!name1) return name1;
     return name2;
+  },
+  winnerName: function() {
+    var winnerPrize = _.find(this.prizes, function(p) {return !!p.winner;});
+    if (winnerPrize) {
+      var that = this;
+      var entry = _.find(Lottos.findOne().entries, function(e) { return e.amount === that.tier && e.winner;});
+      return GWUsers.findOne(entry.gwuserId).alts[0];
+    }
+  },
+  winnerItem: function() {
+    var winnerPrize = _.find(this.prizes, function(p) {return !!p.winner;});
+    if (winnerPrize) {
+      return winnerPrize.name;
+    }
   }
 });
 
