@@ -5,7 +5,7 @@
         {{entries.length}} {{#if hasOne}}entry{{else}}entries{{/if}}
       </p>
       {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasNoWinner}} {{#if hasEntries}}
-        <button type="button" class="roll btn btn-active">Roll</button>
+        <button type="button" class="roll btn btn-primary">Roll</button>
       {{/if}} {{/if}} {{/unless}} {{/if}}
       {{#if showSAPowers}} {{#unless hasNoWinner}}
         <button type="button" class="unroll btn btn-danger">Unroll</button>

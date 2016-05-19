@@ -56,8 +56,8 @@ table {
 }
 
 .gold {
-  padding-left: 17px;
-  background: url("/gold_coin.png") no-repeat 0% 100% transparent;
+  padding-right: 20px;
+  background: url("/gold_coin.png") no-repeat 100% 0% transparent;
 }
 
 .btn-toolbar {

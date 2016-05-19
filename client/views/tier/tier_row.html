@@ -1,9 +1,9 @@
 <template name="tierRow">
   <tr class="prize-row">
     <th class="tier-number index" role="button">
+      {{#if inSession 'SelectedTier' tier}}&#9660;{{else}}&#9654;{{/if}}
       <i></i>
       (<span class="gold">{{tier}}</span>)
-      {{#if inSession 'SelectedTier' tier}}&#9660;{{else}}&#9654;{{/if}}
     </th>
     {{#each prizeLoop prizes}}
       <td {{attributes}}>

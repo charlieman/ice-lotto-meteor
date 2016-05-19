@@ -10,19 +10,30 @@
       </button>
     {{else}}
       <button type="button" class="closeLotto btn btn-danger">
-        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Close lotto
+        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Close Lotto
       </button>
     {{/if}}
 
     {{#if lotto.public}}
       <button type="button" class="togglePublic btn btn-danger">
-        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Make private
+        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Make Private
       </button>
     {{else}}
       <button type="button" class="togglePublic btn btn-success">
-        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Make public
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Make Public
       </button>
     {{/if}}
+    </div>
+
+    <div class="btn-group" role="group">
+    {{#if isAdmin}}{{#if isLottoOpen}}
+      <button type="button" class="populate btn btn-primary">
+        <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Populate Items
+      </button>
+      <button type="button" class="populateLog btn btn-primary">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Populate Log
+      </button>
+    {{/if}}{{/if}}
     </div>
   </div>
   {{/if}}
@@ -46,16 +57,16 @@
       <div class="form-group col-xs-6 col-sm-6">
         {{#if isAdmin}}{{#if isLottoOpen}}
         <div class="panel panel-default">
-          <div class="panel-heading">Add entries directly</div>
+          <div class="panel-heading">Add Entries Directly</div>
           <div class="panel-body">
             <form class="entry-add-direct form-inline" role="form">
               <div class="form-group">
                 <label class="sr-only" for="entryUserId">User</label>
                 <select name="entryUserId" id="entryUserId" class="form-control">
-                  <option value="">Select user</option>
-                    {{#each gwusers }}
-                      <option value="{{_id}}">{{alts.[0]}}</option>
-                    {{/each}}
+                  <option value="">Select User</option>
+                  {{#each gwusers }}
+                  <option value="{{_id}}">{{alts.[0]}}</option>
+                  {{/each}}
                 </select>
               </div>
 
@@ -98,10 +109,6 @@
         </div>
       </div>
     </div>
-    
-    {{#if isAdmin}}{{#if isLottoOpen}}
-      <button class="populate btn btn-large">Populate</button>
-    {{/if}}{{/if}}
 
     <table class="inventory table table-striped table-bordered">
       <thead>
