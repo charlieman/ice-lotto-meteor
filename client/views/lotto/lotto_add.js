@@ -2,7 +2,7 @@ Template.lottoAdd.created = function() {
   Session.set('lottoAddErrors', {});
 };
 Template.lottoAdd.rendered = function() {
-  var nextSaturday = moment().day(5).utcOffset(0);
+  var nextSaturday = moment().startOf('day').day(6).utcOffset(0);
   this.find('#date').value = nextSaturday.format('YYYY-MM-DD');
   this.find('#date').valueAsDate = nextSaturday.toDate();
 };
