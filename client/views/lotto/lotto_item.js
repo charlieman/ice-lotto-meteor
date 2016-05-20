@@ -12,6 +12,8 @@ Template.lottoItem.events({
     Meteor.call('deleteLotto', this._id, function(error, result) {
       if (error) {
         return throwError(error.reason);
+      } else {
+        Router.go('/'); // Go back to lottoList page
       }
     });
 

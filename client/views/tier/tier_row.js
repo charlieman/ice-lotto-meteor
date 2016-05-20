@@ -1,3 +1,7 @@
+Template.tierRow.rendered = function() {
+   $("[data-toggle='tooltip']").tooltip();
+};
+
 Template.tierRow.helpers({
   prizeLoop: function (prizes) {
     var tierId = this._id;

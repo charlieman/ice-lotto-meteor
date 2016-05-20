@@ -8,7 +8,7 @@
     {{#each prizeLoop prizes}}
       <td {{attributes}}>
         {{#if icon}}
-          <img class="prize" alt="{{whichever name prize}}" title="{{whichever name prize}}"  src="{{icon}}" width="64" height="64" />
+          <img class="prize" alt="{{whichever name prize}}" data-toggle="tooltip" title="{{whichever count amount}}x {{whichever name prize}}" src="{{icon}}" width="64" height="64" />
         {{else}}
           <span class="prize">{{whichever name prize}}</span>
         {{/if}}
