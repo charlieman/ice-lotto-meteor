@@ -124,3 +124,13 @@ Template.lottoPage.events({
     });
   }
 });
+
+Template.tableHeaders.rendered = function() {
+   $("[data-toggle='tooltip']").tooltip();
+};
+
+Template.tableHeaders.helpers({
+  isLottoOpen: function() {
+    return !this.lotto.closed;
+  }
+});

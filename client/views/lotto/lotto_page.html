@@ -5,35 +5,24 @@
   <div class="btn-toolbar">
     <div class="btn-group" role="group">
     {{#if lotto.closed}}
-      <button type="button" class="closeLotto btn btn-danger">
-        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Closed
+      <button type="button" class="closeLotto btn btn-warning">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Unlock Lotto
       </button>
     {{else}}
-      <button type="button" class="closeLotto btn btn-danger">
-        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Close Lotto
+      <button type="button" class="closeLotto btn btn-primary">
+        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Lock Lotto
       </button>
     {{/if}}
 
     {{#if lotto.public}}
-      <button type="button" class="togglePublic btn btn-danger">
+      <button type="button" class="togglePublic btn btn-warning">
         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Make Private
       </button>
     {{else}}
-      <button type="button" class="togglePublic btn btn-success">
+      <button type="button" class="togglePublic btn btn-info">
         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Make Public
       </button>
     {{/if}}
-    </div>
-
-    <div class="btn-group pull-right" role="group">
-    {{#if isAdmin}}{{#if isLottoOpen}}
-      <button type="button" class="populate btn btn-primary">
-        <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Populate Items
-      </button>
-      <button type="button" class="populateLog btn btn-primary">
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Populate Log
-      </button>
-    {{/if}}{{/if}}
     </div>
   </div>
   {{/if}}
@@ -55,10 +44,16 @@
     <div class="row">
       <div class="log-panel form-group col-xs-12">
         <div class="panel panel-default">
-          <div class="panel-heading">Log</div>
-          <div class="panel-body">
+          <div class="panel-heading" data-toggle="collapse" data-target="#log-body">Log</div>
+          <div class="panel-body panel-collapse collapse" id="log-body">
 
             <div class="form-group col-xs-12">
+              {{#if isAdmin}}{{#if isLottoOpen}}
+                <button type="button" class="populateLog btn btn-primary" data-toggle="tooltip" title="Load Bank Log from GW2-API">
+                  <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
+                </button>
+              {{/if}}{{/if}}
+
               {{#if isAdmin}}{{#if isLottoOpen}}
               <div class="panel panel-default">
                 <div class="panel-heading">Add Entries Directly</div>
@@ -72,9 +67,7 @@
                         <option value="{{_id}}">{{alts.[0]}}</option>
                         {{/each}}
                       </select>
-                    </div>
 
-                    <div class="form-group">
                       <label class="sr-only" for="entryAmount">Tier</label>
                       <input type="number" class="form-control" name="entryAmount" id="entryAmount" value="2" min="2" max="20" step="2" required/>
                     </div>
@@ -121,9 +114,7 @@
           {{> tierRow }}
           {{#if inSession 'SelectedTier' tier}}
             {{#with showEntries ../lotto.entries ../lotto.closed ../lotto.winners }}
-              
-                {{> entriesTable }}
-
+              {{> entriesTable }}
             {{/with}}
           {{/if}}
         {{/if}}
@@ -136,7 +127,13 @@
 
 <template name="tableHeaders">
   <tr>
-    <th class="index"></th>
+    <th class="index">
+    {{#if isAdmin}}{{#if isLottoOpen}}
+      <button type="button" class="populate btn btn-xs btn-primary" data-toggle="tooltip" title="Load Entries from GW2-API">
+        <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
+      </button>
+    {{/if}}{{/if}}
+    </th>
     {{#each range 1 11 1 }}
       <th class="item">{{ value }}</th>
     {{/each}}

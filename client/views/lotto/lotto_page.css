@@ -7,6 +7,11 @@ table {
   cursor:pointer;
 }
 
+.panel-heading[data-toggle=collapse]:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .prize-row > td .popover-wrapper {
   position: absolute;
   top: 100%;
