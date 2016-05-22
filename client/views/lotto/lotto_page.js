@@ -39,43 +39,6 @@ Template.lottoPage.helpers({
   }
 });
 
-Template.pot.helpers({
-  potEntries: function(entries, winner) {
-    var rangeStart = 1;
-    var rangeEnd = 0;
-    return _.map(entries, function (v, k) {
-      var _rangeStart = rangeStart;
-      rangeEnd = _rangeStart + v - 1;
-      rangeStart = rangeEnd + 1;
-      return {
-        gwuserId: k,
-        amount: v,
-        rangeStart: _rangeStart,
-        rangeEnd: rangeEnd,
-        winner: k === winner
-      };
-    });
-  },
-  mainUsername: function (gwuserId) {
-    return GWUsers.findOne(gwuserId).alts[0];
-  },
-  half: function(total) {
-    return total / 2;
-  },
-  hasWinner: function() {
-    return !!this.winner;
-  },
-  isLottoOpen: function() {
-    return !Template.parentData().lotto.closed;
-  },
-  attributes: function() {
-    if (!!this.winner) {
-      return { class: "winner" };
-    }
-    return {};
-  }
-});
-
 Template.lottoPage.events({
   'click .populate': function(e) {
     e.preventDefault();
@@ -121,17 +84,21 @@ Template.lottoPage.events({
   },
   'submit .entry-add-direct' : function(e) {
     e.preventDefault();
-    var button = e.target.querySelector('button[type=submit]');
+
+    const button = e.target.querySelector('button[type=submit]');
     button.disabled = 'disabled';
     button.innerHTML = 'Adding...';
-    var tier = Math.floor(e.target.entryAmount.value);
-    var lottoId = Session.get('lottoId');
-    var gwuserId = e.target.entryUserId.value;
-    var entry = {
+
+    const tier = Math.floor(e.target.entryAmount.value);
+    const lottoId = Session.get('lottoId');
+    const gwuserId = e.target.entryUserId.value;
+
+    const entry = {
       gwuserId: gwuserId,
       amount: tier
     };
-    var errors = validateEntry(entry);
+
+    const errors = validateEntry(entry);
     if (errors.gwuserId || errors.amount) {
       button.innerHTML = 'Error';
       Meteor.setTimeout(function(){
@@ -147,42 +114,23 @@ Template.lottoPage.events({
     }
 
     Meteor.call('entryAdd', entry, lottoId, function (error, result) {
-      //Meteor.setTimeout(function(){
-        button.innerHTML = 'Add';
-        button.disabled = '';
-        e.target.entryAmount.focus();
-        e.target.entryAmount.select();
-      //}, 500);
+      button.innerHTML = 'Add';
+      button.disabled = '';
+      e.target.entryAmount.focus();
+      e.target.entryAmount.select();
       if (error) {
         return throwError(error.reason);
       }
-      //e.target.entryUserId.value = '';
     });
   }
 });
 
-Template.pot.events({
-  'click .roll': function(e) {
-    e.preventDefault();
-    var lottoId = Session.get('lottoId');
-    var pot = this.toggle;
-    Meteor.call('rollForPot', lottoId, pot, function(error, result){
-      if (error) {
-        return throwError(error.reason);
-      }
-      //console.log('result', result);
-    });
-  },
-  'click .unroll': function(e) {
-    e.preventDefault();
-    if (confirm("Are you sure you want to undo the roll?")) {
-      var lottoId = Session.get('lottoId');
-      var pot = this.toggle;
-      Meteor.call('unrollForPot', lottoId, pot, function(error, result){
-        if (error) {
-          return throwError(error.reason);
-        }
-      });
-    }
+Template.tableHeaders.rendered = function() {
+   $("[data-toggle='tooltip']").tooltip();
+};
+
+Template.tableHeaders.helpers({
+  isLottoOpen: function() {
+    return !this.lotto.closed;
   }
 });

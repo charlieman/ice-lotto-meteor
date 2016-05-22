@@ -3,7 +3,8 @@
     <th class="tier-number index" role="button">
       {{#if inSession 'SelectedTier' tier}}&#9660;{{else}}&#9654;{{/if}}
       <i></i>
-      (<span class="gold">{{tier}}</span>)
+      (<span class="gold">{{tier}}</span>)<br />
+      <p>{{entriesLength}} {{#if hasOne}}Entry{{else}}Entries{{/if}}</p>
     </th>
     {{#each prizeLoop prizes}}
       <td {{attributes}}>
@@ -20,6 +21,20 @@
         {{/if}}{{/if}}
       </td>
     {{/each}}
-    <td><span class="user">{{winnerName}}</span><br /><span>{{winnerItem}}</span></td>
+    <td>
+      {{#if hasNoWinner}}
+        {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasEntries}}
+          <button type="button" class="roll btn btn-primary pull-right">Roll</button>
+        {{/if}} {{/unless}} {{/if}}
+      {{else}}
+        {{#if showSAPowers}}
+          <button type="button" class="unroll btn btn-danger pull-right">Unroll</button>
+        {{/if}}
+        <p>
+          <span class="user">{{winnerName}}</span><br />
+          <span>{{winnerItem}}</span><br />
+        </p>
+      {{/if}}
+    </td>
   </tr>
 </template>

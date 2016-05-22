@@ -13,6 +13,7 @@ Template.entriesTable.helpers({
     return !_.any(this.entries, function(e) {return !!e.winner});
   }
 });
+
 Template.entriesTable.events({
   'click .roll': function(e) {
     e.preventDefault();
