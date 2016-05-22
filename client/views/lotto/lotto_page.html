@@ -69,12 +69,20 @@
               </form>
             </div>
             {{/if}}{{/if}}
-            <div class="clearfix"></div>
-            <span class="toggleLog" role="button">{{#if inSession toggleLog true}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
-            {{#if inSession toggleLog true}}
-              <table class="table table-striped table-bordered table-condensed">
-                <tbody>
-                  {{#each entry in reversedEntries}}
+            <div class="clearfix"><p></p></div>
+            <div class="panel panel-default" data-toggle="collapse">
+              <div class="toggleLog panel-heading">
+                <span>{{#if inSession toggle true}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
+              </div>
+              <div class="panel-body panel-collapse collapse {{#if inSession toggle true}}in{{/if}}">
+                <table class="table table-striped table-bordered table-condensed">
+                  <tbody>
+                    <tr>
+                      <th>User</th>
+                      <th>Amount</th>
+                      <th>Winner</th>
+                    </tr>
+                    {{#each entry in reversedEntries}}
                     <tr>
                       <td>{{mainUsername entry.gwuserId}}</td>
                       <td>{{entry.amount}}</td>
@@ -88,45 +96,51 @@
                       {{/if}}{{/if}}
                       </td>
                     </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-            {{/if}}
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <table class="inventory table table-striped table-bordered">
-      <thead>
-      {{> tableHeaders }}
-      </thead>
-      <tbody class="table-prizes">
-      {{#each tiers}}
-        {{#if showTier ../lotto.type}}
-          {{> tierRow }}
-          {{#if inSession 'SelectedTier' tier}}
-            {{#with showEntries ../lotto.entries ../lotto.closed ../lotto.winners }}
-              {{> entriesTable }}
-            {{/with}}
-          {{/if}}
-        {{/if}}
-      {{/each}}
-      {{> tableHeaders }}
-      </tbody>
-    </table>
+    <div class="panel panel-default">
+      <div class="panel-heading">Prizes</div>
+      <div class="panel-body">
+        {{#if isAdmin}}{{#if isLottoOpen}}
+        <button type="button" class="populateItems btn btn-primary" data-toggle="tooltip" title="Load Entries from GW2-API">
+          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
+        </button>
+        <div class="clearfix"><p></p></div>
+        {{/if}}{{/if}}
+        <table class="inventory table table-striped table-bordered">
+          <thead>
+          {{> tableHeaders }}
+          </thead>
+          <tbody class="table-prizes">
+          {{#each tiers}}
+            {{#if showTier ../lotto.type}}
+              {{> tierRow }}
+              {{#if inSession 'SelectedTier' tier}}
+                {{#with showEntries ../lotto.entries ../lotto.closed ../lotto.winners }}
+                  {{> entriesTable }}
+                {{/with}}
+              {{/if}}
+            {{/if}}
+          {{/each}}
+          {{> tableHeaders }}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
 <template name="tableHeaders">
   <tr>
-    <th class="index">
-    {{#if isAdmin}}{{#if isLottoOpen}}
-      <button type="button" class="populate btn btn-xs btn-primary" data-toggle="tooltip" title="Load Entries from GW2-API">
-        <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
-      </button>
-    {{/if}}{{/if}}
-    </th>
+    <th class="index"></th>
     {{#each range 1 11 1 }}
       <th class="item">{{ value }}</th>
     {{/each}}

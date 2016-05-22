@@ -4,9 +4,15 @@
       {{#if hasEntries}}
         <table class="table table-striped table-bordered table-condensed table-entries">
           <tbody>
-          {{#each entries}}
-            {{> entryRow }}
-          {{/each}}
+            <tr>
+              <td class="index"></td>
+              <th>User</th>
+              <th>Amount</th>
+              <th>Winner</th>
+            </tr>
+            {{#each entries}}
+              {{> entryRow }}
+            {{/each}}
           </tbody>
         </table>
       {{else}}
