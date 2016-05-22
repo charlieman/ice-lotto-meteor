@@ -1,19 +1,18 @@
 <template name="userItem">
   <div>
     <strong>{{username}}</strong>
-
     <form class="form-inline verify">
       <div class="checkbox">
         <label>
           <input type="checkbox" autocomplete="off" class="toggleVerify" checked={{isVerified}}>
-          {{#if isVerified}}Verified{{else}}Not verified{{/if}}
+          {{#if isVerified}}Verified{{else}}Unverified{{/if}}
         </label>
       </div>
       {{#if showSAPowers}}
       <div class="checkbox">
         <label>
           <input type="checkbox" autocomplete="off" class="toggleAdmin" checked={{isAdmin}}>
-          {{#if isAdmin}}Admin{{else}}Not admin{{/if}}
+          {{#if isAdmin}}Admin{{else}}Non-Admin{{/if}}
         </label>
       </div>
       {{/if}}

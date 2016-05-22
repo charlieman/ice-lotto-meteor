@@ -2,7 +2,6 @@
   <tr class="entries">
     <td colspan="12">
       {{#if hasEntries}}
-        <strong>Entry Details</strong>
         <table class="table table-striped table-bordered table-condensed table-entries">
           <tbody>
           {{#each entries}}
@@ -28,9 +27,11 @@
     <td>{{mainUsername}}</td>
     <td>{{amount}}</td>
     <td>
-      {{#if isAdmin}}{{#if isLottoOpen}}
-        <button class="remove btn btn-danger btn-xs">x</button>
-      {{/if}}{{/if}}
+      {{#if isAdmin}} {{#if isLottoOpen}}
+        <button class="remove btn btn-danger btn-xs">
+          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Delete
+        </button>
+      {{/if}} {{/if}}
       {{#if winner}}Winner{{/if}}
     </td>
   </tr>
@@ -41,12 +42,14 @@
     <div class="form-group">
       <label class="sr-only" for="gwuserId">User</label>
       <select name="userId" id="gwuserId" class="form-control">
-        <option value="">Select user</option>
-          {{#each gwusers }}
-            <option value="{{_id}}">{{alts.[0]}}</option>
-          {{/each}}
+        <option value="" disabled selected hidden>Select User</option>
+        {{#each gwusers}}
+          <option value="{{_id}}">{{alts.[0]}}</option>
+        {{/each}}
       </select>
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
+      </button>
     </div>
   </form>
 </template>

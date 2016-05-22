@@ -9,7 +9,7 @@
         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Unlock Lotto
       </button>
     {{else}}
-      <button type="button" class="closeLotto btn btn-primary">
+      <button type="button" class="closeLotto btn btn-success">
         <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Lock Lotto
       </button>
     {{/if}}
@@ -46,39 +46,30 @@
         <div class="panel panel-default">
           <div class="panel-heading" data-toggle="collapse" data-target="#log-body">Log</div>
           <div class="panel-body panel-collapse collapse" id="log-body">
-
-            <div class="form-group col-xs-12">
-              {{#if isAdmin}}{{#if isLottoOpen}}
-                <button type="button" class="populateLog btn btn-primary" data-toggle="tooltip" title="Load Bank Log from GW2-API">
-                  <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
-                </button>
-              {{/if}}{{/if}}
-
-              {{#if isAdmin}}{{#if isLottoOpen}}
-              <div class="panel panel-default">
-                <div class="panel-heading">Add Entries Directly</div>
-                <div class="panel-body">
-                  <form class="entry-add-direct form-inline" role="form">
-                    <div class="form-group">
-                      <label class="sr-only" for="entryUserId">User</label>
-                      <select name="entryUserId" id="entryUserId" class="form-control">
-                        <option value="">Select User</option>
-                        {{#each gwusers }}
-                        <option value="{{_id}}">{{alts.[0]}}</option>
-                        {{/each}}
-                      </select>
-
-                      <label class="sr-only" for="entryAmount">Tier</label>
-                      <input type="number" class="form-control" name="entryAmount" id="entryAmount" value="2" min="2" max="20" step="2" required/>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                  </form>
+            {{#if isAdmin}}{{#if isLottoOpen}}
+            <button type="button" class="populateLog btn btn-primary" data-toggle="tooltip" title="Load Bank Log from GW2-API">
+              <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
+            </button>
+            <div class="pull-right">
+              <form class="entry-add-direct form-inline" role="form">
+                <div class="form-group">
+                  <label for="entryAmount">Add Entries Manually: </label>
+                  <input type="number" class="form-control" name="entryAmount" id="entryAmount" placeholder="Select Tier" min="2" max="20" step="2" required />
+                  <label class="sr-only" for="entryUserId">User</label>
+                  <select name="entryUserId" id="entryUserId" class="form-control">
+                    <option value="" disabled selected hidden>Select User</option>
+                    {{#each gwusers}}
+                      <option value="{{_id}}">{{alts.[0]}}</option>
+                    {{/each}}
+                  </select>
+                  <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
+                  </button>
                 </div>
-              </div>
-              {{/if}}{{/if}}
+              </form>
             </div>
-
-
+            {{/if}}{{/if}}
+            <div class="clearfix"></div>
             <span class="toggleLog" role="button">{{#if inSession toggleLog true}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
             {{#if inSession toggleLog true}}
               <table class="table table-striped table-bordered table-condensed">
@@ -90,7 +81,9 @@
                       <td>
                       {{#if isAdmin}}{{#if isLottoOpen}}
                         {{#with lottoId=lotto._id entryId=entry._id }}
-                          <button class="entry-remove btn btn-danger btn-xs">x</button>
+                          <button class="entry-remove btn btn-danger btn-xs">
+                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Delete
+                          </button>
                         {{/with}}
                       {{/if}}{{/if}}
                       </td>

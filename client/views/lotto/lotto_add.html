@@ -6,7 +6,9 @@
         <input type="date" class="form-control" name="date" id="date" required pattern="\d{4}-\d{1,2}-\d{1,2}" placeholder="YYYY-MM-DD" />
         <p class="help-block">{{errorMessage 'date'}}</p>
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary">Create</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create
+          </button>
         </span>
       </div>
       <!-- Deprecated feature b/c of API -->

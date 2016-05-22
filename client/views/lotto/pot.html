@@ -2,12 +2,19 @@
   <div class="panel panel-default">
     <div class="panel-heading">{{label}}</div>
     <div class="panel-body">
-      {{#if isAdmin}} {{#unless isLottoOpen}} {{#unless hasWinner}}
-        <button type="button" class="roll btn btn-primary pull-right">Roll</button>
-      {{/unless}} {{/unless}} {{/if}}
-      {{#if showSAPowers}} {{#if hasWinner}}
-        <button type="button" class="unroll btn btn-danger pull-right">Unroll</button>
-      {{/if}} {{/if}}
+      {{#if hasWinner}}
+        {{#if showSAPowers}}
+          <button type="button" class="unroll btn btn-danger pull-right">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Unroll
+          </button>
+        {{/if}}
+      {{else}}
+        {{#if isAdmin}} {{#unless isLottoOpen}}
+          <button type="button" class="roll btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Roll
+          </button>
+        {{/unless}} {{/if}}
+      {{/if}}
       <p>
         Total: <span class="gold">{{ total }}</span><br />
         Winnings: <span class="gold">{{ half total }}</span>
