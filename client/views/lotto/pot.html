@@ -8,9 +8,9 @@
       </p>
       <span class="togglePot" role="button">{{#if inSession toggle true}}&#9660; hide{{else}}&#9654; show{{/if}} entries</span>
       {{#if inSession toggle true}}
-        {{#if isAdmin}} {{#unless isLottoOpen}} {{#unless hasWinner}}
+        {{#if isAdmin}} {{#unless isLottoOpen}} {{#unless hasWinner}} {{#if hasEntries}}
         <button type="button" class="roll btn btn-active pull-right">Roll</button>
-        {{/unless}} {{/unless}} {{/if}}
+        {{/if}} {{/unless}} {{/unless}} {{/if}}
         {{#if showSAPowers}} {{#if hasWinner}}
         <button type="button" class="unroll btn btn-danger pull-right">Unroll</button>
         {{/if}} {{/if}}
