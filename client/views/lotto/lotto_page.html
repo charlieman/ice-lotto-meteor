@@ -25,7 +25,7 @@
     {{/if}}
     </div>
 
-    <div class="btn-group" role="group">
+    <div class="btn-group pull-right" role="group">
     {{#if isAdmin}}{{#if isLottoOpen}}
       <button type="button" class="populate btn btn-primary">
         <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Populate Items
@@ -52,40 +52,41 @@
       </div>
     </div>
     
-    
     <div class="row">
-      <div class="form-group col-xs-6 col-sm-6">
-        {{#if isAdmin}}{{#if isLottoOpen}}
-        <div class="panel panel-default">
-          <div class="panel-heading">Add Entries Directly</div>
-          <div class="panel-body">
-            <form class="entry-add-direct form-inline" role="form">
-              <div class="form-group">
-                <label class="sr-only" for="entryUserId">User</label>
-                <select name="entryUserId" id="entryUserId" class="form-control">
-                  <option value="">Select User</option>
-                  {{#each gwusers }}
-                  <option value="{{_id}}">{{alts.[0]}}</option>
-                  {{/each}}
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="sr-only" for="entryAmount">Tier</label>
-                <input type="number" class="form-control" name="entryAmount" id="entryAmount" value="2" min="2" max="20" step="2" required/>
-              </div>
-              <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-          </div>
-        </div>
-        {{/if}}{{/if}}
-      </div>
-      
-      <div class="log-panel form-group col-xs-6 col-sm-6">
+      <div class="log-panel form-group col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading">Log</div>
           <div class="panel-body">
-            <span class="toggleLog" role="button">{{#if inSession toggleLog true}}&#9660; hide{{else}}&#9654; show{{/if}} entries</span>
+
+            <div class="form-group col-xs-12">
+              {{#if isAdmin}}{{#if isLottoOpen}}
+              <div class="panel panel-default">
+                <div class="panel-heading">Add Entries Directly</div>
+                <div class="panel-body">
+                  <form class="entry-add-direct form-inline" role="form">
+                    <div class="form-group">
+                      <label class="sr-only" for="entryUserId">User</label>
+                      <select name="entryUserId" id="entryUserId" class="form-control">
+                        <option value="">Select User</option>
+                        {{#each gwusers }}
+                        <option value="{{_id}}">{{alts.[0]}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="sr-only" for="entryAmount">Tier</label>
+                      <input type="number" class="form-control" name="entryAmount" id="entryAmount" value="2" min="2" max="20" step="2" required/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </form>
+                </div>
+              </div>
+              {{/if}}{{/if}}
+            </div>
+
+
+            <span class="toggleLog" role="button">{{#if inSession toggleLog true}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
             {{#if inSession toggleLog true}}
               <table class="table table-striped table-bordered table-condensed">
                 <tbody>
