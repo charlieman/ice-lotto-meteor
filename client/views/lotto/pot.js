@@ -30,6 +30,9 @@ Template.pot.helpers({
   isLottoOpen: function() {
     return !Template.parentData().lotto.closed;
   },
+  winnerName: function() {
+    return "WinnerNameHere";
+  },
   attributes: function() {
     if (!!this.winner) {
       return { class: "winner" };

@@ -8,6 +8,9 @@
           <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Unroll
         </button>
         {{/if}}
+        {{#if winner}}
+        <strong class="pull-right">{{winnerName}}&nbsp;</strong>
+        {{/if}}
       {{else}}
         {{#if isAdmin}} {{#unless isLottoOpen}}
         <button type="button" class="roll btn btn-primary pull-right">
@@ -19,9 +22,9 @@
         Total: <span class="gold">{{ total }}</span><br />
         Winnings: <span class="gold">{{ half total }}</span>
       </p>
-      
-      <div class="panel panel-default" data-toggle="collapse">
-        <div class="togglePot panel-heading">
+
+      <div class="panel panel-default">
+        <div class="togglePot panel-heading" data-toggle="collapse">
           <span>{{#if inSession toggle true}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
         </div>
         <div class="panel-body panel-collapse collapse {{#if inSession toggle true}}in{{/if}}">
