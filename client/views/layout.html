@@ -3,27 +3,33 @@
     <header class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
+          <!--
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Toggle Navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{pathFor 'lottoList'}}">Ice Lotto</a>
+          -->
+          <a class="navbar-brand" href="{{pathFor 'lottoList'}}">ICE Lotto</a>
         </div>
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
               {{#if isAdmin }}
                 <li>
-                  <a href="{{pathFor 'userList'}}">Users</a>
+                  <a href="{{pathFor 'userList'}}">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users
+                  </a>
                 </li>
                 <li>
-                  <a href="{{pathFor 'gwuserList'}}">GW2 Users</a>
+                  <a href="{{pathFor 'gwuserList'}}">
+                    <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> GW2 Users
+                  </a>
                 </li>
                 {{#if isSuperAdmin }}
                 <li>
-                  <button type="button" class="showSAPowers btn btn-default {{#if showSAPowers}}btn-danger{{/if}}">
-                    <span class="glyphicon glyphicon-eye-{{#if showSAPowers}}open{{else}}close{{/if}}" aria-hidden="true"></span> SuperAdmin
+                  <button type="button" class="showSAPowers btn btn-{{#if showSAPowers}}danger{{else}}default{{/if}}">
+                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> SuperAdmin
                   </button>
                 </li>
                 {{/if}}

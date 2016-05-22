@@ -1,22 +1,28 @@
 <template name="userItem">
   <div>
-    <strong>{{username}}</strong>
-
-    <form class="form-inline verify">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" autocomplete="off" class="toggleVerify" checked={{isVerified}}>
-          {{#if isVerified}}Verified{{else}}Not verified{{/if}}
-        </label>
-      </div>
-      {{#if showSAPowers}}
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" autocomplete="off" class="toggleAdmin" checked={{isAdmin}}>
-          {{#if isAdmin}}Admin{{else}}Not admin{{/if}}
-        </label>
-      </div>
-      {{/if}}
-    </form>
+    <ul class="list-inline">
+      <li class="col-xs-1">
+        <strong>{{username}}</strong>
+      </li>
+      <li class="col-xs-11">
+        <form class="form-inline verify">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-sm btn-{{#if isVerified}}info{{else}}default{{/if}}">
+              <input type="checkbox" autocomplete="off" class="toggleVerify" checked={{isVerified}}><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Verified
+            </label>
+            {{#if showSAPowers}}
+              <label class="btn btn-sm btn-{{#if isAdmin}}danger{{else}}default{{/if}}">
+                <input type="checkbox" autocomplete="off" class="toggleAdmin" checked={{isAdmin}}><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Admin
+              </label>
+            {{/if}}
+          </div>
+          {{#if showSAPowers}}
+          <button type="button" class="deleteUser btn btn-sm btn-danger">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Delete User
+          </button>
+          {{/if}}
+        </form>
+      </li>
+    </ul>
   </div>
 </template>

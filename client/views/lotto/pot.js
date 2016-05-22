@@ -61,5 +61,8 @@ Template.pot.events({
         }
       });
     }
+  },
+  'click .togglePot': function(e) {
+    Session.set(this.toggle, !Session.get(this.toggle));
   }
 });

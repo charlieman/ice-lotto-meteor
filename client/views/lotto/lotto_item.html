@@ -1,12 +1,14 @@
 <template name="lottoItem">
   <div class="lotto-item">
     <div class="lotto-title">
-      <h3>
+      <h2>
         {{#if showSAPowers}}
-        <button type="submit" class="delete btn btn-xs btn-danger">Delete</button>
+        <button type="submit" class="delete btn btn-sm btn-danger">
+          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Delete
+        </button>
         {{/if}}
         <a href="{{pathFor 'lottoPage' }}">Lotto for {{prettyDate}}</a>
-      </h3>
+      </h2>
     </div>
   </div>
 </template>

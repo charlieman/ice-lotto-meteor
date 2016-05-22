@@ -15,6 +15,7 @@ Template.userItem.events({
         return throwError(error.reason);
       }
     });
+
   },
   'change .toggleAdmin': function(e) {
     e.preventDefault();
@@ -23,5 +24,15 @@ Template.userItem.events({
         return throwError(error.reason);
       }
     });
-  }
+  },
+  'click .deleteUser': function(e) {
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this user?")) {
+      Meteor.call('userDelete', this._id, function(error, result){
+        if(error) {
+          return throwError(error.reason);
+        }
+      });
+    }
+  },
 });
