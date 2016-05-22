@@ -38,8 +38,20 @@ Template.tierRow.helpers({
     if (!!name1) return name1;
     return name2;
   },
+  hasNoWinner: function() {
+    return !_.any(this.prizes, function(p) { return !!p.winner; });
+  },
+  entriesLength: function() {
+    return _.filter(Lottos.findOne().entries, (e) => e.amount === this.tier).length;
+  },
+  hasEntries: function() {
+    return _.any(Lottos.findOne().entries, (e) => e.amount === this.tier);
+  },
+  hasOne: function() {
+    return _.filter(Lottos.findOne().entries, (e) => e.amount === this.tier).length === 1;
+  },
   winnerName: function() {
-    var winnerPrize = _.find(this.prizes, function(p) {return !!p.winner;});
+    var winnerPrize = _.find(this.prizes, function(p) { return !!p.winner; });
     if (winnerPrize) {
       var that = this;
       var entry = _.find(Lottos.findOne().entries, function(e) { return e.amount === that.tier && e.winner;});
