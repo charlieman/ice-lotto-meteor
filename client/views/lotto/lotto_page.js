@@ -29,7 +29,7 @@ Template.lottoPage.helpers({
       total: total,
       entries: entries,
       label: label,
-      winner: winner
+      winner: winner,
     }
   },
   mainUsername: function (gwuserId) {
