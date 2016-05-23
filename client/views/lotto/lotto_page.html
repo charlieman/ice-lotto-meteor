@@ -120,7 +120,7 @@
         {{#if showTier ../lotto.type}}
           {{> tierRow }}
           {{#if inSession 'SelectedTier' tier}}
-            {{#with showEntries ../lotto.entries ../lotto.closed ../lotto.winners }}
+            {{#with showEntries ../lotto.entries ../lotto.closed }}
               
                 {{> entriesTable }}
 
