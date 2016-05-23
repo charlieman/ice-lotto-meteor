@@ -44,6 +44,10 @@ Template.lottoPage.helpers({
 });
 
 Template.lottoPage.events({
+  'click .populateLog': function(e) {
+    e.preventDefault();
+    $('#logModal').modal('show');
+  },
   'click .populateItems': function(e) {
     e.preventDefault();
     var lottoId = Session.get('lottoId');
