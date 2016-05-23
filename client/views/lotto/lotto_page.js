@@ -29,7 +29,7 @@ Template.lottoPage.helpers({
       total: total,
       entries: entries,
       label: label,
-      winner: winner,
+      winner: winner
     }
   },
   mainUsername: function (gwuserId) {
@@ -46,6 +46,7 @@ Template.lottoPage.helpers({
 Template.lottoPage.events({
   'click .populateLog': function(e) {
     e.preventDefault();
+    Session.set(this.logModal, !Session.get(this.logModal));
     $('#logModal').modal('show');
   },
   'click .populateItems': function(e) {
