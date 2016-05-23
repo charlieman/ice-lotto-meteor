@@ -25,7 +25,7 @@ Template.pot.helpers({
     return !!this.winner;
   },
   hasEntries: function() {
-    return this.entries && this.entries.length > 0;
+    return !_.isEmpty(this.entries);
   },
   isLottoOpen: function() {
     return !Template.parentData().lotto.closed;
