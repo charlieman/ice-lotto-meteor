@@ -24,11 +24,15 @@
     <td>
       {{#if hasNoWinner}}
         {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasEntries}}
-          <button type="button" class="roll btn btn-primary pull-right">Roll</button>
+          <button type="button" class="roll btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Roll
+          </button>
         {{/if}} {{/unless}} {{/if}}
       {{else}}
         {{#if showSAPowers}}
-          <button type="button" class="unroll btn btn-danger pull-right">Unroll</button>
+          <button type="button" class="unroll btn btn-danger pull-right">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Unroll
+          </button>
         {{/if}}
         <p>
           <span class="user">{{winnerName}}</span><br />

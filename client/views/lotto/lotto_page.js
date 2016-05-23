@@ -1,3 +1,7 @@
+Template.lottoPage.rendered = function() {
+   $("[data-toggle='tooltip']").tooltip();
+};
+
 Template.lottoPage.helpers({
   showEntries: function (entries, closed) {
     var tier = Session.get('SelectedTier');
@@ -38,7 +42,7 @@ Template.lottoPage.helpers({
 });
 
 Template.lottoPage.events({
-  'click .populate': function(e) {
+  'click .populateItems': function(e) {
     e.preventDefault();
     var lottoId = Session.get('lottoId');
     Meteor.call('populateItems', lottoId, function(error, result) {
@@ -58,9 +62,6 @@ Template.lottoPage.events({
   'click .toggleLog': function(e) {
     e.preventDefault();
     Session.set(this.toggleLog, !Session.get(this.toggleLog));
-  },
-  'click .togglePot': function(e) {
-    Session.set(this.toggle, !Session.get(this.toggle));
   },
   'click .togglePublic': function(e){
     e.preventDefault();

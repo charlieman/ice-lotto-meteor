@@ -2,13 +2,17 @@
   <div>
     <ul class="alts list-inline">
       {{#each alts}}
-        <li class="label label-primary">{{this}} <span class="remove-alt">&times;</span> </li>
+        <li class="label label-primary col-xs-2">{{this}} <span class="remove-alt">&times;</span></li>
       {{/each}}
       <li>
         <form class="add-alt form-inline">
-          <div class="form-group">
-            <input type="text" name="altName" class="form-control" placeholder="Alt Name" />
-            <button type="submit" class="btn btn-success">Add Alt</button>
+          <div class="form-group input-group">
+            <input type="text" name="altName" class="form-control col-xs-2" placeholder="Alt Name" />
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Alt
+              </button>
+            </span>
           </div>
         </form>
       </li>
