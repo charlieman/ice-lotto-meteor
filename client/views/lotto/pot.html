@@ -12,11 +12,11 @@
         <strong class="pull-right">{{winnerName}}&nbsp;</strong>
         {{/if}}
       {{else}}
-        {{#if isAdmin}} {{#unless isLottoOpen}}
+        {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasEntries}}
         <button type="button" class="roll btn btn-primary pull-right">
           <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Roll
         </button>
-        {{/unless}} {{/if}}
+        {{/if}} {{/unless}} {{/if}}
       {{/if}}
       <p>
         Total: <span class="gold">{{ total }}</span><br />
