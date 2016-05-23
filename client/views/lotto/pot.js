@@ -31,7 +31,7 @@ Template.pot.helpers({
     return !Template.parentData().lotto.closed;
   },
   winnerName: function() {
-    return "WinnerNameHere";
+    return GWUsers.findOne(this.winner).alts[0];
   },
   attributes: function() {
     if (!!this.winner) {
