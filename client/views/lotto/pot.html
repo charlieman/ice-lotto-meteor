@@ -24,10 +24,10 @@
       </p>
 
       <div class="panel panel-default">
-        <div class="togglePot panel-heading" data-toggle="collapse">
+        <div class="togglePot panel-heading" data-toggle="collapse" data-target="#{{toggle}}">
           <span>{{#if inSession toggle true}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
         </div>
-        <div class="panel-body panel-collapse collapse {{#if inSession toggle true}}in{{/if}}">
+        <div class="panel-body panel-collapse collapse" id="{{toggle}}">
           <table class="table table-striped table-bordered table-condensed table-entries">
             <tbody>
               <tr>
