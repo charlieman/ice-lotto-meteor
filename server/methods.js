@@ -24,9 +24,15 @@ Meteor.methods({
   getItemsFromAPI: function() {
     const apiKey = Meteor.settings.apiKey;
     const guildId = Meteor.settings.guildId;
-    const baseUrl = 'https://api.guildwars2.com/v2';
 
     const bank = new Bank(apiKey, guildId);
     return bank.getItems(Meteor.settings.inventory);
+  },
+  getLogFromAPI: function() {
+    const apiKey = Meteor.settings.apiKey;
+    const guildId = Meteor.settings.guildId;
+
+    const bank = new Bank(apiKey, guildId);
+    return bank.getMoneyLog();
   }
 });

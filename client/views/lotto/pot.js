@@ -30,6 +30,9 @@ Template.pot.helpers({
   isLottoOpen: function() {
     return !Template.parentData().lotto.closed;
   },
+  winnerName: function() {
+    return GWUsers.findOne(this.winner).alts[0];
+  },
   attributes: function() {
     if (!!this.winner) {
       return { class: "winner" };
@@ -42,7 +45,7 @@ Template.pot.events({
   'click .roll': function(e) {
     e.preventDefault();
     var lottoId = Session.get('lottoId');
-    var pot = this.toggle;
+    var pot = this.toggle === 'toggleSmallPot'? 'small': 'large';
     Meteor.call('rollForPot', lottoId, pot, function(error, result){
       if (error) {
         return throwError(error.reason);
@@ -54,7 +57,7 @@ Template.pot.events({
     e.preventDefault();
     if (confirm("Are you sure you want to undo the roll?")) {
       var lottoId = Session.get('lottoId');
-      var pot = this.toggle;
+      var pot = this.toggle === 'toggleSmallPot'? 'small': 'large';
       Meteor.call('unrollForPot', lottoId, pot, function(error, result){
         if (error) {
           return throwError(error.reason);

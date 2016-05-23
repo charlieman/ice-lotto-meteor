@@ -3,17 +3,15 @@ Template.lottoPage.rendered = function() {
 };
 
 Template.lottoPage.helpers({
-  showEntries: function (entries, closed, winners) {
+  showEntries: function (entries, closed) {
     var tier = Session.get('SelectedTier');
     var lottoId = Session.get('lottoId');
-    var winner = _.result(_.find(winners, function(w) {return w.tier === tier}), 'entryId');
     return {
       entries: _.filter(entries, function (x) {
         return x.amount === tier;
       }),
       closed: closed,
-      tier: tier,
-      winners: winners
+      tier: tier
     };
   },
   midTier: function () {
@@ -44,6 +42,11 @@ Template.lottoPage.helpers({
 });
 
 Template.lottoPage.events({
+  'click .populateLog': function(e) {
+    e.preventDefault();
+    //Session.set('logModal', !Session.get('logModal'));
+    $('#logModal').modal('show');
+  },
   'click .populateItems': function(e) {
     e.preventDefault();
     var lottoId = Session.get('lottoId');
@@ -63,7 +66,7 @@ Template.lottoPage.events({
   },
   'click .toggleLog': function(e) {
     e.preventDefault();
-    Session.set(this.toggleLog, !Session.get(this.toggleLog));
+    Session.set('toggleLog', !Session.get('toggleLog'));
   },
   'click .togglePublic': function(e){
     e.preventDefault();
