@@ -46,7 +46,7 @@ Template.lottoPage.helpers({
 Template.lottoPage.events({
   'click .populateLog': function(e) {
     e.preventDefault();
-    Session.set(this.logModal, !Session.get(this.logModal));
+    //Session.set('logModal', !Session.get('logModal'));
     $('#logModal').modal('show');
   },
   'click .populateItems': function(e) {
@@ -68,7 +68,7 @@ Template.lottoPage.events({
   },
   'click .toggleLog': function(e) {
     e.preventDefault();
-    Session.set(this.toggleLog, !Session.get(this.toggleLog));
+    Session.set('toggleLog', !Session.get('toggleLog'));
   },
   'click .togglePublic': function(e){
     e.preventDefault();

@@ -45,7 +45,7 @@
       <div class="log-panel form-group col-xs-12">
         <div class="panel panel-default">
           <div class="toggleLog panel-heading" data-toggle="collapse" data-target="#log-body">
-            <span>{{#if inSession toggle true}}&#9660;{{else}}&#9654;{{/if}} Log</span>
+            <span>{{#if inSession 'toggleLog' true}}&#9660;{{else}}&#9654;{{/if}} Log</span>
           </div>
           <div class="panel-body panel-collapse collapse" id="log-body">
             {{#if isAdmin}}{{#if isLottoOpen}}
@@ -131,7 +131,7 @@
       </div>
     </div>
   </div>
-  {{#if inSession 'logModal' true}} {{> logModal}} {{/if}}
+  {{> logModal}}
 </template>
 
 <template name="tableHeaders">
