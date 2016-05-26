@@ -25,16 +25,16 @@ Template.pot.helpers({
     return !!this.winner;
   },
   hasEntries: function() {
-    return this.entries && this.entries.length > 0;
+    return _.keys(this.entries).length > 0;
   },
   isLottoOpen: function() {
-    return !Template.parentData().lotto.closed;
+    return !this.lotto.closed;
   },
   winnerName: function() {
     return GWUsers.findOne(this.winner).alts[0];
   },
-  attributes: function() {
-    if (!!this.winner) {
+  attributes: function(entry) {
+    if (!!entry.winner) {
       return { class: "winner" };
     }
     return {};
