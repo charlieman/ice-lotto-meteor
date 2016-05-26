@@ -22,7 +22,6 @@ Template.entriesTable.events({
       if (error) {
         return throwError(error.reason);
       }
-      //console.log(result);
     });
   },
   'click .unroll': function(e) {

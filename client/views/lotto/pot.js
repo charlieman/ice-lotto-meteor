@@ -50,7 +50,6 @@ Template.pot.events({
       if (error) {
         return throwError(error.reason);
       }
-      //console.log('result', result);
     });
   },
   'click .unroll': function(e) {
