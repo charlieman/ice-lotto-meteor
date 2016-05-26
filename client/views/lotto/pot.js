@@ -28,13 +28,13 @@ Template.pot.helpers({
     return !_.isEmpty(this.entries);
   },
   isLottoOpen: function() {
-    return !Template.parentData().lotto.closed;
+    return !this.lotto.closed;
   },
   winnerName: function() {
     return GWUsers.findOne(this.winner).alts[0];
   },
-  attributes: function() {
-    if (!!this.winner) {
+  attributes: function(entry) {
+    if (!!entry.winner) {
       return { class: "winner" };
     }
     return {};

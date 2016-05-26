@@ -3,32 +3,17 @@ Template.lottoPage.rendered = function() {
 };
 
 Template.lottoPage.helpers({
-  showEntries: function (entries, closed) {
-    var tier = Session.get('SelectedTier');
-    var lottoId = Session.get('lottoId');
-    return {
-      entries: _.filter(entries, function (x) {
-        return x.amount === tier;
-      }),
-      closed: closed,
-      tier: tier
-    };
+  filterEntries: function(entries, tier) {
+    return _.filter(this.lotto.entries, function (x) {
+      return x.amount === tier;
+    });
   },
   midTier: function () {
     return this.tier === 10;
   },
-  showTier: function(type) {
+  showTier: function(type, tier) {
     if (type !== 'double') return true;
-    return (this.tier % 2 === 0);
-  },
-  makePot: function(toggle, total, entries, label, winner) {
-    return {
-      toggle: toggle,
-      total: total,
-      entries: entries,
-      label: label,
-      winner: winner
-    }
+    return (tier % 2 === 0);
   },
   mainUsername: function (gwuserId) {
     return GWUsers.findOne(gwuserId).alts[0];
@@ -36,9 +21,6 @@ Template.lottoPage.helpers({
   isLottoOpen: function() {
     return !this.lotto.closed;
   },
-  reversedEntries: function() {
-    return _.chain(this.lotto.entries).reverse().value();
-  }
 });
 
 Template.lottoPage.events({
@@ -58,7 +40,7 @@ Template.lottoPage.events({
   },
   'click .entry-remove': function(e) {
     e.preventDefault();
-    Meteor.call('entryRemove', this.entryId, this.lottoId, function (error, result) {
+    Meteor.call('entryRemove', this.entry._id, this.lotto._id, function (error, result) {
       if (error) {
         return throwError(error.reason);
       }

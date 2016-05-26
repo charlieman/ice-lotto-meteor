@@ -37,12 +37,12 @@
                 <th>Total</th>
                 <th>Range</th>
               </tr>
-              {{#each potEntries entries winner}}
-              <tr {{attributes}}>
+              {{#each entry in potEntries entries winner}}
+              <tr {{attributes entry}}>
                 <td class="index"><i></i></td>
-                <td>{{mainUsername gwuserId}}</td>
-                <td>{{amount}}</td>
-                <td>{{rangeStart}} - {{rangeEnd}}</td>
+                <td>{{mainUsername entry.gwuserId}}</td>
+                <td>{{entry.amount}}</td>
+                <td>{{entry.rangeStart}} - {{entry.rangeEnd}}</td>
               </tr>
               {{/each}}
             </tbody>
