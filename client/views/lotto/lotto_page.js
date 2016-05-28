@@ -1,34 +1,26 @@
+Template.lottoPage.onCreated(function() {
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    'showLog': false,
+  });
+});
+
 Template.lottoPage.rendered = function() {
    $("[data-toggle='tooltip']").tooltip();
 };
 
 Template.lottoPage.helpers({
-  showEntries: function (entries, closed) {
-    var tier = Session.get('SelectedTier');
-    var lottoId = Session.get('lottoId');
-    return {
-      entries: _.filter(entries, function (x) {
-        return x.amount === tier;
-      }),
-      closed: closed,
-      tier: tier
-    };
+  filterEntries: function(entries, tier) {
+    return _.filter(this.lotto.entries, function (x) {
+      return x.amount === tier;
+    });
   },
   midTier: function () {
     return this.tier === 10;
   },
-  showTier: function(type) {
+  showTier: function(type, tier) {
     if (type !== 'double') return true;
-    return (this.tier % 2 === 0);
-  },
-  makePot: function(toggle, total, entries, label, winner) {
-    return {
-      toggle: toggle,
-      total: total,
-      entries: entries,
-      label: label,
-      winner: winner
-    }
+    return (tier % 2 === 0);
   },
   mainUsername: function (gwuserId) {
     return GWUsers.findOne(gwuserId).alts[0];
@@ -36,21 +28,20 @@ Template.lottoPage.helpers({
   isLottoOpen: function() {
     return !this.lotto.closed;
   },
-  reversedEntries: function() {
-    return _.chain(this.lotto.entries).reverse().value();
+  showLog: function() {
+    const instance = Template.instance();
+    return instance.state.get('showLog');
   }
 });
 
 Template.lottoPage.events({
   'click .populateLog': function(e) {
     e.preventDefault();
-    //Session.set('logModal', !Session.get('logModal'));
     $('#logModal').modal('show');
   },
   'click .populateItems': function(e) {
     e.preventDefault();
-    var lottoId = Session.get('lottoId');
-    Meteor.call('populateItems', lottoId, function(error, result) {
+    Meteor.call('populateItems', this.lotto._id, function(error, result) {
       if (error) {
         return throwError(error.reason);
       }
@@ -58,15 +49,15 @@ Template.lottoPage.events({
   },
   'click .entry-remove': function(e) {
     e.preventDefault();
-    Meteor.call('entryRemove', this.entryId, this.lottoId, function (error, result) {
+    Meteor.call('entryRemove', this.entry._id, this.lotto._id, function (error, result) {
       if (error) {
         return throwError(error.reason);
       }
     });
   },
-  'click .toggleLog': function(e) {
+  'click .toggleLog': function(e, instance) {
     e.preventDefault();
-    Session.set('toggleLog', !Session.get('toggleLog'));
+    instance.state.set('showLog', !instance.state.get('showLog'));
   },
   'click .togglePublic': function(e){
     e.preventDefault();
@@ -94,7 +85,7 @@ Template.lottoPage.events({
     button.innerHTML = 'Adding...';
 
     const tier = Math.floor(e.target.entryAmount.value);
-    const lottoId = Session.get('lottoId');
+    const lottoId = this.lotto._id;
     const gwuserId = e.target.entryUserId.value;
 
     const entry = {
@@ -114,7 +105,7 @@ Template.lottoPage.events({
           e.target.entryAmount.focus();
         }
       }, 500);
-      return Session.set('entryAddErrors', errors);
+      return;
     }
 
     Meteor.call('entryAdd', entry, lottoId, function (error, result) {

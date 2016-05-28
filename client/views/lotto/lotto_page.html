@@ -30,14 +30,10 @@
   <div class="content">
     <div class="row">
       <div class="col-xs-6 col-sm-6">
-        {{#with makePot 'toggleSmallPot' lotto.smallpot lotto.smallpot_entries 'Small Pot' lotto.smallpot_winner }}
-          {{> pot }}
-        {{/with}}
+        {{> pot name='smallPot' total=lotto.smallpot entries=lotto.smallpot_entries label='Small Pot' winner=lotto.smallpot_winner lotto=lotto }}
       </div>
       <div class="col-xs-6 col-sm-6">
-        {{#with makePot 'toggleBigPot' lotto.bigpot lotto.bigpot_entries 'Big Pot' lotto.bigpot_winner }}
-          {{> pot }}
-        {{/with}}
+        {{> pot name='bigPot' total=lotto.bigpot entries=lotto.bigpot_entries label='Big Pot' winner=lotto.bigpot_winner lotto=lotto }}
       </div>
     </div>
     
@@ -45,57 +41,37 @@
       <div class="log-panel form-group col-xs-12">
         <div class="panel panel-default">
           <div class="toggleLog panel-heading" data-toggle="collapse" data-target="#log-body">
-            <span>{{#if inSession 'toggleLog' true}}&#9660;{{else}}&#9654;{{/if}} Log</span>
+            <span>{{#if showLog}}&#9660;{{else}}&#9654;{{/if}} Log</span>
           </div>
+          
           <div class="panel-body panel-collapse collapse" id="log-body">
             {{#if isAdmin}}{{#if isLottoOpen}}
-            <button type="button" class="populateLog btn btn-primary" data-toggle="tooltip" title="Load Bank Log from GW2-API">
-              <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
-            </button>
-            <div class="pull-right">
-              <form class="entry-add-direct form-inline" role="form">
-                <div class="form-group">
-                  <label for="entryAmount">Add Entries Manually: </label>
-                  <input type="number" class="form-control" name="entryAmount" id="entryAmount" placeholder="Select Tier" min="2" max="20" step="2" required />
-                  <label class="sr-only" for="entryUserId">User</label>
-                  <select name="entryUserId" id="entryUserId" class="form-control">
-                    <option value="" disabled selected hidden>Select User</option>
-                    {{#each gwusers}}
-                      <option value="{{_id}}">{{alts.[0]}}</option>
-                    {{/each}}
-                  </select>
-                  <button type="submit" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
-                  </button>
-                </div>
-              </form>
-            </div>
-            <div class="clearfix"><p></p></div>
+              <button type="button" class="populateLog btn btn-primary" data-toggle="tooltip" title="Load Bank Log from GW2-API">
+                <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
+              </button>
+              
+              <div class="pull-right">
+                <form class="entry-add-direct form-inline" role="form">
+                  <div class="form-group">
+                    <label for="entryAmount">Add Entries: </label>
+                    <select name="entryUserId" id="entryUserId" class="form-control">
+                      <option value="" disabled selected hidden>Select User</option>
+                      {{#each gwuser in gwusers}}
+                        <option value="{{gwuser._id}}">{{gwuser.alts.[0]}}</option>
+                      {{/each}}
+                    </select>
+                    <input type="number" class="form-control" name="entryAmount" id="entryAmount" placeholder="Select Tier" min="2" max="20" step="2" required />
+                    <label class="sr-only" for="entryUserId">User</label>
+                    <button type="submit" class="btn btn-success">
+                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="clearfix"><p></p></div>
             {{/if}}{{/if}}
-            <table class="table table-striped table-bordered table-condensed">
-              <tbody>
-                <tr>
-                  <th>User</th>
-                  <th>Amount</th>
-                  <th>Winner</th>
-                </tr>
-                {{#each entry in reversedEntries}}
-                <tr>
-                  <td>{{mainUsername entry.gwuserId}}</td>
-                  <td>{{entry.amount}}</td>
-                  <td>
-                  {{#if isAdmin}}{{#if isLottoOpen}}
-                    {{#with lottoId=lotto._id entryId=entry._id }}
-                      <button class="entry-remove btn btn-danger btn-xs">
-                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Delete
-                      </button>
-                    {{/with}}
-                  {{/if}}{{/if}}
-                  </td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
+
+            {{> logEntriesTable lotto=lotto entries=lotto.entries }}
           </div>
         </div>
       </div>
@@ -104,28 +80,36 @@
     <div class="panel panel-default">
       <div class="panel-heading">Prizes</div>
       <div class="panel-body">
+        
         {{#if isAdmin}}{{#if isLottoOpen}}
-        <button type="button" class="populateItems btn btn-primary" data-toggle="tooltip" title="Load Entries from GW2-API">
-          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
-        </button>
-        <div class="clearfix"><p></p></div>
+          <button type="button" class="populateItems btn btn-primary" data-toggle="tooltip" title="Load Entries from GW2-API">
+            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GW2-API
+          </button>
+          <div class="clearfix"><p></p></div>
         {{/if}}{{/if}}
+        
         <table class="inventory table table-striped table-bordered">
           <thead>
           {{> tableHeaders }}
           </thead>
           <tbody class="table-prizes">
-          {{#each tiers}}
-            {{#if showTier ../lotto.type}}
-              {{> tierRow }}
-              {{#if inSession 'SelectedTier' tier}}
-                {{#with showEntries ../lotto.entries ../lotto.closed }}
-                  {{> entriesTable }}
-                {{/with}}
+            {{#each tier in tiers}}
+              {{#if showTier lotto.type tier.tier }}
+                {{#let tierEntries=(filterEntries lotto.entries tier.tier)}}
+                  {{> tierRow tier=tier entries=tierEntries lotto=lotto }}
+                  
+                  {{#if inSession 'SelectedTier' tier.tier }}
+                    <tr class="entries">
+                      <td colspan="12">
+                        {{> logEntriesTable lotto=lotto entries=tierEntries }}
+                      </td>
+                    </tr>
+                  {{/if}}
+                {{/let}}
               {{/if}}
-            {{/if}}
-          {{/each}}
-          {{> tableHeaders }}
+            {{/each}}
+
+            {{> tableHeaders }}
           </tbody>
         </table>
       </div>

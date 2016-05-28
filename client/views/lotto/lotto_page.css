@@ -77,6 +77,14 @@ table {
   width: 80px;
 }
 
-.inventory th.index {
-  width: 100px;
+.inventory > thead > tr > th.index {
+  width: 102px;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+}
+
+.table-entries {
+  animation: fadein 0.5s ease;
 }

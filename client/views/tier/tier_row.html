@@ -1,24 +1,21 @@
 <template name="tierRow">
   <tr class="prize-row">
     <th class="tier-number index" role="button">
-      {{#if inSession 'SelectedTier' tier}}&#9660;{{else}}&#9654;{{/if}}
+      {{#if inSession 'SelectedTier' tier.tier}}&#9660;{{else}}&#9654;{{/if}}
       <i></i>
-      (<span class="gold">{{tier}}</span>)<br />
+      (<span class="gold">{{tier.tier}}</span>)<br />
       <p>{{entriesLength}} {{#if hasOne}}Entry{{else}}Entries{{/if}}</p>
     </th>
-    {{#each prizeLoop prizes}}
-      <td {{attributes}}>
-        {{#if icon}}
-          <img class="prize" alt="{{whichever name prize}}" data-toggle="tooltip" title="{{whichever count amount}}x {{whichever name prize}}" src="{{icon}}" width="64" height="64" />
-        {{else}}
-          <span class="prize">{{whichever name prize}}</span>
-        {{/if}}
-        <span class="amount">{{whichever count amount}}</span>
-        {{#if isAdmin}}{{#if isLottoOpen}}
-          {{#if inSession 'SelectedPrize' _id}}
-            {{> prizeSelector }}
+    {{#each prize in prizeLoop tier.prizes}}
+      <td {{attributes prize}}>
+        {{#if prize}}
+          {{#if prize.icon}}
+            <img class="prize" alt="{{whichever prize.name prize.prize}}" data-toggle="tooltip" title="{{whichever prize.count prize.amount}}x {{whichever prize.name prize.prize}}" src="{{prize.icon}}" width="64" height="64" />
+          {{else}}
+            <span class="prize">{{whichever prize.name prize.prize}}</span>
           {{/if}}
-        {{/if}}{{/if}}
+          <span class="amount">{{whichever prize.count prize.amount}}</span>
+        {{/if}}
       </td>
     {{/each}}
     <td>

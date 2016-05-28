@@ -12,11 +12,11 @@
         <strong class="pull-right">{{winnerName}}&nbsp;</strong>
         {{/if}}
       {{else}}
-        {{#if isAdmin}} {{#unless isLottoOpen}}
+        {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasEntries}}
         <button type="button" class="roll btn btn-primary pull-right">
           <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Roll
         </button>
-        {{/unless}} {{/if}}
+        {{/if}} {{/unless}} {{/if}}
       {{/if}}
       <p>
         Total: <span class="gold">{{ total }}</span><br />
@@ -24,10 +24,10 @@
       </p>
 
       <div class="panel panel-default">
-        <div class="togglePot panel-heading" data-toggle="collapse" data-target="#{{toggle}}">
-          <span>{{#if inSession toggle true}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
+        <div class="togglePot panel-heading" data-toggle="collapse" data-target="#{{name}}">
+          <span>{{#if showEntries}}&#9660; Hide{{else}}&#9654; Show{{/if}} Entries</span>
         </div>
-        <div class="panel-body panel-collapse collapse" id="{{toggle}}">
+        <div class="panel-body panel-collapse collapse" id="{{name}}">
           {{#if hasEntries}}
           <table class="table table-striped table-bordered table-condensed table-entries">
             <tbody>
@@ -37,12 +37,12 @@
                 <th>Total</th>
                 <th>Range</th>
               </tr>
-              {{#each potEntries entries winner}}
-              <tr {{attributes}}>
+              {{#each entry in potEntries entries winner}}
+              <tr {{attributes entry}}>
                 <td class="index"><i></i></td>
-                <td>{{mainUsername gwuserId}}</td>
-                <td>{{amount}}</td>
-                <td>{{rangeStart}} - {{rangeEnd}}</td>
+                <td>{{mainUsername entry.gwuserId}}</td>
+                <td>{{entry.amount}}</td>
+                <td>{{entry.rangeStart}} - {{entry.rangeEnd}}</td>
               </tr>
               {{/each}}
             </tbody>

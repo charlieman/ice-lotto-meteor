@@ -20,7 +20,6 @@ Meteor.publish('singleLotto', function (id) {
   return [
     Lottos.find(id),
     Tiers.find({lottoId: id}, {sort: {tier: 1}}),
-    Meteor.users.find({'profile.verified': true}, {fields: {username: 1, 'profile.alts': 1, 'profile.verified': 1}}),
     GWUsers.find({}, {fields: {alts: 1}})
   ];
 });

@@ -1,0 +1,35 @@
+<template name="logEntriesTable">
+  {{#if hasEntries}}
+  <table class="table-entries table table-striped table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th class="index"></th>
+        <th>User</th>
+        <th>Amount</th>
+        <th>Winner</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each entry in reverse entries}}
+        <tr {{attributes entry}}>
+          <td class="index"><i></i></td>
+          <td>{{mainUsername entry.gwuserId}}</td>
+          <td>{{entry.amount}}</td>
+          <td>
+          {{#if isAdmin}}{{#if isLottoOpen}}
+            {{#with lotto=lotto entry=entry }}
+              <button class="entry-remove btn btn-danger btn-xs">
+                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Delete
+              </button>
+            {{/with}}
+          {{/if}}{{/if}}
+          {{#if entry.winner}}Winner{{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+    <p>No entries for this tier</p>
+  {{/if}}
+</template>
