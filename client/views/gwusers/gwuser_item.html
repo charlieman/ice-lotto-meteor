@@ -20,7 +20,7 @@
       <ul class="alts list-inline">
         {{#each alt in gwuser.alts}}
           {{#with alt=alt gwuser=gwuser }}
-            <li class="label label-primary col-xs-2">{{alt}} <span class="remove-alt">&times;</span></li>
+            <li class="label label-primary col-xs-2"><span class="remove-alt pull-right">&times;</span> {{alt}}</li>
           {{/with}}
         {{/each}}
         <li>
