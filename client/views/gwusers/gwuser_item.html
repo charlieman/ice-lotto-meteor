@@ -4,7 +4,7 @@
       {{#if edit}}
         <form class="change-accountname form-inline">
           <div class="form-group input-group">
-            <input type="text" name="accountName" class="form-control col-xs-2" placeholder="Account Name" value="{{gwuser.account}}" />
+            <input type="text" name="accountName" class="form-control col-xs-2" placeholder="Account Name" value="{{restoreDots gwuser.account}}" />
             <span class="input-group-btn">
               <button type="submit" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Set Account Name

@@ -24,5 +24,5 @@ Template.registerHelper('mainUsername', function(gwuserId) {
   if (gwuser === undefined) {
     gwuser = GWUsers.findOne({account: gwuserId});
   }
-  return gwuser === undefined? gwuserId : gwuser.alts[0];
+  return gwuser === undefined? restoreDots(gwuserId) : gwuser.alts[0];
 });

@@ -13,9 +13,10 @@ Template.gwuserItem.helpers({
     return instance.state.get('edit');
   },
   setAccountName: function(account) {
-    if (!!account) return account;
-    return "Set Account Name";
+    if (!!account) return restoreDots(account);
+    return "Click here to set Account Name";
   },
+  restoreDots: restoreDots,
 });
 
 Template.gwuserItem.events({
