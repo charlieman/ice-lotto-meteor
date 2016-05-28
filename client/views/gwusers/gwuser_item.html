@@ -1,21 +1,41 @@
 <template name="gwuserItem">
-  <div>
-    <ul class="alts list-inline">
-      {{#each alts}}
-        <li class="label label-primary col-xs-2">{{this}} <span class="remove-alt">&times;</span></li>
-      {{/each}}
-      <li>
-        <form class="add-alt form-inline">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{#if edit}}
+        <form class="change-accountname form-inline">
           <div class="form-group input-group">
-            <input type="text" name="altName" class="form-control col-xs-2" placeholder="Alt Name" />
+            <input type="text" name="accountName" class="form-control col-xs-2" placeholder="Account Name" value="{{gwuser.account}}" />
             <span class="input-group-btn">
               <button type="submit" class="btn btn-success">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Alt
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Set Account Name
               </button>
+              <button type="button" class="cancel btn btn-default"> Cancel </button>
             </span>
           </div>
         </form>
-      </li>
-    </ul>
+      {{else}}
+        <h3><span class="toggle-edit label label-default"> {{setAccountName gwuser.account}} </span></h3>
+      {{/if}}
+
+      <ul class="alts list-inline">
+        {{#each alt in gwuser.alts}}
+          {{#with alt=alt gwuser=gwuser }}
+            <li class="label label-primary col-xs-2">{{alt}} <span class="remove-alt">&times;</span></li>
+          {{/with}}
+        {{/each}}
+        <li>
+          <form class="add-alt form-inline">
+            <div class="form-group input-group">
+              <input type="text" name="altName" class="form-control col-xs-2" placeholder="Alt Name" />
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-success">
+                  <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Alt
+                </button>
+              </span>
+            </div>
+          </form>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>

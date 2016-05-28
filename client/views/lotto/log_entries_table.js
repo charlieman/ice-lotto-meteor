@@ -6,9 +6,6 @@ Template.logEntriesTable.helpers({
   hasEntries: function () {
     return this.entries && this.entries.length > 0;
   },
-  mainUsername: function (gwuserId) {
-    return GWUsers.findOne(gwuserId).alts[0];
-  },
   isLottoOpen: function() {
     return !this.lotto.closed;
   },
@@ -17,7 +14,7 @@ Template.logEntriesTable.helpers({
       return { class: "winner" };
     }
     return {};
-  }
+  },
 });
 
 Template.logEntriesTable.events({

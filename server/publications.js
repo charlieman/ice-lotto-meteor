@@ -20,7 +20,7 @@ Meteor.publish('singleLotto', function (id) {
   return [
     Lottos.find(id),
     Tiers.find({lottoId: id}, {sort: {tier: 1}}),
-    GWUsers.find({}, {fields: {alts: 1}})
+    GWUsers.find({}, {fields: {account: 1, alts: 1}})
   ];
 });
 
@@ -37,5 +37,5 @@ Meteor.publish('gwuserManagement', function() {
     this.ready();
     return;
   }
-  return GWUsers.find({}, {fields: {alts: 1}});
+  return GWUsers.find({}, {fields: {account: 1, alts: 1}});
 });

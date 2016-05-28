@@ -1,15 +1,23 @@
 <template name="gwuserList">
   <div class="user-list">
-  	{{#each gwusers }}
-      {{> gwuserItem }}
-    {{/each}}
-    <div>
-      <form class="add-gwuser form-inline">
-        <div class="form-group">
-          <input type="text" name="altName" class="form-control" placeholder="Alt Name" />
-          <button type="submit" class="btn btn-success">Add New</button>
-        </div>
-      </form>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add new user</h3>
+      </div>
+      <div class="panel-body">
+        <form class="add-gwuser form-inline">
+          <div class="form-group">
+            <input type="text" name="accountName" class="form-control" placeholder="Account Name" />
+            <input type="text" name="altName" class="form-control" placeholder="Alt Name" />
+            <button type="submit" class="btn btn-success">Add New User</button>
+          </div>
+        </form>
+      </div>
     </div>
+
+  	{{#each gwuser in gwusers }}
+      {{> gwuserItem gwuser=gwuser }}
+    {{/each}}
   </div>
 </template>
