@@ -15,34 +15,39 @@
         </div>
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
-              {{#if isAdmin }}
-                <li>
-                  <a href="{{pathFor 'userList'}}">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users
-                  </a>
-                </li>
-                <li>
-                  <a href="{{pathFor 'gwuserList'}}">
-                    <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> GW2 Users
-                  </a>
-                </li>
-                {{#if isSuperAdmin }}
+            <li>
+              <a href="{{pathFor 'rules'}}">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Rules
+              </a>
+            </li>
+            {{#if isAdmin }}
+              <li>
+                <a href="{{pathFor 'userList'}}">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users
+                </a>
+              </li>
+              <li>
+                <a href="{{pathFor 'gwuserList'}}">
+                  <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> GW2 Users
+                </a>
+              </li>
+              {{#if isSuperAdmin }}
                 <li>
                   <button type="button" class="showSAPowers btn btn-{{#if showSAPowers}}danger{{else}}default{{/if}}">
                     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> SuperAdmin
                   </button>
                 </li>
-                {{/if}}
               {{/if}}
+            {{/if}}
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              {{> loginButtons}}
+            {{> loginButtons}}
           </ul>
         </div>
       </div>
     </header>
     <div id="main" class="row-fluid">
-        {{> yield }}
+      {{> yield }}
     </div>
   </div>
 </template>
