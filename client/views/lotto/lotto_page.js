@@ -1,3 +1,10 @@
+Template.lottoPage.onCreated(function() {
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    'showLog': false,
+  });
+});
+
 Template.lottoPage.rendered = function() {
    $("[data-toggle='tooltip']").tooltip();
 };
@@ -21,18 +28,20 @@ Template.lottoPage.helpers({
   isLottoOpen: function() {
     return !this.lotto.closed;
   },
+  showLog: function() {
+    const instance = Template.instance();
+    return instance.state.get('showLog');
+  }
 });
 
 Template.lottoPage.events({
   'click .populateLog': function(e) {
     e.preventDefault();
-    //Session.set('logModal', !Session.get('logModal'));
     $('#logModal').modal('show');
   },
   'click .populateItems': function(e) {
     e.preventDefault();
-    var lottoId = Session.get('lottoId');
-    Meteor.call('populateItems', lottoId, function(error, result) {
+    Meteor.call('populateItems', this.lotto._id, function(error, result) {
       if (error) {
         return throwError(error.reason);
       }
@@ -46,9 +55,9 @@ Template.lottoPage.events({
       }
     });
   },
-  'click .toggleLog': function(e) {
+  'click .toggleLog': function(e, instance) {
     e.preventDefault();
-    Session.set('toggleLog', !Session.get('toggleLog'));
+    instance.state.set('showLog', !instance.state.get('showLog'));
   },
   'click .togglePublic': function(e){
     e.preventDefault();
@@ -76,7 +85,7 @@ Template.lottoPage.events({
     button.innerHTML = 'Adding...';
 
     const tier = Math.floor(e.target.entryAmount.value);
-    const lottoId = Session.get('lottoId');
+    const lottoId = this.lotto._id;
     const gwuserId = e.target.entryUserId.value;
 
     const entry = {
@@ -96,7 +105,7 @@ Template.lottoPage.events({
           e.target.entryAmount.focus();
         }
       }, 500);
-      return Session.set('entryAddErrors', errors);
+      return;
     }
 
     Meteor.call('entryAdd', entry, lottoId, function (error, result) {

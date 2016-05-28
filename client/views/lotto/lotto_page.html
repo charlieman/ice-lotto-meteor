@@ -30,10 +30,10 @@
   <div class="content">
     <div class="row">
       <div class="col-xs-6 col-sm-6">
-        {{> pot toggle='toggleSmallPot' total=lotto.smallpot entries=lotto.smallpot_entries label='Small Pot' winner=lotto.smallpot_winner lotto=lotto }}
+        {{> pot name='smallPot' total=lotto.smallpot entries=lotto.smallpot_entries label='Small Pot' winner=lotto.smallpot_winner lotto=lotto }}
       </div>
       <div class="col-xs-6 col-sm-6">
-        {{> pot toggle='toggleBigPot' total=lotto.bigpot entries=lotto.bigpot_entries label='Big Pot' winner=lotto.bigpot_winner lotto=lotto }}
+        {{> pot name='bigPot' total=lotto.bigpot entries=lotto.bigpot_entries label='Big Pot' winner=lotto.bigpot_winner lotto=lotto }}
       </div>
     </div>
     
@@ -41,7 +41,7 @@
       <div class="log-panel form-group col-xs-12">
         <div class="panel panel-default">
           <div class="toggleLog panel-heading" data-toggle="collapse" data-target="#log-body">
-            <span>{{#if inSession 'toggleLog' true}}&#9660;{{else}}&#9654;{{/if}} Log</span>
+            <span>{{#if showLog}}&#9660;{{else}}&#9654;{{/if}} Log</span>
           </div>
           
           <div class="panel-body panel-collapse collapse" id="log-body">

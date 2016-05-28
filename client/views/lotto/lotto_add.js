@@ -1,6 +1,9 @@
-Template.lottoAdd.created = function() {
-  Session.set('lottoAddErrors', {});
-};
+Template.lottoAdd.onCreated(function() {
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    lottoAddErrors: {},
+  });
+});
 Template.lottoAdd.rendered = function() {
   var nextSaturday = moment().startOf('day').day(6).utcOffset(0);
   this.find('#date').value = nextSaturday.format('YYYY-MM-DD');
@@ -9,15 +12,17 @@ Template.lottoAdd.rendered = function() {
 
 Template.lottoAdd.helpers({
   errorMessage: function(field) {
-    return Session.get('lottoAddErrors')[field];
+    const instance = Template.instance();
+    return instance.state.get('lottoAddErrors')[field];
   },
   errorClass: function (field) {
-    return !!Session.get('lottoAddErrors')[field] ? 'has-error' : '';
+    const instance = Template.instance();
+    return !!instance.state.get('lottoAddErrors')[field] ? 'has-error' : '';
   }
 });
 
 Template.lottoAdd.events({
-  'submit form': function(e) {
+  'submit form': function(e, instance) {
     e.preventDefault();
 
     var lotto = {
@@ -27,7 +32,7 @@ Template.lottoAdd.events({
     if (!lotto.date) {
       var errors = {};
       errors.date = "Please select a date";
-      return Session.set('lottoAddErrors', errors);
+      return instance.state.set('lottoAddErrors', errors);
     }
 
     //var autofill = e.target.autofill.checked;
@@ -37,7 +42,7 @@ Template.lottoAdd.events({
         return throwError(error.reason);
       }
       if(result.lottoExists) {
-        throwError('Lotto for this date already exists');
+        return throwError('Lotto for this date already exists');
       }
       Router.go('lottoPage', {_id: result._id});
     });

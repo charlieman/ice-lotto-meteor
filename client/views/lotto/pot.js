@@ -1,3 +1,10 @@
+Template.pot.onCreated(function() {
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    'showEntries': false,
+  })
+});
+
 Template.pot.helpers({
   potEntries: function(entries, winner) {
     var rangeStart = 1;
@@ -38,15 +45,18 @@ Template.pot.helpers({
       return { class: "winner" };
     }
     return {};
+  },
+  showEntries: function() {
+    const instance = Template.instance();
+    return instance.state.get('showEntries');
   }
 });
 
 Template.pot.events({
   'click .roll': function(e) {
     e.preventDefault();
-    var lottoId = Session.get('lottoId');
-    var pot = this.toggle === 'toggleSmallPot'? 'small': 'large';
-    Meteor.call('rollForPot', lottoId, pot, function(error, result){
+    var pot = this.name === 'smallPot'? 'small': 'large';
+    Meteor.call('rollForPot', this.lotto._id, pot, function(error, result){
       if (error) {
         return throwError(error.reason);
       }
@@ -55,16 +65,16 @@ Template.pot.events({
   'click .unroll': function(e) {
     e.preventDefault();
     if (confirm("Are you sure you want to undo the roll?")) {
-      var lottoId = Session.get('lottoId');
-      var pot = this.toggle === 'toggleSmallPot'? 'small': 'large';
-      Meteor.call('unrollForPot', lottoId, pot, function(error, result){
+      var pot = this.name === 'smallPot'? 'small': 'large';
+      Meteor.call('unrollForPot', this.lotto._id, pot, function(error, result){
         if (error) {
           return throwError(error.reason);
         }
       });
     }
   },
-  'click .togglePot': function(e) {
-    Session.set(this.toggle, !Session.get(this.toggle));
+  'click .togglePot': function(e, instance) {
+    e.preventDefault();
+    instance.state.set('showEntries', !instance.state.get('showEntries'));
   }
 });
