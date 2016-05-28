@@ -1,8 +1,8 @@
 <template name="lottoList">
+  <h1>Previous Lottos</h1>
   {{#if isAdmin}}
   	{{> lottoAdd }}
   {{/if}}
-
   <div class="lotto-list">
     {{#each lottos}}
       {{> lottoItem }}
