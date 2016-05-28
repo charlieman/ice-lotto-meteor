@@ -1,19 +1,53 @@
 <template name="logModal">
-  <div class="modal fade" id="logModal">
+  <div class="modal fade" tabindex="-1" id="logModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title">Load Bank Log from API</h3>
         </div>
-        <div class="modal-body">
-          <h4 class="text-warning">TODO!</h4>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-success">
-            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Submit
-          </button>
-        </div>
+        <form class="add-entries">
+          <div class="modal-body">
+            <h4>Log</h4>
+            {{#if inSession 'loadingLog' false }}
+              <table class="table-log table table-striped table-bordered table-condensed">
+                <thead>
+                  <tr>
+                    <th class="selector"></th>
+                    <th>Account</th>
+                    <th>Operation</th>
+                    <th>Amount</th>
+                    <th>time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each entry in logs }}
+                    {{#let coins=(splitCoins entry.coins)}}
+                      <tr {{attributes entry}}>
+                        <td><input type="checkbox" name="logEntry" {{checkboxAttributes entry coins}} /></td>
+                        <td>{{entry.user}}</td>
+                        <td class="coins">
+                          <span class="gold">{{ coins.gold }}</span>
+                          <span class="silver">{{ coins.silver }}</span>
+                          <span class="copper">{{ coins.copper }}</span>
+                        </td>
+                        <td>{{entry.operation}}</td>
+                        <td>{{timeAgo entry.time}}</td>
+                      </tr>
+                    {{/let}}
+                  {{/each}}
+                </tbody>
+              </table>
+            {{else}}
+              {{> spinner }}
+            {{/if}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cancel btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success">
+              <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Submit
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

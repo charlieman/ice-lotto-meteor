@@ -1,3 +1,5 @@
+LocalLog = new Mongo.Collection(null); // Local collection
+
 Template.lottoPage.onCreated(function() {
   this.state = new ReactiveDict();
   this.state.setDefault({
@@ -22,22 +24,31 @@ Template.lottoPage.helpers({
     if (type !== 'double') return true;
     return (tier % 2 === 0);
   },
-  mainUsername: function (gwuserId) {
-    return GWUsers.findOne(gwuserId).alts[0];
-  },
   isLottoOpen: function() {
     return !this.lotto.closed;
   },
   showLog: function() {
     const instance = Template.instance();
     return instance.state.get('showLog');
-  }
+  },
 });
 
 Template.lottoPage.events({
   'click .populateLog': function(e) {
     e.preventDefault();
     $('#logModal').modal('show');
+    Session.set('loadingLog', true);
+    LocalLog = new Mongo.Collection(null); // Reset local collection
+    
+    Meteor.call('getLogFromAPI', function(error, result) {
+      Session.set('loadingLog', false);
+      if (error) {
+        return throwError(error.reason);
+      }
+      for(let operation of result) {
+        LocalLog.insert(operation);
+      }
+    });
   },
   'click .populateItems': function(e) {
     e.preventDefault();
