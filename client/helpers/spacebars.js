@@ -19,6 +19,8 @@ Template.registerHelper('isSuperAdmin', isSuperAdmin);
 
 Template.registerHelper('showSAPowers', showSAPowers);
 
+Template.registerHelper('restoreDots', restoreDots);
+
 Template.registerHelper('mainUsername', function(gwuserId) {
   let gwuser = GWUsers.findOne(gwuserId);
   if (gwuser === undefined) {
