@@ -7,6 +7,9 @@
 .table-log .ignore {
   color: gray;
 }
+.table-log tbody>tr:hover {
+    background-color: lightGray !important;
+}
 .modal-body {
     height: calc(100vh - 212px);
     overflow-y: auto;
