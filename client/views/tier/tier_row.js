@@ -47,20 +47,14 @@ Template.tierRow.helpers({
   hasOne: function() {
     return this.entries.length === 1;
   },
-  winnerName: function() {
-    var winnerPrize = _.find(this.tier.prizes, function(p) { return !!p.winner; });
+  winnerData: function() {
+    let winnerEntry;
+    const winnerPrize = this.tier.prizes.find((p) => !!p.winner);
     if (winnerPrize) {
-      var that = this;
-      var entry = _.find(this.entries, function(e) { return e.amount === that.tier.tier && !!e.winner;});
-      return entry.gwuserId;
+      winnerEntry = this.entries.find((e) => e.amount === this.tier.tier && !!e.winner);
     }
+    return Object.assign({}, winnerPrize, winnerEntry);
   },
-  winnerItem: function() {
-    var winnerPrize = _.find(this.tier.prizes, function(p) {return !!p.winner;});
-    if (winnerPrize) {
-      return winnerPrize.name;
-    }
-  }
 });
 
 Template.tierRow.events({

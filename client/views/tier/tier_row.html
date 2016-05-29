@@ -31,10 +31,12 @@
             <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Unroll
           </button>
         {{/if}}
-        <p>
-          <span class="user">{{mainUsername winnerName}}</span><br />
-          <span>{{winnerItem}}</span>
-        </p>
+        {{#let winner=winnerData}}
+          <p>
+            <span class="user">{{mainUsername winner.gwuserId}}</span><br />
+            <span>{{winner.count}}x {{winner.name}}</span>
+          </p>
+        {{/let}}
       {{/if}}
     </td>
   </tr>
