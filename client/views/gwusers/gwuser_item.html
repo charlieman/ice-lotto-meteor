@@ -1,32 +1,35 @@
 <template name="gwuserItem">
-  <div class="panel panel-default">
-    <div class="panel-body">
+  <div class="row">
+    <div class="col-xs-4">
       {{#if edit}}
         <form class="change-accountname form-inline">
           <div class="form-group input-group">
-            <input type="text" name="accountName" class="form-control col-xs-2" placeholder="Account Name" value="{{restoreDots gwuser.account}}" />
+            <input type="text" name="accountName" class="form-control" placeholder="Account Name" value="{{restoreDots gwuser.account}}" />
             <span class="input-group-btn">
               <button type="submit" class="btn btn-success">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Set Account Name
+                <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Edit
               </button>
               <button type="button" class="cancel btn btn-default"> Cancel </button>
             </span>
           </div>
         </form>
       {{else}}
-        <h3><span class="toggle-edit label label-default"> {{setAccountName gwuser.account}} </span></h3>
+        <button type="button" class="toggle-edit btn btn-default col-xs-12">
+          <strong>{{setAccountName gwuser.account}}</strong>
+        </button>
       {{/if}}
-
+    </div>
+    <div class="col-xs-8">
       <ul class="alts list-inline">
         {{#each alt in gwuser.alts}}
           {{#with alt=alt gwuser=gwuser }}
-            <li class="label label-primary col-xs-2"><span class="remove-alt pull-right">&times;</span> {{alt}}</li>
+            <li class="label label-primary col-xs-3"><span class="remove-alt pull-right">&times;</span> {{alt}}</li>
           {{/with}}
         {{/each}}
         <li>
           <form class="add-alt form-inline">
             <div class="form-group input-group">
-              <input type="text" name="altName" class="form-control col-xs-2" placeholder="Alt Name" />
+              <input type="text" name="altName" class="form-control col-xs-3" placeholder="Alt Name" />
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-success">
                   <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Alt
