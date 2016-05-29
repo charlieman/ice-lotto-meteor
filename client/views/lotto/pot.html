@@ -4,12 +4,12 @@
     <div class="panel-body">
       {{#if hasWinner}}
         {{#if showSAPowers}}
-        <button type="button" class="unroll btn btn-danger pull-right">
-          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Unroll
-        </button>
+          <button type="button" class="unroll btn btn-danger pull-right">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Unroll
+          </button>
         {{/if}}
         {{#if winner}}
-        <strong class="pull-right">{{winnerName}}&nbsp;</strong>
+          <strong class="pull-right">{{mainUsername winner}}&nbsp;</strong>
         {{/if}}
       {{else}}
         {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasEntries}}

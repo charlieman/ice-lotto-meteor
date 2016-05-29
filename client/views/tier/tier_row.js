@@ -52,7 +52,7 @@ Template.tierRow.helpers({
     if (winnerPrize) {
       var that = this;
       var entry = _.find(this.entries, function(e) { return e.amount === that.tier.tier && !!e.winner;});
-      return GWUsers.findOne(entry.gwuserId).alts[0];
+      return entry.gwuserId;
     }
   },
   winnerItem: function() {
