@@ -1,0 +1,9 @@
+.table-log th.selector {
+  width: 25px;
+}
+.table-log .coins {
+  text-align: right;
+}
+.table-log .ignore {
+  color: gray;
+}

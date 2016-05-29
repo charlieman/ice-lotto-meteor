@@ -27,12 +27,10 @@ Bank.prototype.getItems = function getItems(stashName) {
 };
 
 Bank.prototype.getMoneyLog = function getMoneyLog() {
-  const request = HTTP.get(`${baseUrl}/guild/${guildId}/log?${this.token}`);
+  const request = HTTP.get(`${baseUrl}/guild/${this.guildId}/log?${this.token}`);
 
-  const withdrawals = request.data.filter((r) => r.operation === 'withdraw')
-  const deposits = request.data.filter((r) => r.operation === 'deposit');
-
-  return {deposits, withdrawals};
+  const operations = request.data.filter((r) => r.coins > 0 && (r.operation === 'withdraw' || r.operation === 'deposit'));
+  return operations;
 };
 
 exports.Bank = Bank;

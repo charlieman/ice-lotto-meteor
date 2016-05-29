@@ -1,19 +1,38 @@
+Template.gwuserList.onCreated(function() {
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    'addUserErrors': {},
+  });
+});
+
+
 Template.gwuserList.events({
   'submit .add-gwuser': function(e, t) {
   	e.preventDefault();
-    var altName = e.target.altName.value;
+    const accountName = e.target.accountName.value;
+    const altName = e.target.altName.value;
+
+    let errors = {};
+    if (!accountName) {
+      errors.accountName = "Value can't be empty";
+    }
 
     if (!altName) {
-      var errors = {};
       errors.altName = "Value can't be empty";
-      return Session.set('addAltErrors', errors);
+    }
+
+    if (_.any(errors)) {
+      instance.state.set('addUserErrors', errors);
+      return;
     }
     
-    Meteor.call('addGWUser', altName, function(error, result){
+    Meteor.call('addGWUser', accountName, altName, function(error, result){
       if(error) {
         return throwError(error.reason);
       }
-      e.target.altName.value = '';
+      e.target.reset();
+      //e.target.accountName.value = '';
+      //e.target.altName.value = '';
     });
   }
 });

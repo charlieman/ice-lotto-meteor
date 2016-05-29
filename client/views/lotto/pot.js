@@ -22,9 +22,6 @@ Template.pot.helpers({
       };
     });
   },
-  mainUsername: function (gwuserId) {
-    return GWUsers.findOne(gwuserId).alts[0];
-  },
   half: function(total) {
     return total / 2;
   },
@@ -49,7 +46,7 @@ Template.pot.helpers({
   showEntries: function() {
     const instance = Template.instance();
     return instance.state.get('showEntries');
-  }
+  },
 });
 
 Template.pot.events({

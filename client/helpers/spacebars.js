@@ -18,3 +18,13 @@ Template.registerHelper('isAdmin', isAdmin);
 Template.registerHelper('isSuperAdmin', isSuperAdmin);
 
 Template.registerHelper('showSAPowers', showSAPowers);
+
+Template.registerHelper('restoreDots', restoreDots);
+
+Template.registerHelper('mainUsername', function(gwuserId) {
+  let gwuser = GWUsers.findOne(gwuserId);
+  if (gwuser === undefined) {
+    gwuser = GWUsers.findOne({account: gwuserId});
+  }
+  return gwuser === undefined? restoreDots(gwuserId) : gwuser.alts[0];
+});

@@ -65,6 +65,16 @@ table {
   background: url("/gold_coin.png") no-repeat 100% 0% transparent;
 }
 
+.silver {
+  padding-right: 20px;
+  background: url("/silver_coin.png") no-repeat 100% 0% transparent;
+}
+
+.copper {
+  padding-right: 20px;
+  background: url("/copper_coin.png") no-repeat 100% 0% transparent;
+}
+
 .btn-toolbar {
   margin-bottom: 5px;
 }
