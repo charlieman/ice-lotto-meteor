@@ -31,6 +31,10 @@ Template.lottoPage.helpers({
     const instance = Template.instance();
     return instance.state.get('showLog');
   },
+  whichever: function(name1, name2) {
+    if (!!name1) return name1;
+    return name2;
+  },
 });
 
 Template.lottoPage.events({
