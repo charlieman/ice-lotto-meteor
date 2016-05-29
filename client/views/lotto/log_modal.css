@@ -7,3 +7,7 @@
 .table-log .ignore {
   color: gray;
 }
+.modal-body {
+    height: calc(100vh - 212px);
+    overflow-y: auto;
+}
