@@ -45,6 +45,13 @@ Template.logModal.helpers({
 });
 
 Template.logModal.events({
+  'click tr': function(e) {
+    if (e.target.type === 'checkbox') return;
+    e.preventDefault();
+    const checkbox = e.currentTarget.querySelector('input[type=checkbox]');
+    if (checkbox.disabled) return;
+    checkbox.checked = !checkbox.checked;
+  },
   'submit .add-entries': function(e) {
     e.preventDefault();
     const checkboxes = Array.from(e.target.logEntry);
