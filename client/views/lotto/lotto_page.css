@@ -45,7 +45,8 @@ table {
 }
 
 .table-entries .index {
-  width: 20px;
+  width: 26px;
+  text-align: right;
 }
 
 .table-prizes {
