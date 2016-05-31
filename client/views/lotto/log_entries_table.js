@@ -10,7 +10,7 @@ Template.logEntriesTable.helpers({
     return !this.lotto.closed;
   },
   attributes: function(entry) {
-    if (!!entry.winner) {
+    if (this.showWinner === true && !!entry.winner) {
       return { class: "winner" };
     }
     return {};

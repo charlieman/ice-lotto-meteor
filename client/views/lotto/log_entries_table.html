@@ -6,7 +6,7 @@
         <th class="index"></th>
         <th>User</th>
         <th>Amount</th>
-        <th>Winner</th>
+        <th>{{#if showWinner}}Winner{{/if}}</th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
               </button>
             {{/with}}
           {{/if}}{{/if}}
-          {{#if entry.winner}}Winner{{/if}}
+          {{#if showWinner}}{{#if entry.winner}}Winner{{/if}}{{/if}}
           </td>
         </tr>
       {{/each}}
