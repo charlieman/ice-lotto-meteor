@@ -14,7 +14,7 @@ Template.gwuserItem.helpers({
   },
   setAccountName: function(account) {
     if (!!account) return restoreDots(account);
-    return "Click here to set Account Name";
+    return "No Account Name";
   },
   restoreDots: restoreDots,
 });
