@@ -45,12 +45,17 @@ Template.logModal.helpers({
 });
 
 Template.logModal.events({
+  'change input[type=checkbox]': function(e) {
+    const tr = e.target.parentElement.parentElement;
+    checkRow(tr, e.target.checked);
+  },
   'click tr': function(e) {
     if (e.target.type === 'checkbox') return;
     e.preventDefault();
     const checkbox = e.currentTarget.querySelector('input[type=checkbox]');
     if (checkbox.disabled) return;
     checkbox.checked = !checkbox.checked;
+    checkRow(e.currentTarget, checkbox.checked);
   },
   'submit .add-entries': function(e) {
     e.preventDefault();
@@ -69,3 +74,11 @@ Template.logModal.events({
     });
   },
 });
+
+let checkRow = function(tr, checked) {
+  if (checked) {
+    tr.classList.add('checked');
+  } else {
+    tr.classList.remove('checked');
+  }
+}

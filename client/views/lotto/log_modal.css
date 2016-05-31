@@ -7,8 +7,11 @@
 .table-log .ignore {
   color: gray;
 }
+.table-log tr.checked {
+  background: #f2de8c !important;
+}
 .table-log tbody>tr:hover {
-  background-color: lightGray !important;
+  background: lightGray !important;
   cursor: pointer;
 }
 .modal-body {
