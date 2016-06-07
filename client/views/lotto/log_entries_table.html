@@ -6,7 +6,8 @@
         <th class="index"></th>
         <th>User</th>
         <th>Amount</th>
-        <th>{{#if showWinner}}Winner{{/if}}</th>
+        {{#if showWinner}}<th>Winner</th>{{/if}}
+        {{#if isAdmin}}{{#if isLottoOpen}}<th>Admin</th>{{/if}}{{/if}}
       </tr>
     </thead>
     <tbody>
@@ -15,16 +16,18 @@
           <td class="index"><i></i></td>
           <td title="{{restoreDots entry.gwuserId}}">{{mainUsername entry.gwuserId}}</td>
           <td>{{entry.amount}}</td>
-          <td>
+          {{#if showWinner}}
+            <td>{{#if entry.winner}}Winner{{/if}}</td>
+          {{/if}}
           {{#if isAdmin}}{{#if isLottoOpen}}
+            <td>
             {{#with lotto=lotto entry=entry }}
               <button class="entry-remove btn btn-danger btn-xs">
                 <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Delete
               </button>
             {{/with}}
+            </td>
           {{/if}}{{/if}}
-          {{#if showWinner}}{{#if entry.winner}}Winner{{/if}}{{/if}}
-          </td>
         </tr>
       {{/each}}
     </tbody>
