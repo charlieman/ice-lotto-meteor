@@ -1,12 +1,12 @@
-Template.tierRow.rendered = function() {
+Template.tierRow.onRendered(function() {
    $("[data-toggle='tooltip']").tooltip();
-};
+});
 
 Template.tierRow.helpers({
-  prizeLoop: function (prizes) {
-    var prizeList = [];
-    var i = 1;
-    var sortedPrizes = _.sortBy(prizes, function(p) {return p.pos;});
+  prizeLoop(prizes) {
+    let prizeList = [];
+    let i = 1;
+    const sortedPrizes = _.sortBy(prizes, (p) => p.pos);
 
     _.each(sortedPrizes, function (p) {
       while (p.pos > i) {
@@ -22,28 +22,28 @@ Template.tierRow.helpers({
     }
     return prizeList;
   },
-  isLottoOpen: function() {
+  isLottoOpen() {
     return !this.lotto.closed;
   },
-  attributes: function(prize) {
+  attributes(prize) {
     if (!!prize && !!prize.winner) {
       return { class: "winner" };
     }
     return {};
   },
-  hasNoWinner: function() {
+  hasNoWinner() {
     return !_.any(this.tier.prizes, function(p) { return !!p.winner; });
   },
-  entriesLength: function() {
+  entriesLength() {
     return this.entries.length;
   },
-  hasEntries: function() {
+  hasEntries() {
     return _.any(this.entries);
   },
-  hasOne: function() {
+  hasOne() {
     return this.entries.length === 1;
   },
-  winnerData: function() {
+  winnerData() {
     let winnerEntry;
     const winnerPrize = this.tier.prizes.find((p) => !!p.winner);
     if (winnerPrize) {
@@ -54,7 +54,7 @@ Template.tierRow.helpers({
 });
 
 Template.tierRow.events({
-  'click .tier-number': function (e) {
+  'click .tier-number'(e) {
     e.preventDefault();
     if (Session.equals('SelectedTier', this.tier.tier)) {
       Session.set('SelectedTier', null);
@@ -63,7 +63,7 @@ Template.tierRow.events({
       Session.set('SelectedTier', this.tier.tier);
     }
   },
-  'click .roll': function(e) {
+  'click .roll'(e) {
     e.preventDefault();
     Meteor.call('rollForTier', this.lotto._id, this.tier.tier, function(error, result){
       if (error) {
@@ -71,7 +71,7 @@ Template.tierRow.events({
       }
     });
   },
-  'click .unroll': function(e) {
+  'click .unroll'(e) {
     e.preventDefault();
     if (confirm("Are you sure you want to undo the roll?")) {
       Meteor.call('unrollForTier', this.lotto._id, this.tier.tier, function(error, result) {

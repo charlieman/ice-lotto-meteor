@@ -7,34 +7,34 @@ Template.lottoPage.onCreated(function() {
   });
 });
 
-Template.lottoPage.rendered = function() {
+Template.lottoPage.onRendered(function() {
    $("[data-toggle='tooltip']").tooltip();
-};
+});
 
 Template.lottoPage.helpers({
-  filterEntries: function(entries, tier) {
+  filterEntries(entries, tier) {
     return _.filter(this.lotto.entries, function (x) {
       return x.amount === tier;
     });
   },
-  midTier: function () {
+  midTier() {
     return this.tier === 10;
   },
-  showTier: function(type, tier) {
+  showTier(type, tier) {
     if (type !== 'double') return true;
     return (tier % 2 === 0);
   },
-  isLottoOpen: function() {
+  isLottoOpen() {
     return !this.lotto.closed;
   },
-  showLog: function() {
+  showLog() {
     const instance = Template.instance();
     return instance.state.get('showLog');
   },
 });
 
 Template.lottoPage.events({
-  'click .populateLog': function(e) {
+  'click .populateLog'(e) {
     e.preventDefault();
     $('#logModal').modal('show');
     Session.set('loadingLog', true);
@@ -50,7 +50,7 @@ Template.lottoPage.events({
       }
     });
   },
-  'click .populateItems': function(e) {
+  'click .populateItems'(e) {
     e.preventDefault();
     Meteor.call('populateItems', this.lotto._id, function(error, result) {
       if (error) {
@@ -58,7 +58,7 @@ Template.lottoPage.events({
       }
     });
   },
-  'click .entry-remove': function(e) {
+  'click .entry-remove'(e) {
     e.preventDefault();
     Meteor.call('entryRemove', this.entry._id, this.lotto._id, function (error, result) {
       if (error) {
@@ -66,11 +66,11 @@ Template.lottoPage.events({
       }
     });
   },
-  'click .toggleLog': function(e, instance) {
+  'click .toggleLog'(e, instance) {
     e.preventDefault();
     instance.state.set('showLog', !instance.state.get('showLog'));
   },
-  'click .togglePublic': function(e){
+  'click .togglePublic'(e){
     e.preventDefault();
     Meteor.call('lottoPublicToggle', this.lotto._id, function(error, result){
       if(error) {
@@ -78,7 +78,7 @@ Template.lottoPage.events({
       }
     });
   },
-  'click .closeLotto': function(e) {
+  'click .closeLotto'(e) {
     e.preventDefault();
     if (confirm("Are you sure you want to close/reopen the lotto?")) {
       Meteor.call('lottoToggleClose', this.lotto._id, function(error, result){
@@ -88,7 +88,7 @@ Template.lottoPage.events({
       });
     }
   },
-  'submit .entry-add-direct' : function(e) {
+  'submit .entry-add-direct' (e) {
     e.preventDefault();
 
     const button = e.target.querySelector('button[type=submit]');

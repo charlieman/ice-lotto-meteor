@@ -7,7 +7,7 @@ Template.gwuserList.onCreated(function() {
 
 
 Template.gwuserList.events({
-  'submit .add-gwuser': function(e, t) {
+  'submit .add-gwuser'(e, instance) {
   	e.preventDefault();
     const accountName = e.target.accountName.value;
     const altName = e.target.altName.value;
@@ -31,8 +31,6 @@ Template.gwuserList.events({
         return throwError(error.reason);
       }
       e.target.reset();
-      //e.target.accountName.value = '';
-      //e.target.altName.value = '';
     });
   }
 });

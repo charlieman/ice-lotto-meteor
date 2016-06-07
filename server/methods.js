@@ -3,17 +3,17 @@ import { HTTP } from 'meteor/http';
 import { Bank } from '../imports/lib/bank';
 
 Meteor.methods({
-  createTiers: function (lottoId) {
-    for (var i = 2; i <= 20; i+=2) {
+  createTiers(lottoId) {
+    for (let i = 2; i <= 20; i+=2) {
       Tiers.insert({tier: i, lottoId: lottoId, prizes: []});
     }
   },
-  duplicateTiers: function(lottoId, lastLottoId) {
-    var omitPrize = function omitPrize(x) { return _.omit(x, 'winner');};
-    var tiersToDuplicate = Tiers.find({lottoId: lastLottoId});
+  duplicateTiers(lottoId, lastLottoId) {
+    const omitPrize = function omitPrize(x) { return _.omit(x, 'winner');};
+    const tiersToDuplicate = Tiers.find({lottoId: lastLottoId});
     tiersToDuplicate.forEach(function(tier) {
-      var prizes = _.map(tier.prizes, omitPrize);
-      var newTier = {
+      const prizes = _.map(tier.prizes, omitPrize);
+      const newTier = {
         lottoId: lottoId,
         tier: tier.tier,
         prizes: prizes
@@ -21,18 +21,18 @@ Meteor.methods({
       Tiers.insert(newTier);
     });
   },
-  getItemsFromAPI: function() {
+  getItemsFromAPI() {
     const apiKey = Meteor.settings.apiKey;
     const guildId = Meteor.settings.guildId;
 
     const bank = new Bank(apiKey, guildId);
     return bank.getItems(Meteor.settings.inventory);
   },
-  getLogFromAPI: function() {
+  getLogFromAPI() {
     const apiKey = Meteor.settings.apiKey;
     const guildId = Meteor.settings.guildId;
 
     const bank = new Bank(apiKey, guildId);
     return bank.getMoneyLog();
-  }
+  },
 });

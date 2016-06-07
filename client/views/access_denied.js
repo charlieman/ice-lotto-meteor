@@ -1,8 +1,8 @@
 Template.accessDenied.helpers({
-  isUser: function() {
+  isUser() {
     return Meteor.userId() !== null;
   },
-  isVerified: function() {
+  isVerified() {
   	return isVerified(Meteor.user());
   }
 });

@@ -6,11 +6,11 @@ Template.pot.onCreated(function() {
 });
 
 Template.pot.helpers({
-  potEntries: function(entries, winner) {
-    var rangeStart = 1;
-    var rangeEnd = 0;
+  potEntries(entries, winner) {
+    let rangeStart = 1;
+    let rangeEnd = 0;
     return _.map(entries, function (v, k) {
-      var _rangeStart = rangeStart;
+      let _rangeStart = rangeStart;
       rangeEnd = _rangeStart + v - 1;
       rangeStart = rangeEnd + 1;
       return {
@@ -22,47 +22,47 @@ Template.pot.helpers({
       };
     });
   },
-  half: function(total) {
+  half(total) {
     return total / 2;
   },
-  hasWinner: function() {
+  hasWinner() {
     return !!this.winner;
   },
-  hasEntries: function() {
+  hasEntries() {
     return !_.isEmpty(this.entries);
   },
-  isLottoOpen: function() {
+  isLottoOpen() {
     return !this.lotto.closed;
   },
-  winnerName: function() {
+  winnerName() {
     return GWUsers.findOne(this.winner).alts[0];
   },
-  attributes: function(entry) {
+  attributes(entry) {
     if (!!entry.winner) {
       return { class: "winner" };
     }
     return {};
   },
-  showEntries: function() {
+  showEntries() {
     const instance = Template.instance();
     return instance.state.get('showEntries');
   },
 });
 
 Template.pot.events({
-  'click .roll': function(e) {
+  'click .roll'(e) {
     e.preventDefault();
-    var pot = this.name === 'smallPot'? 'small': 'large';
+    const pot = this.name === 'smallPot'? 'small': 'large';
     Meteor.call('rollForPot', this.lotto._id, pot, function(error, result){
       if (error) {
         return throwError(error.reason);
       }
     });
   },
-  'click .unroll': function(e) {
+  'click .unroll'(e) {
     e.preventDefault();
     if (confirm("Are you sure you want to undo the roll?")) {
-      var pot = this.name === 'smallPot'? 'small': 'large';
+      const pot = this.name === 'smallPot'? 'small': 'large';
       Meteor.call('unrollForPot', this.lotto._id, pot, function(error, result){
         if (error) {
           return throwError(error.reason);
@@ -70,7 +70,7 @@ Template.pot.events({
       });
     }
   },
-  'click .togglePot': function(e, instance) {
+  'click .togglePot'(e, instance) {
     e.preventDefault();
     instance.state.set('showEntries', !instance.state.get('showEntries'));
   }

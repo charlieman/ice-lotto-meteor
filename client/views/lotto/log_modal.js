@@ -45,19 +45,21 @@ Template.logModal.helpers({
 });
 
 Template.logModal.events({
-  'change input[type=checkbox]': function(e) {
+  'change input[type=checkbox]'(e) {
     const tr = e.target.parentElement.parentElement;
     checkRow(tr, e.target.checked);
   },
-  'click tr': function(e) {
+  'click tr'(e) {
     if (e.target.type === 'checkbox') return;
     e.preventDefault();
+    
     const checkbox = e.currentTarget.querySelector('input[type=checkbox]');
     if (checkbox.disabled) return;
+    
     checkbox.checked = !checkbox.checked;
     checkRow(e.currentTarget, checkbox.checked);
   },
-  'submit .add-entries': function(e) {
+  'submit .add-entries'(e) {
     e.preventDefault();
     const checkboxes = Array.from(e.target.logEntry);
     const checked = new Set(checkboxes.filter((c) => c.checked).map((c) => parseInt(c.dataset.id)));

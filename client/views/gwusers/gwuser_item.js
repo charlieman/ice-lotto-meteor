@@ -8,11 +8,11 @@ Template.gwuserItem.onCreated(function() {
 });
 
 Template.gwuserItem.helpers({
-  edit: function() {
+  edit() {
     const instance = Template.instance();
     return instance.state.get('edit');
   },
-  setAccountName: function(account) {
+  setAccountName(account) {
     if (!!account) return restoreDots(account);
     return "No Account Name";
   },
@@ -20,22 +20,23 @@ Template.gwuserItem.helpers({
 });
 
 Template.gwuserItem.events({
-  'click .toggle-edit': function(e, instance) {
+  'click .toggle-edit'(e, instance) {
     e.preventDefault();
     instance.state.set('edit', true);
     Meteor.defer(() => instance.find('input').focus());
   },
-  'click .cancel': function(e, instance) {
+  'click .cancel'(e, instance) {
     e.preventDefault();
     instance.state.set('edit', false);
   },
-  'submit .change-accountname': function(e, instance) {
+  'submit .change-accountname'(e, instance) {
     e.preventDefault();
     const accountName = e.target.accountName.value;
 
     if (!accountName) {
-      var errors = {};
-      errors.accountName = "Value can't be empty";
+      let errors = {
+        accountName: "Value can't be empty",
+      };
       instance.state.set('changeAccountNameErrors', errors);
       return;
     }
@@ -47,13 +48,14 @@ Template.gwuserItem.events({
       instance.state.set('edit', false);
     });
   },
-  'submit .add-alt': function(e, instance) {
+  'submit .add-alt'(e, instance) {
     e.preventDefault();
     const altName = e.target.altName.value;
 
     if (!altName) {
-      var errors = {};
-      errors.altName = "Value can't be empty";
+      let errors = {
+        altName: "Value can't be empty",
+      };
       instance.state.set('addAltErrors', errors);
       return;
     }
@@ -65,7 +67,7 @@ Template.gwuserItem.events({
       e.target.altName.value = '';
     });
   },
-  'click .remove-alt': function(e, instance) {
+  'click .remove-alt'(e, instance) {
     e.preventDefault();
     Meteor.call('removeGWAlt', this.gwuser._id, this.alt, function(error, result){
       if(error) {

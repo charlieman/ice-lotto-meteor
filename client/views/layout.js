@@ -1,5 +1,5 @@
 Template.layout.events({
-  'click .showSAPowers': function(e) {
+  'click .showSAPowers'(e) {
     e.preventDefault();
     Meteor.call('userToggleSuperAdminPowers', !showSAPowers(), function(error, result){
       if(error) {

@@ -10,7 +10,7 @@ Meteor.publish('singleLotto', function (id) {
   check(id, String);
   
   if (!this.userId) {
-    var lotto = Lottos.findOne({_id: id, public: true});
+    const lotto = Lottos.findOne({_id: id, public: true});
     if (!lotto) {
       this.ready();
       return;

@@ -1,11 +1,11 @@
 Template.lottoItem.helpers({
-  prettyDate: function(){
+  prettyDate(){
     return moment(this.date).format('MMM Do, YYYY');
   }
 });
 
 Template.lottoItem.events({
-  'click .delete': function(e) {
+  'click .delete'(e) {
     e.preventDefault();
     if (!confirm("Are you sure you want to delete this lotto?")) return;
 
@@ -16,6 +16,5 @@ Template.lottoItem.events({
         Router.go('/'); // Go back to lottoList page
       }
     });
-
   }
 });
