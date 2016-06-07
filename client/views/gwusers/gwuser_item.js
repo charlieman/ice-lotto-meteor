@@ -47,7 +47,7 @@ Template.gwuserItem.events({
       instance.state.set('edit', false);
     });
   },
-  'submit .add-alt': function(e) {
+  'submit .add-alt': function(e, instance) {
     e.preventDefault();
     const altName = e.target.altName.value;
 
