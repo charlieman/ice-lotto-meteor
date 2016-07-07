@@ -14,7 +14,10 @@
       {{#each entry in reverse entries}}
         <tr {{attributes entry}}>
           <td class="index"><i></i></td>
-          <td title="{{restoreDots entry.gwuserId}}">{{mainUsername entry.gwuserId}}</td>
+          <td title="{{restoreDots entry.gwuserId}}">
+            <strong>{{mainUsername entry.gwuserId}}</strong>
+            ({{restoreDots entry.gwuserId}})
+          </td>
           <td>{{entry.amount}}</td>
           {{#if showWinner}}
             <td>{{#if entry.winner}}Winner{{/if}}</td>

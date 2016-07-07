@@ -33,7 +33,9 @@
         {{/if}}
         {{#let winner=winnerData}}
           <p>
-            <span class="user">{{mainUsername winner.gwuserId}}</span><br />
+            <span class="user">
+              {{mainUsername winner.gwuserId}}
+            </span> ({{restoreDots winner.gwuserId}})<br />
             <span>{{winner.count}}x {{winner.name}}</span>
           </p>
         {{/let}}
