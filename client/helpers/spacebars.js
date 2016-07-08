@@ -29,7 +29,19 @@ Template.registerHelper('mainUsername', function(gwuserId) {
   return gwuser === undefined? restoreDots(gwuserId) : gwuser.alts[0];
 });
 
+Template.registerHelper('getGWUser', function(gwuserId) {
+    let gwuser = GWUsers.findOne(gwuserId);
+    if (gwuser === undefined) {
+      gwuser = GWUsers.findOne({account: gwuserId});
+    }
+    return gwuser;
+});
+
 Template.registerHelper('either', (x, y) => {
   if (!!x) return x;
   return y;
+});
+
+Template.registerHelper('altName', (gwuser) => {
+  return gwuser && gwuser.alts[0];
 });

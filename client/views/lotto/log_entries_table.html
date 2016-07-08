@@ -15,8 +15,10 @@
         <tr {{attributes entry}}>
           <td class="index"><i></i></td>
           <td title="{{restoreDots entry.gwuserId}}">
-            <strong>{{mainUsername entry.gwuserId}}</strong>
-            ({{restoreDots entry.gwuserId}})
+            {{#let gwaccount=(getGWUser entry.gwuserId)}}
+              <strong>{{either (gwaccount.alts.[0]) (restoreDots entry.gwuserId)}}</strong>
+              ({{restoreDots gwaccount.account}})
+            {{/let}}
           </td>
           <td>{{entry.amount}}</td>
           {{#if showWinner}}

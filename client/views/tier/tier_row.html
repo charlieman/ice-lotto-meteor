@@ -32,12 +32,14 @@
           </button>
         {{/if}}
         {{#let winner=winnerData}}
-          <p>
-            <span class="user">
-              {{mainUsername winner.gwuserId}}
-            </span> ({{restoreDots winner.gwuserId}})<br />
-            <span>{{winner.count}}x {{winner.name}}</span>
-          </p>
+          {{#let gwaccount=(getGWUser winner.gwuserId)}}
+            <p>
+              <span class="user">
+                {{gwaccount.alts.[0]}}
+              </span> ({{restoreDots gwaccount.account}})<br />
+              <span>{{winner.count}}x {{winner.name}}</span>
+            </p>
+          {{/let}}
         {{/let}}
       {{/if}}
     </td>
