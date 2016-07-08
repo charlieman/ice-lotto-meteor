@@ -31,10 +31,6 @@ Template.tierRow.helpers({
     }
     return {};
   },
-  whichever: function(name1, name2) {
-    if (!!name1) return name1;
-    return name2;
-  },
   hasNoWinner: function() {
     return !_.any(this.tier.prizes, function(p) { return !!p.winner; });
   },

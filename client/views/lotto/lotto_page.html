@@ -57,7 +57,7 @@
                     <select name="entryUserId" id="entryUserId" class="form-control">
                       <option value="" disabled selected hidden>Select User</option>
                       {{#each gwuser in gwusers}}
-                        <option value="{{whichever gwuser.account gwuser._id}}">{{whichever gwuser.alts.[0] gwuser.account}}</option>
+                        <option value="{{either gwuser.account gwuser._id}}">{{either gwuser.alts.[0] gwuser.account}}</option>
                       {{/each}}
                     </select>
                     <input type="number" class="form-control" name="entryAmount" id="entryAmount" placeholder="Select Tier" min="2" max="20" step="2" required />

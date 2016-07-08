@@ -28,3 +28,8 @@ Template.registerHelper('mainUsername', function(gwuserId) {
   }
   return gwuser === undefined? restoreDots(gwuserId) : gwuser.alts[0];
 });
+
+Template.registerHelper('either', (x, y) => {
+  if (!!x) return x;
+  return y;
+});

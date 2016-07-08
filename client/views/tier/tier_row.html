@@ -10,11 +10,11 @@
       <td {{attributes prize}}>
         {{#if prize}}
           {{#if prize.icon}}
-            <img class="prize" alt="{{whichever prize.name prize.prize}}" data-toggle="tooltip" title="{{whichever prize.count prize.amount}}x {{whichever prize.name prize.prize}}" src="{{prize.icon}}" width="64" height="64" />
+            <img class="prize" alt="{{either prize.name prize.prize}}" data-toggle="tooltip" title="{{either prize.count prize.amount}}x {{either prize.name prize.prize}}" src="{{prize.icon}}" width="64" height="64" />
           {{else}}
-            <span class="prize">{{whichever prize.name prize.prize}}</span>
+            <span class="prize">{{either prize.name prize.prize}}</span>
           {{/if}}
-          <span class="amount">{{whichever prize.count prize.amount}}</span>
+          <span class="amount">{{either prize.count prize.amount}}</span>
         {{/if}}
       </td>
     {{/each}}
