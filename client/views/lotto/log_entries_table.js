@@ -1,7 +1,6 @@
 Template.logEntriesTable.helpers({
   reverse: function(entries) {
-    // TODO: seems to modify the array
-    return _.chain(entries).reverse().value();
+    return Array.prototype.slice.call(entries).reverse();
   },
   hasEntries: function () {
     return this.entries && this.entries.length > 0;
