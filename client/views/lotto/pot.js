@@ -1,3 +1,6 @@
+Template.pot.onRendered(() => {
+   $("[data-toggle='tooltip']").tooltip();
+});
 Template.pot.onCreated(function() {
   this.state = new ReactiveDict();
   this.state.setDefault({

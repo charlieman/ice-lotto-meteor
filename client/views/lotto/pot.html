@@ -40,7 +40,9 @@
               {{#each entry in potEntries entries winner}}
               <tr {{attributes entry}}>
                 <td class="index"><i></i></td>
-                <td title="{{restoreDots entry.gwuserId}}">{{mainUsername entry.gwuserId}}</td>
+                <td>
+                  <span data-toggle="tooltip" title="{{restoreDots entry.gwuserId}}">{{mainUsername entry.gwuserId}}</span>
+                </td>
                 <td>{{entry.amount}}</td>
                 <td>{{entry.rangeStart}} - {{entry.rangeEnd}}</td>
               </tr>
