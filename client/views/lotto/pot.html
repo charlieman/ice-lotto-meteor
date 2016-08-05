@@ -9,7 +9,7 @@
           </button>
         {{/if}}
         {{#if winner}}
-          <strong class="pull-right">{{mainUsername winner}}&nbsp;</strong>
+          <span class="pull-right"><strong>{{mainUsername winner}}</strong> ({{restoreDots winner}})&nbsp;</span>
         {{/if}}
       {{else}}
         {{#if isAdmin}} {{#unless isLottoOpen}} {{#if hasEntries}}
