@@ -8,11 +8,11 @@ if (Meteor.users.find().count() === 0) {
 
   // gwusers
   let gwusers = [];
-  gwuser.push(GWUsers.insert({account: 'foo@1234', alts: ['Foo']}));
-  gwuser.push(GWUsers.insert({account: 'bar@2345', alts: ['Bar']}));
-  gwuser.push(GWUsers.insert({account: 'baz@3456', alts: ['Baz']}));
-  gwuser.push(GWUsers.insert({account: 'qux@1234', alts: ['Qux']}));
-  
+  gwusers.push(GWUsers.insert({account: 'foo@1234', alts: ['Foo']}));
+  gwusers.push(GWUsers.insert({account: 'bar@2345', alts: ['Bar']}));
+  gwusers.push(GWUsers.insert({account: 'baz@3456', alts: ['Baz']}));
+  gwusers.push(GWUsers.insert({account: 'qux@1234', alts: ['Qux']}));
+
   //lotto
   smallpot_users = gwusers.slice(0, 2);
   bigpot_users = gwusers.slice(2);
@@ -32,7 +32,7 @@ if (Meteor.users.find().count() === 0) {
       }
     });
   }
-  
+
   const pots = updatePots(entries, 'double');
 
   const lottoId = Lottos.insert({
