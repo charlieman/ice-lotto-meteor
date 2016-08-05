@@ -35,7 +35,7 @@
           {{#let gwaccount=(getGWUser winner.gwuserId)}}
             <p>
               <span class="user">
-                {{gwaccount.alts.[0]}}
+                {{either gwaccount.alts.[0] (restoreDots gwaccount.account) }}
               </span> ({{restoreDots gwaccount.account}})<br />
               <span>{{winner.count}}x {{winner.name}}</span>
             </p>

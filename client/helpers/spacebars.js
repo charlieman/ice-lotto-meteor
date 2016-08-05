@@ -34,7 +34,10 @@ Template.registerHelper('getGWUser', function(gwuserId) {
     if (gwuser === undefined) {
       gwuser = GWUsers.findOne({account: gwuserId});
     }
-    return gwuser;
+    if (gwuser !== undefined) {
+      return gwuser;
+    }
+    return {account: gwuserId};
 });
 
 Template.registerHelper('either', (x, y) => {
