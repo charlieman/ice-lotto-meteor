@@ -13,9 +13,7 @@ Template.lottoPage.onRendered(function() {
 
 Template.lottoPage.helpers({
   filterEntries(entries, tier) {
-    return _.filter(this.lotto.entries, function (x) {
-      return x.amount === tier;
-    });
+    return _.filter(this.lotto.entries, (e) => e.amount === tier);
   },
   midTier() {
     return this.tier === 10;
@@ -39,7 +37,7 @@ Template.lottoPage.events({
     $('#logModal').modal('show');
     Session.set('loadingLog', true);
     LocalLog = new Mongo.Collection(null); // Reset local collection
-    
+
     Meteor.call('getLogFromAPI', function(error, result) {
       Session.set('loadingLog', false);
       if (error) {

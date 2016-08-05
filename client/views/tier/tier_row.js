@@ -32,7 +32,7 @@ Template.tierRow.helpers({
     return {};
   },
   hasNoWinner() {
-    return !_.any(this.tier.prizes, function(p) { return !!p.winner; });
+    return !_.any(this.tier.prizes, (p) => !!p.winner);
   },
   entriesLength() {
     return this.entries.length;
